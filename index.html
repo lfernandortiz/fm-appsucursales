@@ -24,12 +24,32 @@
 
 		var map;
 		var divMap = document.getElementById('map');
-		var cooda = {lat: 7.90826989, lng: -72.4914906};
+		var cooda = {lat: 7.88878206, lng: -72.503093};
+
+		var locations = [
+			['Dromedicas del Oriente SAS ', 7908388743984920, -72491574883461, 1],
+			['Farmanorte 1 ', 7840764903473610, -725028133392334, 2],
+			['Farmanorte 2 ', 7923595410892430, -7252201795578000, 3],
+			['Farmanorte 3 ', 7917091999388580, -7249572694301600, 4],
+			['Farmanorte 4 ', 79049350202970800, -7251519441604610, 5],
+			['Farmanorte 5 ', 7898048740341690, -7252727508544920, 6],
+			['Farmanorte 6 ', 7872149774600280, -7252853035926810, 7],
+			['Farmanorte 7 ', 78904609470678000, -7249629020690910, 8],
+			['Farmanorte 8 ', 7373990247532270, -7264909029006950, 9],
+			['Farmanorte 9 ', 7929875568608960, -7250390768051140, 10],
+			['Farmanorte 10 ', 7912830721471750, -7248752474784850, 11],
+			['FarmaNorte 12 ', 788983925194856, -7249102771282190, 12],
+			['Farmanorte 13 ', 7886720134976070, -7251558065414420, 13],
+			['Farmanorte 16 ', 7607999367664440, -7259926557540890, 14],
+			['San Antonio del Norte ', 7887416226152300, -725060373544693, 15],
+			['San Martin de Porres ', 7895763915292500, -725098729133606, 16]
+		];
+
 
 		function initMap() {
 		  map = new google.maps.Map(document.getElementById('map'), {
 		    center: cooda,
-		    zoom: 15,
+		    zoom: 14,
 		  });
 
 		  var urlIcon = "icono.png";
@@ -49,25 +69,14 @@
 		  var marker = new google.maps.Marker({
 			position: cooda,
 			map: map,
-			icon: image,
-
+			// icon: image,
 			title: 'Dromedicas del Oriente SAS'
 		  });
 
-			marker.setMap(map);
-			map.setZoom(17);
-			map.panTo(curmarker.position);
+			// marker.setMap(map);
 		}
 
-		function addMarkerWithTimeout(position, timeout) {
-			window.setTimeout(function() {
-			markers.push(new google.maps.Marker({
-			position: position,
-			map: map,
-			animation: google.maps.Animation.DROP
-			}));
-			}, timeout);
-		}
+		
 
 		
 
