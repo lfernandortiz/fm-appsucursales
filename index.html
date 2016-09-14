@@ -19,6 +19,18 @@
 		border: 1px solid blue;
 		padding: 2px;
 	}
+
+	#map h1{
+		color: #062180;
+		text-shadow: 1px 1px 1px #010B30;
+		font-size: .95rem;
+	}
+
+
+	#map .sucursal{
+		color: #FF0000;
+		text-shadow: 1px 1px 1px #353535;
+	}
 </style>
 <script type="text/javascript">
 
@@ -29,10 +41,10 @@
 	};
 
 	var locations = [
-		['Dromedicas del Oriente SAS ',  7.908388743984923 ,  -72.491574883461 , 1],
-		['Farmanorte 1 ',  7.840764903473619 ,  -72.5028133392334 , 2],
-		['Farmanorte 2 ',  7.923595410892432 ,  -72.52201795578003 , 3],
-		['Farmanorte 3 ',  7.917091999388589 ,  -72.49572694301605 , 4],
+		['Dromedicas del Oriente SAS',  7.908388743984923 ,  -72.491574883461 , 1],
+		['Farmanorte 1',  7.840764903473619 ,  -72.5028133392334 , 2],
+		['Farmanorte 2',  7.923595410892432 ,  -72.52201795578003 , 3],
+		['Farmanorte 3',  7.917091999388589 ,  -72.49572694301605 , 4],
 		['Farmanorte 4 ',  7.9049350202970805 ,  -72.51519441604614 , 5],
 		['Farmanorte 5 ',  7.898048740341691 ,  -72.52727508544922 , 6],
 		['Farmanorte 6 ',  7.872149774600282 ,  -72.52853035926819 , 7],
@@ -48,7 +60,6 @@
 
 	];
 
-
 	function initMap() {
 		//creo el mapa
 		map = new google.maps.Map(document.getElementById('map'), {
@@ -63,20 +74,57 @@
 
 	    for (i = 0; i < locations.length; i++) { 
 	    	console.log(locations[i][1], locations[i][2]);
-	      	marker = new google.maps.Marker({	      	
-	        position: new google.maps.LatLng(locations[i][1], locations[i][2]),
-	        map: map
-	      });
+	    	var principal = new String(locations[i][0]);
+	    	var sucursalt = new String('Dromedicas del Oriente SAS');
+	    	console.log( principal.localeCompare(sucursalt) ===0);
 
-	      var infoHtml = "<h1>Drogueria</h1>";
 
-	      google.maps.event.addListener(marker, 'click', (function(marker, i) {
-	        return function() {
-	          infowindow.setContent(infoHtml+locations[i][0]);
-	          infowindow.open(map, marker);
-	        }
-	      })(marker, i));
-	    }
+	    	if(principal.localeCompare(sucursalt)=== 0){
+	    		console.log("Creando Icono Personalizado")
+	    		var image = {
+    			url: 'icono.png',
+    			// This marker is 20 pixels wide by 32 pixels high.
+    			size: new google.maps.Size(40, 44),
+    			// The origin for this image is (0, 0).
+    			origin: new google.maps.Point(0, 0),
+   				 // The anchor for this image is the base of the flagpole at (0, 32).
+    			anchor: new google.maps.Point(0, 32)
+ 				};
+	    		marker = new google.maps.Marker({	      	
+	        	position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+	        	icon: image,
+	        	map: map
+	        	});
+
+	        	var infoHtml = "<h1><span class='sucursal'>Sucursal </span> "+locations[i][0]+"</h1>";
+	        	google.maps.event.addListener(marker, 'click', (function(marker, i) {
+	        	return function() {
+			    infowindow.setContent("<h1><span class='sucursal'></span> "+locations[i][0]+"</h1>");
+			    infowindow.open(map, marker);
+			        }
+			      })
+			    (marker, i));
+	    	}else{
+	    		marker = new google.maps.Marker({	      	
+	        	position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+	        	map: map
+	        	});
+
+	        	var infoHtml = "<h1><span class='sucursal'>Sucursal </span> "+locations[i][0]+"</h1>";
+	        	google.maps.event.addListener(marker, 'click', (function(marker, i) {
+	        	return function() {
+			    infowindow.setContent("<h1><span class='sucursal'>Sucursal</span> "+locations[i][0]+"</h1>");
+			    infowindow.open(map, marker);
+			        }
+			      })
+			    (marker, i));
+	    	}
+	     
+	    }///fin del for
+
+	    
+
+	    
 	} //fin de la funcion initMap	
 
 </script>
