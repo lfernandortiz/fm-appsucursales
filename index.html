@@ -20,70 +20,69 @@
 		padding: 2px;
 	}
 </style>
- <script type="text/javascript">
+<script type="text/javascript">
 
-		var map;
-		var divMap = document.getElementById('map');
-		var cooda = {lat: 7.88878206, lng: -72.503093};
+	var map;
+	var coordenadasIniciales = {
+		lat: 7.88878206,
+		lng: -72.503093
+	};
 
-		var locations = [
-			['Dromedicas del Oriente SAS ', 7908388743984920, -72491574883461, 1],
-			['Farmanorte 1 ', 7840764903473610, -725028133392334, 2],
-			['Farmanorte 2 ', 7923595410892430, -7252201795578000, 3],
-			['Farmanorte 3 ', 7917091999388580, -7249572694301600, 4],
-			['Farmanorte 4 ', 79049350202970800, -7251519441604610, 5],
-			['Farmanorte 5 ', 7898048740341690, -7252727508544920, 6],
-			['Farmanorte 6 ', 7872149774600280, -7252853035926810, 7],
-			['Farmanorte 7 ', 78904609470678000, -7249629020690910, 8],
-			['Farmanorte 8 ', 7373990247532270, -7264909029006950, 9],
-			['Farmanorte 9 ', 7929875568608960, -7250390768051140, 10],
-			['Farmanorte 10 ', 7912830721471750, -7248752474784850, 11],
-			['FarmaNorte 12 ', 788983925194856, -7249102771282190, 12],
-			['Farmanorte 13 ', 7886720134976070, -7251558065414420, 13],
-			['Farmanorte 16 ', 7607999367664440, -7259926557540890, 14],
-			['San Antonio del Norte ', 7887416226152300, -725060373544693, 15],
-			['San Martin de Porres ', 7895763915292500, -725098729133606, 16]
-		];
+	var locations = [
+		['Dromedicas del Oriente SAS ',  7.908388743984923 ,  -72.491574883461 , 1],
+		['Farmanorte 1 ',  7.840764903473619 ,  -72.5028133392334 , 2],
+		['Farmanorte 2 ',  7.923595410892432 ,  -72.52201795578003 , 3],
+		['Farmanorte 3 ',  7.917091999388589 ,  -72.49572694301605 , 4],
+		['Farmanorte 4 ',  7.9049350202970805 ,  -72.51519441604614 , 5],
+		['Farmanorte 5 ',  7.898048740341691 ,  -72.52727508544922 , 6],
+		['Farmanorte 6 ',  7.872149774600282 ,  -72.52853035926819 , 7],
+		['Farmanorte 7 ',  7.8904609470678055 ,  -72.49629020690918 , 8],
+		['Farmanorte 8 ',  7.373990247532279 ,  -72.64909029006958 , 9],
+		['Farmanorte 9 ',  7.929875568608961 ,  -72.50390768051147 , 10],
+		['Farmanorte 10 ',  7.912830721471756 ,  -72.48752474784851 , 11],
+		['FarmaNorte 12 ',  7.88983925194856 ,  -72.49102771282196 , 12],
+		['Farmanorte 13 ',  7.886720134976074 ,  -72.51558065414429 , 13],
+		['Farmanorte 16 ',  7.607999367664449 ,  -72.59926557540894 , 14],
+		['San Antonio del Norte ',  7.887416226152301 ,  -72.5060373544693 , 15],
+		['San Martin de Porres ',  7.895763915292502 ,  -72.5098729133606 , 16],
+
+	];
 
 
-		function initMap() {
-		  map = new google.maps.Map(document.getElementById('map'), {
-		    center: cooda,
-		    zoom: 14,
-		  });
+	function initMap() {
+		//creo el mapa
+		map = new google.maps.Map(document.getElementById('map'), {
+			center: coordenadasIniciales,
+			zoom: 13,
+			mapTypeId: google.maps.MapTypeId.ROADMAP
+		});
 
-		  var urlIcon = "icono.png";
-		  var icono = new Image();
-		  icono.src = urlIcon;
+		var infowindow = new google.maps.InfoWindow();
 
-		var image = {
-	    url: 'icono.png',
-	    // This marker is 20 pixels wide by 32 pixels high.
-	    size: new google.maps.Size(40, 44),
-	    // The origin for this image is (0, 0).
-	    origin: new google.maps.Point(0, 0),
+    	var marker, i;
 
-	    // The anchor for this image is the base of the flagpole at (0, 32).
-	    anchor: new google.maps.Point(0, 32)};
+	    for (i = 0; i < locations.length; i++) { 
+	    	console.log(locations[i][1], locations[i][2]);
+	      	marker = new google.maps.Marker({	      	
+	        position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+	        map: map
+	      });
 
-		  var marker = new google.maps.Marker({
-			position: cooda,
-			map: map,
-			// icon: image,
-			title: 'Dromedicas del Oriente SAS'
-		  });
+	      var infoHtml = "<h1>Drogueria</h1>";
 
-			// marker.setMap(map);
-		}
+	      google.maps.event.addListener(marker, 'click', (function(marker, i) {
+	        return function() {
+	          infowindow.setContent(infoHtml+locations[i][0]);
+	          infowindow.open(map, marker);
+	        }
+	      })(marker, i));
+	    }
+	} //fin de la funcion initMap	
 
-		
-
-		
-
-    </script>
-    <script async defer
+</script>
+<script async defer
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA3lhlUmXlLXYgbTTeGMp89zM6Ym49p5YU&callback=initMap">
-    </script>
+</script>
 
 </head>
 <!-- api_key_googlemaps_dromedicas  AIzaSyA3lhlUmXlLXYgbTTeGMp89zM6Ym49p5YU-->
