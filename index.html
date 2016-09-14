@@ -21,8 +21,8 @@
 	}
 
 	#map h1{
-		color: #062180;
-		text-shadow: 1px 1px 1px #010B30;
+		color: #0101BE;
+		text-shadow: 1px 1px 1px #444444;
 		font-size: .95rem;
 	}
 
@@ -36,10 +36,13 @@
 
 	var map;
 	var markers = [];
+	//coordenadas para la carga del mapa
 	var coordenadasIniciales = { lat: 7.88878206, lng: -72.503093 };
+	//varible para objeto de informacion del marcador 
 	var infowindow;
 	
-	var locations = [
+	//informacion y coordenada de sucursales
+	var sucursales = [
 		['Dromedicas del Oriente SAS',  7.908388743984923 ,  -72.491574883461 , 1],
 		['Farmanorte 1',  7.840764903473619 ,  -72.5028133392334 , 2],
 		['Farmanorte 2',  7.923595410892432 ,  -72.52201795578003 , 3],
@@ -59,7 +62,7 @@
 
 	];
 
-
+	//carga el objeto mapa y crea el objeto InfoWindow
 	function initMap() {
 		map = new google.maps.Map(document.getElementById('map'), {
 			zoom: 13,
@@ -67,6 +70,24 @@
 		});		
 		infowindow = new google.maps.InfoWindow();
 	}
+
+
+	//funcion ejecutada al momento de la carga de la pagina
+	function drop() {
+		clearMarkers();
+		for (var i = 0; i < sucursales.length; i++) {
+			var coordenadas = new google.maps.LatLng(sucursales[i][1], sucursales[i][2]);
+			var principal = new String(sucursales[i][0]);
+	     	var sucursalt = new String('Dromedicas del Oriente SAS');
+	     	if(principal.localeCompare(sucursalt)=== 0){
+	     		addMarkerWithTimeoutPpal(coordenadas, i * 100, sucursales[i][0], i );
+	     		// addMarkerWithTimeout(coordenadas, i * 100, sucursales[i][0], i );
+	     	}else{
+	     		addMarkerWithTimeout(coordenadas, i * 100, sucursales[i][0], i );
+	     	}
+						
+		}//fin del for
+	}//fin del metodo drop
 
 
 	function clearMarkers() {
@@ -77,22 +98,8 @@
 	}//fin del metodo  clearMarkers
 
 
-	function drop() {
-		clearMarkers();
-		for (var i = 0; i < locations.length; i++) {
-			var coordenadas = new google.maps.LatLng(locations[i][1], locations[i][2]);
-			var principal = new String(locations[i][0]);
-	     	var sucursalt = new String('Dromedicas del Oriente SAS');
-	     	if(principal.localeCompare(sucursalt)=== 0){
-	     		addMarkerWithTimeoutPpal(coordenadas, i * 100, locations[i][0], i );
-	     	}else{
-	     		addMarkerWithTimeout(coordenadas, i * 100, locations[i][0], i );
-	     	}
-						
-		}//fin del for
-	}//fin del metodo drop
-
-
+	//anade el marcardor "Marker" al mapa y registra el evento click sobre el marcador
+	//para mostrar la informacion de la sucursal en un objeto InfoWindow
 	function addMarkerWithTimeout(position, timeout, info, i) {
 		window.setTimeout(function() {
 			var marker = new google.maps.Marker({
@@ -111,6 +118,7 @@
 		}, timeout);	
 	}
 
+	//metodo auxiliar para variacion
 	function addMarkerWithTimeoutPpal(position, timeout, info, i) {
 		window.setTimeout(function() {
 			var image = {
@@ -127,7 +135,7 @@
 				})
 			google.maps.event.addListener(marker, 'click', (function(marker, i) {
 	        	return function() {
-			    infowindow.setContent("<h1><span class='sucursal'>Sucursal </span> "+info+"</h1>");
+			    infowindow.setContent("<h1><span class='sucursal'></span> "+info+"</h1>");
 			    infowindow.open(map, marker);
 			        }
 			      })
@@ -135,7 +143,8 @@
 			markers.push(marker);
 		}, timeout);	
 	}
-	
+
+	//registro de manejo de evento al momento de carga de la pagina
 	window.addEventListener('load', drop, false);
 </script>
 <script async defer
