@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+<style type="text/css">
+	html, body {
+		height: 100%;
+		margin: 0;
+		padding: 0;
+		font-family: calibri, sans-serif;
+	}
+	h1{
+		color: blue;
+		text-shadow: 1px 1px 1px #07164C;
+	}
+	#map {
+		height: 100%;
+		border: 1px solid blue;
+		padding: 2px;
+	}
+</style>
+ <script type="text/javascript">
+
+		var map;
+		var divMap = document.getElementById('map');
+		var cooda = {lat: 7.90826989, lng: -72.4914906};
+
+		function initMap() {
+		  map = new google.maps.Map(document.getElementById('map'), {
+		    center: cooda,
+		    zoom: 15,
+		  });
+
+		  var urlIcon = "icono.png";
+		  var icono = new Image();
+		  icono.src = urlIcon;
+
+		var image = {
+	    url: 'icono.png',
+	    // This marker is 20 pixels wide by 32 pixels high.
+	    size: new google.maps.Size(40, 44),
+	    // The origin for this image is (0, 0).
+	    origin: new google.maps.Point(0, 0),
+
+	    // The anchor for this image is the base of the flagpole at (0, 32).
+	    anchor: new google.maps.Point(0, 32)};
+
+		  var marker = new google.maps.Marker({
+			position: cooda,
+			map: map,
+			icon: image,
+
+			title: 'Dromedicas del Oriente SAS'
+		  });
+
+			marker.setMap(map);
+			map.setZoom(17);
+			map.panTo(curmarker.position);
+		}
+
+		function addMarkerWithTimeout(position, timeout) {
+			window.setTimeout(function() {
+			markers.push(new google.maps.Marker({
+			position: position,
+			map: map,
+			animation: google.maps.Animation.DROP
+			}));
+			}, timeout);
+		}
+
+		
+
+    </script>
+    <script async defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA3lhlUmXlLXYgbTTeGMp89zM6Ym49p5YU&callback=initMap">
+    </script>
+
+</head>
+<!-- api_key_googlemaps_dromedicas  AIzaSyA3lhlUmXlLXYgbTTeGMp89zM6Ym49p5YU-->
+<body>
+<h1>Farmanorte</h1>
+<div id="map"></div>	
+</body>
+</html>
