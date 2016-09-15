@@ -37,7 +37,7 @@
 	var map;
 	var markers = [];
 	//coordenadas para la carga del mapa
-	var coordenadasIniciales = { lat: 7.88878206, lng: -72.503093 };
+	var coordenadasIniciales = { lat: 7.8890971, lng: -72.49668959999997 };
 	//varible para objeto de informacion del marcador 
 	var infowindow;
 	
@@ -65,8 +65,8 @@
 	//carga el objeto mapa y crea el objeto InfoWindow
 	function initMap() {
 		map = new google.maps.Map(document.getElementById('map'), {
-			zoom: 13,
-			center: { lat: 7.88878206, lng: -72.503093},
+			zoom: 11,
+			center: coordenadasIniciales,
 		});		
 		infowindow = new google.maps.InfoWindow();
 	}
@@ -81,11 +81,11 @@
 	     	var sucursalt = new String('Dromedicas del Oriente SAS');
 	     	if(principal.localeCompare(sucursalt)=== 0){
 	     		addMarkerWithTimeoutPpal(coordenadas, i * 100, sucursales[i][0], i );
+	     		//**Cambie a este metodo si no desea que el marker de la principal sea custom
 	     		// addMarkerWithTimeout(coordenadas, i * 100, sucursales[i][0], i );
 	     	}else{
 	     		addMarkerWithTimeout(coordenadas, i * 100, sucursales[i][0], i );
-	     	}
-						
+	     	}						
 		}//fin del for
 	}//fin del metodo drop
 
