@@ -1,0 +1,122 @@
+@font-face {
+	font-family: "Babylon5";
+	src: url("fonts/B5______.eot?") format("eot"), url("fonts/B5______.woff") format("woff"), url("fonts/B5______.ttf") format("truetype"), url("fonts/B5______.svg#Babylon5") format("svg");
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'icomoon';
+	src: url('fonts/icomoon.eot?hqzru4');
+	src: url('fonts/icomoon.eot?hqzru4#iefix') format('embedded-opentype'), url('fonts/icomoon.ttf?hqzru4') format('truetype'), url('fonts/icomoon.woff?hqzru4') format('woff'), url('fonts/icomoon.svg?hqzru4#icomoon') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+[class^="icon-"],
+[class*=" icon-"] {
+
+	/* use !important to prevent issues with browser extensions that change fonts */
+	font-family: 'icomoon' !important;
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;  /* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.icon-home:before {
+	content: "\e901";
+	font-size: 1rem;
+	color: #012E8A;
+	text-shadow: 1px 1px 1px #7E7E7E;
+}
+
+.icon-phone:before {
+	content: "\e942";
+}
+
+html,body {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	font-family: calibri, sans-serif;
+}
+
+h1 {
+	color: blue;
+	text-shadow: 1px 1px 1px #07164C;
+}
+/*Estilos del infoWindow*/
+.main {
+	width: 450px;
+	margin: 60px auto;
+}
+
+img,h3 {
+	padding: 0;
+	margin: 0;
+	font-size: 100%;
+	display: inline;
+}
+
+.iw-title {
+	position: relative;
+}
+
+#iw-container  .iw-title {
+	font-family: 'Babylon5', calibri;
+	font-size: 22px;
+	line-height: 30px;
+	font-weight: 400;
+	padding: 10px 10px 10px 0px;
+	background-color: #000a7b;
+	color: white;
+	margin: 1px;
+	border-radius: 2px 2px 0 0; /* In accordance with the rounding of the default infowindow corners. */
+}
+
+.iw-title h3 {
+	margin-left: 3rem;
+}
+
+.iw-title img {
+	width: 4rem;
+	position: absolute;
+	bottom: 0px;
+	left: -36px;
+}
+
+.gm-style-iw {
+	width: 350px !important;
+	top: 0 !important;
+	left: 0 !important;
+	border-radius: 2px 2px 0 0;
+}
+
+
+/*Estilos del mapa contenedor*/
+#map {
+	height: 100%;
+	border: 1px solid blue;
+	padding: 2px;
+}
+
+#map h1 {
+	color: #0101BE;
+	text-shadow: 1px 1px 1px #444444;
+	font-size: 1.1rem;
+}
+
+#map p {
+	font-size: .9rem;
+	text-shadow: 1px 1px 1px #C1C1C1;
+}
+
+#map .sucursal {
+	color: #FA3A3A;
+	text-shadow: 1px 1px 1px #353535;
+}
