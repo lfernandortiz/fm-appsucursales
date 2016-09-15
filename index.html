@@ -4,6 +4,35 @@
 	<meta charset="UTF-8">
 	<title>Document</title>
 <style type="text/css">
+	@font-face {
+		font-family: 'icomoon';
+		src: url('fonts/icomoon.eot?hqzru4');
+		src: url('fonts/icomoon.eot?hqzru4#iefix') format('embedded-opentype'), url('fonts/icomoon.ttf?hqzru4') format('truetype'), url('fonts/icomoon.woff?hqzru4') format('woff'), url('fonts/icomoon.svg?hqzru4#icomoon') format('svg');
+		font-weight: normal;
+		font-style: normal;
+	}
+	[class^="icon-"], [class*=" icon-"] {
+
+		/* use !important to prevent issues with browser extensions that change fonts */
+		font-family: 'icomoon' !important;
+		speak: none;
+		font-style: normal;
+		font-weight: normal;
+		font-variant: normal;
+		text-transform: none;
+		line-height: 1;  /* Better Font Rendering =========== */
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+	}
+	.icon-home:before {
+		content: "\e901";
+		font-size: 1.1rem;
+		color: #012E8A;
+		text-shadow: 1px 1px 1px #7E7E7E;
+	}
+	.icon-phone:before {
+		content: "\e942";
+	}
 	html, body {
 		height: 100%;
 		margin: 0;
@@ -23,7 +52,12 @@
 	#map h1{
 		color: #0101BE;
 		text-shadow: 1px 1px 1px #444444;
-		font-size: .95rem;
+		font-size: 1.4rem;
+	}
+
+	#map p{
+		font-size: 1.2rem;
+		text-shadow: 1px 1px 1px #C1C1C1;
 	}
 
 
@@ -78,7 +112,7 @@
 	//carga el objeto mapa y crea el objeto InfoWindow
 	function initMap() {
 		map = new google.maps.Map(document.getElementById('map'), {
-			zoom: 9,
+			zoom: 12,
 			center: coordenadasIniciales,
 		});		
 		infowindow = new google.maps.InfoWindow();
@@ -93,11 +127,11 @@
 			var principal = new String(sucursales[i][0]);
 	     	var sucursalt = new String('Dromedicas del Oriente SAS');
 	     	if(principal.localeCompare(sucursalt)=== 0){
-	     		addMarkerWithTimeoutPpal(coordenadas, i * 100, sucursales[i][0], i );
+	     		addMarkerWithTimeoutPpal(coordenadas, i * 100, sucursales[i][0], i, sucursales[i][3] );
 	     		//**Cambie a este metodo si no desea que el marker de la principal sea custom
 	     		// addMarkerWithTimeout(coordenadas, i * 100, sucursales[i][0], i );
 	     	}else{
-	     		addMarkerWithTimeout(coordenadas, i * 50, sucursales[i][0], i );
+	     		addMarkerWithTimeout(coordenadas, i * 50, sucursales[i][0], i, sucursales[i][3] );
 	     	}						
 		}//fin del for
 	}//fin del metodo drop
@@ -113,14 +147,15 @@
 
 	//anade el marcardor "Marker" al mapa y registra el evento click sobre el marcador
 	//para mostrar la informacion de la sucursal en un objeto InfoWindow
-	function addMarkerWithTimeout(position, timeout, info, i) {
+	function addMarkerWithTimeout(position, timeout, info, i, dir) {
 		window.setTimeout(function() {
 			var marker = new google.maps.Marker({
 				position: position,
 				map: map,
 				animation: google.maps.Animation.DROP
 				})
-			var contents = "<h1><span class='sucursal'>Sucursal</span> "+info+"</h1>";
+			var contents = "<h1><span class='sucursal'>Sucursal</span> "+info+"</h1>" +
+						   "<p><span class='icon-home'></span> "+dir+"</p>";
 			google.maps.event.addListener(marker, 'click', (function(marker, i) {
 	        	return function() {
 			    infowindow.setContent(contents);//estable el contenido del infoWindow
