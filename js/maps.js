@@ -50,6 +50,10 @@ function initMap() {
 	});
 	infowindow = new google.maps.InfoWindow();
 
+	google.maps.event.addListener(map, 'click', function() {
+		infowindow.close();
+	});
+
 	google.maps.event.addListener(infowindow, 'domready', function() {
 
 		// Reference to the DIV that wraps the bottom of infowindow
@@ -90,11 +94,6 @@ function initMap() {
 	      $(this).css({opacity: '1'});
 	    });
   	});
-
-
-	google.maps.event.addListener(map, 'click', function() {
-		infowindow.close();
-	});
 }
 
 
