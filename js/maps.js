@@ -109,7 +109,7 @@ function addMarkerWithTimeout(position, timeout, info, i, dir) {
 		//registro del manejo de evento click para desplegar el objeto InfoWindow
 		google.maps.event.addListener(marker, 'click', (function(marker, i) {
 				return function() {				
-					infowindow.setContent(content); //estable el contenido del infoWindow
+					infowindow.setContent(contents); //estable el contenido del infoWindow
 					infowindow.open(map, marker);
 				}
 			})			(marker, i)); //fin del registro de evento click del sobre los marcadores
