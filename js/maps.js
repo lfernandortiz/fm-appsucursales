@@ -82,7 +82,7 @@ function initMap() {
 		var iwCloseBtn = iwOuter.next();
 
 		// Apply the desired effect to the close button
-		iwCloseBtn.css({opacity: '1', right: '38px', top: '3px', border: '7px solid rgba(0, 10, 123, 1.0)', 'border-radius': '13px', 'box-shadow': '0 0 5px rgba(0, 10, 123, .9)'});
+		iwCloseBtn.css({opacity: '1', right: '38px', top: '3px', border: '7px solid rgba(0, 10, 123, 1.0)', 'border-radius': '5px', 'box-shadow': '0 0 5px rgba(0, 10, 123, .9)'});
 
 		// If the content of infowindow not exceed the set maximum height, then the gradient is removed.
 		// if($('.iw-content').height() < 140){
@@ -98,8 +98,9 @@ function initMap() {
 
 
 //funcion ejecutada al momento de la carga de la pagina
-function drop() {
+function drop() {	
 	clearMarkers();
+	initMap();
 	for (var i = 0; i < sucursales.length; i++) {
 		// console.log(sucursales[i][1], sucursales[i][2]);
 		var coordenadas = new google.maps.LatLng(sucursales[i][1], sucursales[i][2]);
