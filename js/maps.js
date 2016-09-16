@@ -111,7 +111,7 @@ function drop() {
 			//**Cambie a este metodo si no desea que el marker de la principal sea custom
 			// addMarkerWithTimeout(coordenadas, i * 100, sucursales[i][0], i );
 		} else {
-			addMarkerWithTimeout(coordenadas, i * 50, sucursales[i][0], i, sucursales[i][3]);
+			addMarkerWithTimeout(coordenadas, i * 50, sucursales[i][0], i, sucursales[i][3], sucursales[i][4], sucursales[i][5]);
 		}
 	} //fin del for
 } //fin del metodo drop
@@ -127,28 +127,35 @@ function clearMarkers() {
 
 //anade el marcardor "Marker" al mapa y registra el evento click sobre el marcador
 //para mostrar la informacion de la sucursal en un objeto InfoWindow
-function addMarkerWithTimeout(position, timeout, info, i, dir, telefono, celular) {
+function addMarkerWithTimeout(position, timeout, suc, i, dir, telefono, celular) {
 	window.setTimeout(function() {
 		//se crea uno Marker (marcador)  para el mapa
+		var image = {
+			url: '../images/markGoogleMaps.png',
+			size: new google.maps.Size(45, 64),
+			origin: new google.maps.Point(0, 0),
+			anchor: new google.maps.Point(0, 32)
+		};
 		var marker = new google.maps.Marker({
 			position: position,
 			map: map,
-			title:info,
+			icon: image,
+			title:suc,
 			animation: google.maps.Animation.DROP
 		});
 		//contenido del objeto InfoWindow
-		var contents = "<h1><span class='sucursal'>Sucursal</span> " + info + "</h1>" +
+		var contents = "<h1><span class='sucursal'>Sucursal</span> " + suc + "</h1>" +
 			"<p><span class='icon-home'></span> " + dir + "</p>";
 
 		var content = 
 			'<div id="iw-container">' +
                 '<div class="iw-title">'+
 					'<img src="images/iconoFarmanorte.png" alt="logoFarmanorte">'+
-					'<h3>Droguería '+ info +'</h3>'+
+					'<h3>Droguería '+ suc +'</h3>'+
 				'</div>'+
 				'<div class="iw-content">'+
 					'<p><span class="icon-home"></span>'+ dir +'</p>'+
-					'<p><a href="tel:(037)5777762" class="footertext"><span class="icon-phone"></span>5747808</a></p>'+	
+					'<p><a href="tel:(037)'+ telefono +'" class="footertext"><span class="icon-phone"></span>'+ telefono +'</a></p>'+	
 					'<p><a href="tel:3002692042" class="footertext"><span class="icon-mobile"></span>3002692042</a></p>'+	
 					'<h3>Horarios</h3>'+
 					'<p class="horario">24 Horas.</p>'+
@@ -161,7 +168,8 @@ function addMarkerWithTimeout(position, timeout, info, i, dir, telefono, celular
 					infowindow.setContent(content); //estable el contenido del infoWindow
 					infowindow.open(map, marker);
 				}
-			})			(marker, i)); //fin del registro de evento click del sobre los marcadores
+			})			
+			(marker, i)); //fin del registro de evento click del sobre los marcadores
 		markers.push(marker);
 	}, timeout); //fin del metodo setTimeout del objeto window
 }
