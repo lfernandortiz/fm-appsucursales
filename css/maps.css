@@ -1,14 +1,20 @@
 @font-face {
 	font-family: "Babylon5";
-	src: url("fonts/B5______.eot?") format("eot"), url("fonts/B5______.woff") format("woff"), url("fonts/B5______.ttf") format("truetype"), url("fonts/B5______.svg#Babylon5") format("svg");
+	src: url("../fonts/B5______.eot?") format("eot"), 
+		 url("../fonts/B5______.woff") format("woff"), 
+		 url("../fonts/B5______.ttf") format("truetype"), 
+		 url("../fonts/B5______.svg#Babylon5") format("svg");
 	font-weight: normal;
 	font-style: normal;
 }
 
 @font-face {
 	font-family: 'icomoon';
-	src: url('fonts/icomoon.eot?hqzru4');
-	src: url('fonts/icomoon.eot?hqzru4#iefix') format('embedded-opentype'), url('fonts/icomoon.ttf?hqzru4') format('truetype'), url('fonts/icomoon.woff?hqzru4') format('woff'), url('fonts/icomoon.svg?hqzru4#icomoon') format('svg');
+	src: url('../fonts/icomoon.eot?hqzru4');
+	src: url('../fonts/icomoon.eot?hqzru4#iefix') format('embedded-opentype'), 
+		 url('../fonts/icomoon.ttf?hqzru4') format('truetype'), 
+		 url('../fonts/icomoon.woff?hqzru4') format('woff'), 
+		 url('../fonts/icomoon.svg?hqzru4#icomoon') format('svg');
 	font-weight: normal;
 	font-style: normal;
 }
@@ -16,7 +22,7 @@
 [class^="icon-"],
 [class*=" icon-"] {
 
-	/* use !important to prevent issues with browser extensions that change fonts */
+	/* use !important to prevent issues with browser extensions that change ..fonts */
 	font-family: 'icomoon' !important;
 	speak: none;
 	font-style: normal;
@@ -68,7 +74,7 @@ img,h3 {
 }
 
 #iw-container  .iw-title {
-	font-family: 'Babylon5', calibri;
+	/*font-family: 'Babylon5', calibri;*/
 	font-size: 22px;
 	line-height: 30px;
 	font-weight: 400;
@@ -92,9 +98,9 @@ img,h3 {
 
 .gm-style-iw {
 	width: 350px !important;
-	top: 0 !important;
-	left: 0 !important;
-	border-radius: 2px 2px 0 0;
+   	top: 0 !important;
+   	left: 0 !important;
+   	
 }
 
 

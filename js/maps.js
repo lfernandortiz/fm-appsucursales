@@ -49,6 +49,10 @@ function initMap() {
 		center: coordenadasIniciales,
 	});
 	infowindow = new google.maps.InfoWindow();
+
+	google.maps.event.addListener(map, 'click', function() {
+		infowindow.close();
+	});
 }
 
 
@@ -56,7 +60,7 @@ function initMap() {
 function drop() {
 	clearMarkers();
 	for (var i = 0; i < sucursales.length; i++) {
-		console.log(sucursales[i][1], sucursales[i][2]);
+		// console.log(sucursales[i][1], sucursales[i][2]);
 		var coordenadas = new google.maps.LatLng(sucursales[i][1], sucursales[i][2]);
 		var principal = new String(sucursales[i][0]);
 		var sucursalt = new String('Dromedicas del Oriente SAS');
@@ -87,19 +91,28 @@ function addMarkerWithTimeout(position, timeout, info, i, dir) {
 		var marker = new google.maps.Marker({
 			position: position,
 			map: map,
+			title:info,
 			animation: google.maps.Animation.DROP
 		});
 		//contenido del objeto InfoWindow
 		var contents = "<h1><span class='sucursal'>Sucursal</span> " + info + "</h1>" +
 			"<p><span class='icon-home'></span> " + dir + "</p>";
+
+		var content = '<div id="iw-container">' +
+                    '<div class="iw-title"><img src="images/iconoFarmanorte.png" alt="logoFarmanorte">'+
+					'<h3>Droguería ' + info + '</h3></div>' +
+                    '<div class="iw-content">' +   
+                    "<p><span class='icon-home'></span> " + dir + "</p>";                   
+                    '</div>' +
+                    '<div class="iw-bottom-gradient"></div>' +
+                  '</div>';
 		//registro del manejo de evento click para desplegar el objeto InfoWindow
 		google.maps.event.addListener(marker, 'click', (function(marker, i) {
-				return function() {
-					infowindow.setContent(contents); //estable el contenido del infoWindow
+				return function() {				
+					infowindow.setContent(content); //estable el contenido del infoWindow
 					infowindow.open(map, marker);
 				}
-			})
-			(marker, i)); //fin del registro de evento click del sobre los marcadores
+			})			(marker, i)); //fin del registro de evento click del sobre los marcadores
 		markers.push(marker);
 	}, timeout); //fin del metodo setTimeout del objeto window
 }
