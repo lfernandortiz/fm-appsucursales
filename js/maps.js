@@ -45,7 +45,7 @@ var sucursales = [
 //carga el objeto mapa y crea el objeto InfoWindow
 function initMap() {
 	map = new google.maps.Map(document.getElementById('map'), {
-		zoom: 14,
+		zoom: 13,
 		center: coordenadasIniciales,
 	});
 	infowindow = new google.maps.InfoWindow();
@@ -127,7 +127,7 @@ function clearMarkers() {
 
 //anade el marcardor "Marker" al mapa y registra el evento click sobre el marcador
 //para mostrar la informacion de la sucursal en un objeto InfoWindow
-function addMarkerWithTimeout(position, timeout, info, i, dir) {
+function addMarkerWithTimeout(position, timeout, info, i, dir, telefono, celular) {
 	window.setTimeout(function() {
 		//se crea uno Marker (marcador)  para el mapa
 		var marker = new google.maps.Marker({
