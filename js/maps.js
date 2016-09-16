@@ -45,7 +45,7 @@ var sucursales = [
 //carga el objeto mapa y crea el objeto InfoWindow
 function initMap() {
 	map = new google.maps.Map(document.getElementById('map'), {
-		zoom: 12,
+		zoom: 14,
 		center: coordenadasIniciales,
 	});
 	infowindow = new google.maps.InfoWindow();
@@ -98,18 +98,75 @@ function addMarkerWithTimeout(position, timeout, info, i, dir) {
 		var contents = "<h1><span class='sucursal'>Sucursal</span> " + info + "</h1>" +
 			"<p><span class='icon-home'></span> " + dir + "</p>";
 
-		var content = '<div id="iw-container">' +
-                    '<div class="iw-title"><img src="images/iconoFarmanorte.png" alt="logoFarmanorte">'+
-					'<h3>Droguería ' + info + '</h3></div>' +
-                    '<div class="iw-content">' +   
-                    "<p><span class='icon-home'></span> " + dir + "</p>";                   
-                    '</div>' +
-                    '<div class="iw-bottom-gradient"></div>' +
-                  '</div>';
+		var content = 
+			'<div id="iw-container">' +
+                '<div class="iw-title">'+
+					'<img src="images/iconoFarmanorte.png" alt="logoFarmanorte">'+
+					'<h3>Droguería '+ info +'</h3>'+
+				'</div>'+
+				'<div class="iw-content">'+
+					'<p><span class="icon-home"></span>'+ dir +'</p>'+
+					'<p><a href="tel:(037)5777762" class="footertext"><span class="icon-phone"></span>5747808</a></p>'+	
+					'<p><a href="tel:3002692042" class="footertext"><span class="icon-mobile"></span>3002692042</a></p>'+	
+					'<h3>Horarios</h3>'+
+					'<p class="horario">24 Horas.</p>'+
+				'</div>'+
+            '</div>';
+
+
+         google.maps.event.addListener(infowindow, 'domready', function() {
+
+		// Reference to the DIV that wraps the bottom of infowindow
+		var iwOuter = $('.gm-style-iw');
+
+		/* Since this div is in a position prior to .gm-div style-iw.
+		* We use jQuery and create a iwBackground variable,
+		* and took advantage of the existing reference .gm-style-iw for the previous div with .prev().
+		*/
+		var iwBackground = iwOuter.prev();
+
+		// Removes background shadow DIV
+		iwBackground.children(':nth-child(2)').css({'display' : 'none'});
+
+		// Removes white background DIV
+		iwBackground.children(':nth-child(4)').css({'display' : 'none'});
+
+		// Moves the infowindow 115px to the right.
+		iwOuter.parent().parent().css({left: '0px'});
+
+		// Moves the shadow of the arrow 76px to the left margin.
+		// iwBackground.children(':nth-child(1)').attr('style', 
+		// 	function(i,s){ return s + 'left: 76px !important;'});
+
+		// Moves the arrow 76px to the left margin.
+		// iwBackground.children(':nth-child(3)').attr('style', 
+		// 	function(i,s){ return s + 'left: 76px !important;'});
+
+		// Changes the desired tail shadow color.
+		iwBackground.children(':nth-child(3)').find('div').children().css({'box-shadow': 'rgba(0, 10, 123, .5) 0px 1px 6px', 'z-index' : '1'});
+
+		// Reference to the div that groups the close button elements.
+		var iwCloseBtn = iwOuter.next();
+
+		// Apply the desired effect to the close button
+		iwCloseBtn.css({opacity: '1', right: '38px', top: '3px', border: '7px solid rgba(0, 10, 123, 1.0)', 'border-radius': '13px', 'box-shadow': '0 0 5px rgba(0, 10, 123, .9)'});
+
+		// If the content of infowindow not exceed the set maximum height, then the gradient is removed.
+		// if($('.iw-content').height() < 140){
+		// $('.iw-bottom-gradient').css({display: 'none'});
+		// }
+
+    // The API automatically applies 0.7 opacity to the button after the mouseout event. This function reverses this event to the desired value.
+    iwCloseBtn.mouseout(function(){
+      $(this).css({opacity: '1'});
+    });
+  });
+
+
 		//registro del manejo de evento click para desplegar el objeto InfoWindow
 		google.maps.event.addListener(marker, 'click', (function(marker, i) {
 				return function() {				
-					infowindow.setContent(contents); //estable el contenido del infoWindow
+					infowindow.setContent(content); //estable el contenido del infoWindow
 					infowindow.open(map, marker);
 				}
 			})			(marker, i)); //fin del registro de evento click del sobre los marcadores
@@ -123,7 +180,7 @@ function addMarkerWithTimeoutPpal(position, timeout, info, i) {
 		//Marker (marcador) personalizado para la sede principal
 		// se crea el objeto con sus parametros
 		var image = {
-			url: 'icono.png',
+			url: '../images/icono.png',
 			size: new google.maps.Size(40, 44),
 			origin: new google.maps.Point(0, 0),
 			anchor: new google.maps.Point(0, 32)
