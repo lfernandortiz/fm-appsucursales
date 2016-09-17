@@ -55,69 +55,67 @@ function initMap() {
 		infowindow.close();
 	});
 
+	//Desde aca se comienza la manipulacion del DOM del objeto Info Window
+	//nos apoyamos de jQuery
 	google.maps.event.addListener(infowindow, 'domready', function() {
-
 		// Reference to the DIV that wraps the bottom of infowindow
 		var iwOuter = $('.gm-style-iw');
-
 		/* Since this div is in a position prior to .gm-div style-iw.
 		* We use jQuery and create a iwBackground variable,
 		* and took advantage of the existing reference .gm-style-iw for the previous div with .prev().
 		*/
 		var iwBackground = iwOuter.prev();
-
 		// Removes background shadow DIV
 		iwBackground.children(':nth-child(2)').css({'display' : 'none'});
-
 		// Removes white background DIV
 		iwBackground.children(':nth-child(4)').css({'display' : 'none'});
-
 		// Moves the infowindow 115px to the right.
 		iwOuter.parent().parent().css({left: '0px'});
-
-		
 		// Changes the desired tail shadow color.
 		iwBackground.children(':nth-child(3)').find('div').children().css({'box-shadow': 'rgba(0, 10, 123, .5) 0px 1px 6px', 'z-index' : '1'});
-
 		// Reference to the div that groups the close button elements.
 		var iwCloseBtn = iwOuter.next();
-
 		// Apply the desired effect to the close button
 		iwCloseBtn.css({opacity: '1', right: '38px', top: '3px', border: '7px solid rgba(0, 10, 123, 1.0)', 'border-radius': '5px', 'box-shadow': '0 0 5px rgba(0, 10, 123, .9)'});
-
 		// If the content of infowindow not exceed the set maximum height, then the gradient is removed.
 		// if($('.iw-content').height() < 140){
 		// $('.iw-bottom-gradient').css({display: 'none'});
 		// }
-
 	    // The API automatically applies 0.7 opacity to the button after the mouseout event. This function reverses this event to the desired value.
 	    iwCloseBtn.mouseout(function(){
 	      $(this).css({opacity: '1'});
 	    });
   	});
-}
+}// fin del metodo initMap
 
 
 //funcion ejecutada al momento de la carga de la pagina
 function drop() {	
 	clearMarkers();
 	createMarkers();	
-	
+
+	//pre-cargo las imagenes de los marcadores
 } //fin del metodo drop
 
 
+
 function createMarkers(){
+	//iteramos la coleccion de sucursales
 	for (var i = 0; i < sucursales.length; i++) {
 		// console.log(sucursales[i][1], sucursales[i][2]);
+		//se crea un objeto coordenadas para crear nuestro marcador
 		var coordenadas = new google.maps.LatLng(sucursales[i][1], sucursales[i][2]);
+		//variables creadas para comparar determinar cual es la ppal
 		var principal = new String(sucursales[i][0]);
 		var sucursalt = new String('Dromedicas del Oriente SAS');
+		
 		if (principal.localeCompare(sucursalt) === 0) {			
-			addMarkerWithTimeoutPpal(coordenadas, i * 100, sucursales[i][0], i, sucursales[i][3]);
-			//**Cambie a este metodo si no desea que el marker de la principal sea custom
-			// addMarkerWithTimeout(coordenadas, i * 100, sucursales[i][0], i );
+			addMarkerWithTimeoutPpal(coordenadas, i * 100, 
+										sucursales[i][0], i, sucursales[i][3]);			
 		} else {
-			addMarkerWithTimeout(coordenadas, i * 50, sucursales[i][0], i, sucursales[i][3], sucursales[i][4], sucursales[i][5]);
+			addMarkerWithTimeout(coordenadas, i * 50,
+									sucursales[i][0], i, sucursales[i][3], 
+									sucursales[i][4], sucursales[i][5]);
 		}
 	} //fin del for
 }//fin del metodo createMarkers
@@ -136,7 +134,7 @@ function clearMarkers() {
 function addMarkerWithTimeout(position, timeout, suc, i, dir, telefono, celular) {
 	window.setTimeout(function() {
 		//se crea uno Marker (marcador)  para el mapa
-		var image = {
+		var imageMarkerStandar = {
 			url: 'images/markFarmaAbierto.png',
 			// url: 'images/markFarmaCerrad.png',
 			size: new google.maps.Size(30, 42),
@@ -146,7 +144,7 @@ function addMarkerWithTimeout(position, timeout, suc, i, dir, telefono, celular)
 		var marker = new google.maps.Marker({
 			position: position,
 			map: map,
-			icon: image,
+			icon: imageMarkerStandar,
 			title:suc,
 			animation: google.maps.Animation.DROP
 		});
@@ -185,7 +183,7 @@ function addMarkerWithTimeout(position, timeout, suc, i, dir, telefono, celular)
 function addMarkerWithTimeoutPpal(position, timeout, suc, i, dir, telefono, celular) {
 	window.setTimeout(function() {
 		//se crea uno Marker (marcador)  para el mapa
-		var image = {
+		var imageMarkerPpal = {
 			url: 'images/markDromedicas.png',
 			// url: 'images/markFarmaCerrad.png',
 			size: new google.maps.Size(30, 42),
@@ -195,7 +193,7 @@ function addMarkerWithTimeoutPpal(position, timeout, suc, i, dir, telefono, celu
 		var marker = new google.maps.Marker({
 			position: position,
 			map: map,
-			icon: image,
+			icon: imageMarkerPpal,
 			title:suc,
 			animation: google.maps.Animation.DROP
 		});
