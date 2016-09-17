@@ -100,7 +100,6 @@ function initMap() {
 //funcion ejecutada al momento de la carga de la pagina
 function drop() {	
 	clearMarkers();
-	// initMap();
 	createMarkers();	
 	
 } //fin del metodo drop
@@ -215,5 +214,5 @@ function addMarkerWithTimeoutPpal(position, timeout, info, i) {
 }
 
 //registro de manejo de evento al momento de carga de la pagina
-// window.addEventListener('load', initMap, false);
+window.addEventListener('load', initMap, false);
 window.addEventListener('load', drop, false);
