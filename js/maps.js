@@ -141,7 +141,6 @@ function addMarkerWithTimeout(position, timeout, suc, i, dir, telefono, celular)
 			origin: new google.maps.Point(0, 0),
 			anchor: new google.maps.Point(0, 32)
 		};
-		console.log(image);
 		var marker = new google.maps.Marker({
 			position: position,
 			map: map,
