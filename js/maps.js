@@ -192,11 +192,12 @@ function addMarkerWithTimeoutPpal(position, timeout, info, i) {
 			origin: new google.maps.Point(0, 0),
 			anchor: new google.maps.Point(0, 32)
 		};
+		var m = '../images/markDromedicas.png'
 		//objeto marcador
 		var marker = new google.maps.Marker({
 			position: position,
 			map: map,
-			icon: image,
+			icon: m,
 			animation: google.maps.Animation.DROP
 		});
 		//contenido del objeto InfoWindow
