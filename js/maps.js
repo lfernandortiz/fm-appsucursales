@@ -113,11 +113,12 @@ function createMarkers(){
 		var principal = new String(sucursales[i][0]);
 		var sucursalt = new String('Dromedicas del Oriente SAS');
 		if (principal.localeCompare(sucursalt) === 0) {
-			console.log("cargando pines...")
+			
 			addMarkerWithTimeoutPpal(coordenadas, i * 100, sucursales[i][0], i, sucursales[i][3]);
 			//**Cambie a este metodo si no desea que el marker de la principal sea custom
 			// addMarkerWithTimeout(coordenadas, i * 100, sucursales[i][0], i );
 		} else {
+			console.log("cargando pines...")
 			addMarkerWithTimeout(coordenadas, i * 50, sucursales[i][0], i, sucursales[i][3], sucursales[i][4], sucursales[i][5]);
 		}
 	} //fin del for
