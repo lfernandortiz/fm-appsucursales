@@ -131,7 +131,7 @@ function addMarkerWithTimeout(position, timeout, suc, i, dir, telefono, celular)
 	window.setTimeout(function() {
 		//se crea uno Marker (marcador)  para el mapa
 		var image = {
-			url: '../images/iconosmaps.png',
+			url: '../images/markFarmaAbierto.png',
 			size: new google.maps.Size(30, 42),
 			origin: new google.maps.Point(0, 0),
 			anchor: new google.maps.Point(0, 32)
@@ -180,8 +180,8 @@ function addMarkerWithTimeoutPpal(position, timeout, info, i) {
 		//Marker (marcador) personalizado para la sede principal
 		// se crea el objeto con sus parametros
 		var image = {
-			url: '../images/icono.png',
-			size: new google.maps.Size(40, 44),
+			url: '../images/markDromedicas.png',
+			size: new google.maps.Size(30, 42),
 			origin: new google.maps.Point(0, 0),
 			anchor: new google.maps.Point(0, 32)
 		};
