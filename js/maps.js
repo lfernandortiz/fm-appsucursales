@@ -10,35 +10,36 @@ var infowindow;
 
 //informacion y coordenada de sucursales
 var sucursales = [
-	['Dromedicas del Oriente SAS', 7.908388743984923, -72.491574883461, 'AVENIDA 11 BE # 8BN - 10  GUAIMARAL', '5552106', '', 1],
-	['Farmanorte 01', 7.840764903473619, -72.5028133392334, 'CALLE 33 # 4 - 05 LA SABANA LOS PATIOS', '5826745', '', 2],
-	['Farmanorte 02', 7.923595410892432, -72.52201795578003, 'CALLE 2N # 5 - 07  PESCADERO', '5780727', '', 3],
-	['Farmanorte 03', 7.917091999388589, -72.49572694301605, 'CALLE 20AN # 2 - 168 URBANIZACION PRADOS NORTE', '5796888', '', 4],
-	['Farmanorte 04', 7.9049350202970805, -72.51519441604614, 'CALLE 4 # 2- 05 LA VICTORIA', '5787878', '', 5],
-	['Farmanorte 05', 7.898048740341691, -72.52727508544922, 'CALLE 2 # 5 - 75 BARRIO CECI', '5870555', '', 6],
-	['Farmanorte 06', 7.87261944, -72.52802511, 'AVENIDA 26 # 28 - 03  BELEN', '5828280', '', 7],
-	['Farmanorte 07', 7.8904609470678055, -72.49629020690918, 'CALLE 8 # 1E - 176  POPULAR', '5744094', '', 8],
-	['Farmanorte 08', 7.373990247532279, -72.64909029006958, 'CARRERA 6 # 7 - 99  CALLE REAL', '5682217', '', 9],
-	['Farmanorte 09', 7.929875568608961, -72.50390768051147, 'CALLE 4 # 1 - 90  AREOPUERTO', '5818245', '', 10],
-	['Farmanorte 10', 7.912830721471756, -72.48752474784851, 'AVENIDA LIBERTADORES #18N-181 FTE BLOQUE ZULI', '5776206', '', 11],
-	['Farmanorte 11', 7.8871853, -72.49622654, 'CALLE 11 -  AVENIDA 2E ESQUINA', '5711737', '5712365', 12],
-	['Farmanorte 12', 7.88983925194856, -72.49102771282196, 'AVENIDA 9E # 9 - 10 ESQUINA  LA RIVIERA ', '5751377', '', 13],
-	['Farmanorte 13', 7.886720134976074, -72.51558065414429, 'CALLE 8 # 16 -116 SAN MIGUEL ', '5821784', '', 14],
-	['Farmanorte 14', 7.88912722, -72.51350731, 'CALLE 6 # 13 - 61 FRENTE A LA ESE LOMA BOLIVAR', '5739782', '', 15],
-	['Farmanorte 15', 7.91121118, -72.51772667, 'AVENIDA 0 # 4-68  COMUNEROS', '5796173', '', 16],
-	['Farmanorte 16', 7.607999367664449, -72.59926557540894, 'CALLE 3 # 3 -34  CHINACOTA', '5864324', '3173660022', 17],
-	['Farmanorte 17', 7.92706246, -72.51931541, 'AVENIDA 5 # 24 - 02', '5781108', '3153084801', 18],
-	['Farmanorte 18', 7.88198692, -72.4986197, 'AVENIDA 1 # 15 - 87', '5710546', '3176410633', 19],
-	['Farmanorte 19', 7.87879545, -72.49714686, 'AVENIDA 0 CALLE 19 ESQUINA BARRIO BLANCO', '5831554', '5831522', 20],
-	['Farmanorte 20', 7.88715719, -72.5027738, 'AVENIDA 4 CALLE 10 ESQUINA', '5730318', '3175020642', 21],
-	['Farmanorte 21', 7.88680822, -72.5048961, 'AVENIDA 6 # 10-142 CENTRO', '5712508', '', 22],
-	['Farmanorte 22', 8.23596841, -73.35418615, 'CALLE 10 # 12 - 87 CENTRO OCAÑA', '0', '', 23],
-	['Farmanorte 23', 7.88755082, -72.50502387, 'AVENIDA 6 CALLE 9 ESQUINA CENTRO', '5730526', '', 24],
-	['Farmanorte 24', 7.88765518, -72.49848544, 'AVENIDA 0 # 10-18  LATINO', '5711114', '3175021518', 25],
-	['Farmanorte 25', 7.8666476, -72.49764258, 'CC PINAR DEL RIO LOCAL 10A', '5842555', '5840191', 26],
-	['Farmanorte 26', 7.87187112, -72.52892628, 'AVENIDA 26 # 29 - 48 BELEN', '5754140', '', 27],
-	['Farmanorte 27', 7.91694492, -72.4727475, 'ANILLO VIAL BOMBA EL ESCOBAL', '5774152', '', 28],
-	['San Antonio del Norte', 7.88749215, -72.50609315, 'AVENIDA 7 # 9 - 07 CENTRO ', '5727091', '', 29],
+	['Dromedicas del Oriente SAS',  7.908388743984923 ,  -72.491574883461 , 'AVENIDA 11 BE # 8BN - 10  GUAIMARAL', '5552106','','CUCUTA',1],
+	['Farmanorte 01',  7.840764903473619 ,  -72.5028133392334 , 'CALLE 33 CON AVENIDA 4 ESQUINA BRR LA SABANA', '5808800','3167409253', 'LOS PATIOS',2],
+	['Farmanorte 02',  7.923595410892432 ,  -72.52201795578003 , 'AVENIDA 5 CON CALLE 2N PESCADERO', '5780727','3166909962', 'CUCUTA',3],
+	['Farmanorte 03',  7.917091999388589 ,  -72.49572694301605 , 'AVENIDA 4 CON CALLE 20AN ESQUINA BRR PRADOS DEL NORTE', '5796888','3166909583', 'CUCUTA',4],
+	['Farmanorte 04',  7.9049350202970805 ,  -72.51519441604614 , 'AVENIDA KENNEDY CON 2DA ESQUINA BRR LA VICTORIA', '5787878','3183353570', 'CUCUTA',5],
+	['Farmanorte 05',  7.898048740341691 ,  -72.52727508544922 , 'CALLE 2 CON AVENIDA 6 ESQUINA BRR CECI', '5870555','3168309523', 'CUCUTA',6],
+	['Farmanorte 06', 7.87261944, -72.52802511, 'AVENIDA 26 CON CALLE 28 ESQUINA BRR BELEN', '5828280','3155888094', 'CUCUTA',7],
+	['Farmanorte 07',  7.8904609470678055 ,  -72.49629020690918 , 'CALLE 8 # 1E-76 JUNTO CAFESALUD LA SALLE', '5744094','3153437725', 'CUCUTA',8],
+	['Farmanorte 08',  7.373990247532279 ,  -72.64909029006958 , 'CRR 6 # 7-99 CALLE REAL', '5682217','3183437726', 'PAMPLONA',9],
+	['Farmanorte 09',  7.929875568608961 ,  -72.50390768051147 , 'AVENIDA 2 CON CALLE 4 ESQUINA BRR AEROPUERTO', '5818245','3166910544', 'CUCUTA',10],
+	['Farmanorte 10',  7.912830721471756 ,  -72.48752474784851 , 'AVENIDA LIBERTADORES # 18N-181 BRR SANTA ELENA BLOQUES DEL ZULIMA', '5776206','3155997099', 'CUCUTA',11],
+	['Farmanorte 11', 7.8871853, -72.49622654, 'CLL 11 CON AV 2E ESQUINA DIAGONAL C.C. VENTURA PLAZA', '5711737','3173643955', 'CUCUTA',12],
+	['Farmanorte 12',  7.88983925194856 ,  -72.49102771282196 , 'AV. 9E CON CLL 9 ESQ FTE COL. DOMINGO SAVIO BRR LA RIVIERA', '5751377','3185166993', 'CUCUTA',13],
+	['Farmanorte 13',  7.886720134976074 ,  -72.51558065414429 , 'AV 3E # 1-108 LOCAL 1 FRENTE AL PARQUE LA CEIBA', '577770','3185166990', 'CUCUTA',14],
+	['Farmanorte 14', 7.88912722, -72.51350731, 'CLL 6 # 13-61 FTE ESE LOMA BOLIVAR', '5739782','3155120028', 'CUCUTA',15],
+	['Farmanorte 15', 7.91121118, -72.51772667, 'AVENIDA 0 # 4-68 ESQUINA BARRIO COMUNEROS', '5796173','3154372258', 'CUCUTA',16],
+	['Farmanorte 16',  7.607999367664449 ,  -72.59926557540894 , 'CLL 3 # 3-34  PARQ PRPAL CHINACOTA', '5864324','3173660022', 'CHINACOTA',17],
+	['Farmanorte 17', 7.92706246, -72.51931541, 'AVENIDA 5 CON CALLE 24 OSPINA PEREZ ESQUINA', '5781108','3153084801', 'CUCUTA',18],
+	['Farmanorte 18', 7.88198692, -72.4986197, 'AVENDAD 1 #15-87 BARRIO LA PLAYA', '5710546','3176410633', 'CUCUTA',19],
+	['Farmanorte 19', 7.87879545, -72.49714686, 'AVENIDA 0 CON CALLE 19 ESQUINA', '5831554','3174378532', 'CUCUTA',20],
+	['Farmanorte 20', 7.88715719, -72.5027738, 'CALLE 10 CON AVENIDA 4 ESQUINA', '5730318','3175020642', 'CUCUTA',21],
+	['Farmanorte 21', 7.88680822, -72.5048961, 'AV 6 CON CALLE 10# 5-94  FRENTE AL PARQUE SANTANDER CENTRO', '5719113','3174380134', 'CUCUTA',22],
+	['Farmanorte 22', 8.23596841, -73.35418615, 'CALLE 10 # 12-87 FRENTE AL PARQUE - OCAÑA', '5691839','3153926643', 'OCAÑA',23],
+	['Farmanorte 23', 7.88755082, -72.50502387, 'AVENIDA 6 # 9-21', '5730526','3183380633', 'CUCUTA',24],
+	['Farmanorte 24', 7.88765518, -72.49848544, 'AVENIDA 0 · 10-14', '5711114','3175021518', 'CUCUTA',25],
+	['Farmanorte 25', 7.8666476, -72.49764258, 'CENTRO CIAL PINAR DEL RIO LOCAL 10', '5842555','3174333572', 'CUCUTA',26],
+	['Farmanorte 26', 7.87187112, -72.52892628, 'AVENIDA 26 NO 29-48 BR BELEN', '5754140','3162331144', 'CUCUTA',27],
+	['Farmanorte 27', 7.91694492, -72.4727475, 'EL ESCOBAL, ANILLO VIAL, PLAZA DEL ESTE LOCAL 6', '5847808','3188135356', 'CUCUTA',28],
+	['San Antonio del Norte', 7.88749215, -72.50609315, 'AV 7 CALLE 9 ESQUINA CENTRO', '5727091','3155997098', 'CUCUTA',29],
+
 
 ];
 
@@ -137,6 +138,7 @@ function addMarkerWithTimeout(position, timeout, suc, i, dir, telefono, celular)
 		//se crea uno Marker (marcador)  para el mapa
 		var image = {
 			url: 'images/markFarmaAbierto.png',
+			// url: 'images/markFarmaCerrad.png',
 			size: new google.maps.Size(30, 42),
 			origin: new google.maps.Point(0, 0),
 			anchor: new google.maps.Point(0, 32)
@@ -180,35 +182,52 @@ function addMarkerWithTimeout(position, timeout, suc, i, dir, telefono, celular)
 }
 
 //metodo auxiliar para variacion
-function addMarkerWithTimeoutPpal(position, timeout, info, i) {
+function addMarkerWithTimeoutPpal(position, timeout, suc, i, dir, telefono, celular) {
 	window.setTimeout(function() {
-		//Marker (marcador) personalizado para la sede principal
-		// se crea el objeto con sus parametros
+		//se crea uno Marker (marcador)  para el mapa
 		var image = {
 			url: 'images/markDromedicas.png',
+			// url: 'images/markFarmaCerrad.png',
 			size: new google.maps.Size(30, 42),
 			origin: new google.maps.Point(0, 0),
 			anchor: new google.maps.Point(0, 32)
 		};
-		//objeto marcador
 		var marker = new google.maps.Marker({
 			position: position,
 			map: map,
 			icon: image,
+			title:suc,
 			animation: google.maps.Animation.DROP
 		});
 		//contenido del objeto InfoWindow
-		var contents = "<h1><span class='sucursal'></span> " + info + "</h1>";
+		var contents = "<h1><span class='sucursal'>Sucursal</span> " + suc + "</h1>" +
+			"<p><span class='icon-home'></span> " + dir + "</p>";
+
+		var content = 
+			'<div id="iw-container">' +
+                '<div class="iw-titleppal">'+
+					'<img src="images/iconoDromedicas.png" alt="logoFarmanorte">'+
+					'<h3>Droguería '+ suc +'</h3>'+
+				'</div>'+
+				'<div class="iw-contentppal">'+
+					'<p><span class="icon-home"></span>'+ dir +'</p>'+
+					'<p><a href="tel:(037)'+ telefono +'" class="footertext"><span class="icon-phone"></span>'+ telefono +'</a></p>'+	
+					'<p><a href="tel:3002692042" class="footertext"><span class="icon-mobile"></span>3002692042</a></p>'+	
+					// '<h3>Horarios</h3>'+
+					// '<p class="horario">24 Horas.</p>'+
+				'</div>'+
+            '</div>';
+
 		//registro del manejo de evento click para desplegar el objeto InfoWindow
 		google.maps.event.addListener(marker, 'click', (function(marker, i) {
-				return function() {
-					infowindow.setContent(contents);
+				return function() {				
+					infowindow.setContent(content); //estable el contenido del infoWindow
 					infowindow.open(map, marker);
 				}
-			})
+			})			
 			(marker, i)); //fin del registro de evento click del sobre los marcadores
 		markers.push(marker);
-	}, timeout); //fin del metodo setTimeout del objeto window	
+	}, timeout); //fin del metodo setTimeout del objeto window
 }
 
 //registro de manejo de evento al momento de carga de la pagina
