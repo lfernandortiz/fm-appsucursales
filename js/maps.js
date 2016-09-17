@@ -106,6 +106,7 @@ function drop() {
 		var principal = new String(sucursales[i][0]);
 		var sucursalt = new String('Dromedicas del Oriente SAS');
 		if (principal.localeCompare(sucursalt) === 0) {
+			console.log("cargando pines...")
 			addMarkerWithTimeoutPpal(coordenadas, i * 100, sucursales[i][0], i, sucursales[i][3]);
 			//**Cambie a este metodo si no desea que el marker de la principal sea custom
 			// addMarkerWithTimeout(coordenadas, i * 100, sucursales[i][0], i );
