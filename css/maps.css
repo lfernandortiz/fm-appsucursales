@@ -287,12 +287,13 @@ img,h3,p {
 
 /*Estilos del mapa contenedor*/
 #map {
-	height: 600px;
-	max-width: 1200px;
+	height: 500px;
+	max-width: 900px;
 	margin: 0 auto;
 	border: 2px solid #0101BE;
 	padding: 2px;
 	border-radius: 8px;
+	
 }
 
 #map h1 {

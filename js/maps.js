@@ -207,7 +207,7 @@ function addMarkerWithTimeoutPpal(position, timeout, suc, i, dir, telefono, celu
 			'<div id="iw-container">' +
                 '<div class="iw-titleppal">'+
 					'<img src="images/iconoDromedicas.png" alt="logoFarmanorte">'+
-					'<h3>Droguería '+ suc +'</h3>'+
+					'<h3>'+ suc +'</h3>'+
 				'</div>'+
 				'<div class="iw-contentppal">'+
 					'<p><span class="icon-home"></span>'+ dir +'</p>'+
