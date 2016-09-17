@@ -203,8 +203,8 @@ img,h3,p {
 
 /*Estilos del mapa contenedor*/
 #map {
-	height: 500px;
-	max-width: 900px;
+	height: 600px;
+	max-width: 1200px;
 	margin: 0 auto;
 	border: 2px solid #0101BE;
 	padding: 2px;
