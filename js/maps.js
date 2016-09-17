@@ -45,7 +45,7 @@ var sucursales = [
 //carga el objeto mapa y crea el objeto InfoWindow
 function initMap() {
 	map = new google.maps.Map(document.getElementById('map'), {
-		zoom: 13,
+		zoom: 14,
 		center: coordenadasIniciales,
 	});
 	infowindow = new google.maps.InfoWindow();
@@ -131,9 +131,8 @@ function addMarkerWithTimeout(position, timeout, suc, i, dir, telefono, celular)
 	window.setTimeout(function() {
 		//se crea uno Marker (marcador)  para el mapa
 		var image = {
-			// url: '../images/icono.png',
-			url: '../images/markGoogleMaps.png',
-			size: new google.maps.Size(45, 64),
+			url: '../images/iconosmaps.png',
+			size: new google.maps.Size(30, 42),
 			origin: new google.maps.Point(0, 0),
 			anchor: new google.maps.Point(0, 32)
 		};

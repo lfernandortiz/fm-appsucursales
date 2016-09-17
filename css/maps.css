@@ -203,8 +203,8 @@ img,h3,p {
 
 /*Estilos del mapa contenedor*/
 #map {
-	height: 500px;
-	max-width: 900px;
+	height: 600px;
+	max-width: 1200px;
 	margin: 0 auto;
 	border: 2px solid #0101BE;
 	padding: 2px;
@@ -223,6 +223,6 @@ img,h3,p {
 }
 
 #map .sucursal {
-	color: #FA3A3A;
+	color: #FF4444;
 	text-shadow: 1px 1px 1px #353535;
 }
