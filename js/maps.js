@@ -131,8 +131,7 @@ function addMarkerWithTimeout(position, timeout, suc, i, dir, telefono, celular)
 	window.setTimeout(function() {
 		//se crea uno Marker (marcador)  para el mapa
 		var image = {
-			// url: '../images/icono.png',
-			url: '../images/markGoogleMaps.png',
+			url: '../images/iconosmaps.png',
 			size: new google.maps.Size(45, 64),
 			origin: new google.maps.Point(0, 0),
 			anchor: new google.maps.Point(0, 32)
