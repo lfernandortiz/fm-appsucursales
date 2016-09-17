@@ -45,7 +45,7 @@ var sucursales = [
 //carga el objeto mapa y crea el objeto InfoWindow
 function initMap() {
 	map = new google.maps.Map(document.getElementById('map'), {
-		zoom: 9,
+		zoom: 13,
 		center: coordenadasIniciales,
 	});
 	infowindow = new google.maps.InfoWindow();
@@ -111,13 +111,11 @@ function createMarkers(){
 		var coordenadas = new google.maps.LatLng(sucursales[i][1], sucursales[i][2]);
 		var principal = new String(sucursales[i][0]);
 		var sucursalt = new String('Dromedicas del Oriente SAS');
-		if (principal.localeCompare(sucursalt) === 0) {
-			
+		if (principal.localeCompare(sucursalt) === 0) {			
 			addMarkerWithTimeoutPpal(coordenadas, i * 100, sucursales[i][0], i, sucursales[i][3]);
 			//**Cambie a este metodo si no desea que el marker de la principal sea custom
 			// addMarkerWithTimeout(coordenadas, i * 100, sucursales[i][0], i );
 		} else {
-			console.log("cargando pines...")
 			addMarkerWithTimeout(coordenadas, i * 50, sucursales[i][0], i, sucursales[i][3], sucursales[i][4], sucursales[i][5]);
 		}
 	} //fin del for
@@ -193,7 +191,6 @@ function addMarkerWithTimeoutPpal(position, timeout, info, i) {
 			origin: new google.maps.Point(0, 0),
 			anchor: new google.maps.Point(0, 32)
 		};
-		console.log(image);
 		//objeto marcador
 		var marker = new google.maps.Marker({
 			position: position,
