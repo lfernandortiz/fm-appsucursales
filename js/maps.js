@@ -100,7 +100,7 @@ function initMap() {
 //funcion ejecutada al momento de la carga de la pagina
 function drop() {	
 	clearMarkers();
-	initMap();
+	// initMap();
 	createMarkers();	
 	
 } //fin del metodo drop
