@@ -99,7 +99,14 @@ function initMap() {
 
 //funcion ejecutada al momento de la carga de la pagina
 function drop() {	
-	clearMarkers();	
+	clearMarkers();
+	initMap();
+	createMarkers();	
+	
+} //fin del metodo drop
+
+
+function createMarkers(){
 	for (var i = 0; i < sucursales.length; i++) {
 		// console.log(sucursales[i][1], sucursales[i][2]);
 		var coordenadas = new google.maps.LatLng(sucursales[i][1], sucursales[i][2]);
@@ -114,7 +121,7 @@ function drop() {
 			addMarkerWithTimeout(coordenadas, i * 50, sucursales[i][0], i, sucursales[i][3], sucursales[i][4], sucursales[i][5]);
 		}
 	} //fin del for
-} //fin del metodo drop
+}//fin del metodo createMarkers
 
 
 function clearMarkers() {
