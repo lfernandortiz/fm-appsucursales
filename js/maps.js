@@ -45,7 +45,7 @@ var sucursales = [
 //carga el objeto mapa y crea el objeto InfoWindow
 function initMap() {
 	map = new google.maps.Map(document.getElementById('map'), {
-		zoom: 14,
+		zoom: 9,
 		center: coordenadasIniciales,
 	});
 	infowindow = new google.maps.InfoWindow();
@@ -99,8 +99,7 @@ function initMap() {
 
 //funcion ejecutada al momento de la carga de la pagina
 function drop() {	
-	clearMarkers();
-	initMap();
+	clearMarkers();	
 	for (var i = 0; i < sucursales.length; i++) {
 		// console.log(sucursales[i][1], sucursales[i][2]);
 		var coordenadas = new google.maps.LatLng(sucursales[i][1], sucursales[i][2]);
@@ -207,4 +206,5 @@ function addMarkerWithTimeoutPpal(position, timeout, info, i) {
 }
 
 //registro de manejo de evento al momento de carga de la pagina
+// window.addEventListener('load', initMap, false);
 window.addEventListener('load', drop, false);
