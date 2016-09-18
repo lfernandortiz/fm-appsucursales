@@ -46,7 +46,7 @@ var sucursales = [
 //carga el objeto mapa y crea el objeto InfoWindow
 function initMap() {
 	map = new google.maps.Map(document.getElementById('map'), {
-		zoom: 13,
+		zoom: 14,
 		center: coordenadasIniciales,
 	});
 	infowindow = new google.maps.InfoWindow();
