@@ -19,7 +19,7 @@ function iniciar(){
 	});
 
 	infoWindowCustom = new google.maps.InfoWindow();
-	editCssInfoWindow();
+	// editCssInfoWindow();
 
 
 	var contents = 
@@ -46,9 +46,9 @@ function iniciar(){
 		infoWindow: {content:contents},
 	});
 	infoWindowCustom = mark.infoWindow;
-	editCssInfoWindow();
+	editCssInfoWindow();	
+
 	
-	map.addMarker(mark);
 	
 
 }//fin del metodo iniciar
@@ -87,5 +87,8 @@ function editCssInfoWindow(){
 	      $(this).css({opacity: '1'});
 	    });
   	});
-}
+}// fin del metodo editCssInfoWindow
+
+
+
 window.addEventListener('load',iniciar,false);
