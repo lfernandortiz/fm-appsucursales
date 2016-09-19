@@ -14,6 +14,32 @@ function iniciar(){
 		zoom: 13
 	});
 	
+	GMaps.geolocate({
+		success: function(position) {
+			map.setCenter(position.coords.latitude, position.coords.longitude);
+			map.setZoom(14);
+			var mark = map.createMarker ({	
+				lat: position.coords.latitude,
+				lng: position.coords.longitude,
+				title: 'Ubicacion Actual',
+				infoWindow: {
+					content: "<p>Su ubicacion actual.</p>"
+				},	
+				animation: google.maps.Animation.DROP,
+			});
+			map.addMarker(mark);
+		},
+		error: function(error) {
+			alert('Geolocation failed: ' + error.message);
+		},
+		not_supported: function() {
+			alert("Your browser does not support geolocation");
+		},
+		always: function() {
+			// alert("Done!");
+		}
+	});
+
 	infoWindowCustom = new google.maps.InfoWindow();
 	
 
@@ -55,7 +81,7 @@ function iniciar(){
 	//añadiendo la marca al mapa	
 	map.addMarker(mark);
 	// markers.push(mark);
-	}, 900);
+	}, 100);
 
 	
 	
