@@ -102,6 +102,20 @@ function initMap() {
 function drop() {	
 	clearMarkers();
 	createMarkers();	
+
+	var watchID = navigator.geolocation.watchPosition(function(position) {
+		do_something(position.coords.latitude, position.coords.longitude);
+	});
+	navigator.geolocation.clearWatch(watchID);
+
+
+	var marker = new google.maps.Marker({
+		position: position,
+		map: map,
+		icon: image,
+		title: suc,
+		animation: google.maps.Animation.DROP
+	});
 	
 } //fin del metodo drop
 
