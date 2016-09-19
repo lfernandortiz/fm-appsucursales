@@ -64,6 +64,7 @@ function initMap() {
 		* We use jQuery and create a iwBackground variable,
 		* and took advantage of the existing reference .gm-style-iw for the previous div with .prev().
 		*/
+		// console.log("edit stile css InfoWindow");
 		var iwBackground = iwOuter.prev();
 		// Removes background shadow DIV
 		iwBackground.children(':nth-child(2)').css({'display' : 'none'});
