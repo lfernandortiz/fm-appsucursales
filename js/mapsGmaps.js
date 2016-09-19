@@ -3,7 +3,7 @@ console.log("test GMaps");
 var map;
 var markers = [];
 //varible para objeto de informacion del marcador 
-var infoW;
+var infoWindowCustom
 
 function iniciar(){
 	//crea el mapa con las coordenada iniciales y el zoom
@@ -14,6 +14,12 @@ function iniciar(){
 		zoom: 13
 	});
 
+	google.maps.event.addListener(map, 'click', function() {
+		infowindow.close();
+	});
+
+	infoWindowCustom = new google.maps.InfoWindow();
+	editCssInfoWindow();
 
 
 	var contents = 
@@ -31,13 +37,6 @@ function iniciar(){
 				'</div>'+
             '</div>';
 
-    var infoW = new google.maps.InfoWindow();
-
-	google.maps.event.addListener(map, 'click', function() {
-		infowindow.close();
-	});
-
-	infoW.setContent(contents);
 	//añadir un marker con GMap
 	var mark = map.createMarker ({	
 	    lat: 7.908388743984923 ,  
@@ -46,7 +45,17 @@ function iniciar(){
 		title: 'Dromedicas del Oriente',
 		infoWindow: {content:contents},
 	});
-	var infoWindowCustom = mark.infoWindow;
+	infoWindowCustom = mark.infoWindow;
+	editCssInfoWindow();
+	
+	map.addMarker(mark);
+	
+
+}//fin del metodo iniciar
+
+
+
+function editCssInfoWindow(){
 	//Desde aca se comienza la manipulacion del DOM del objeto Info Window
 	//nos apoyamos de jQuery
 	google.maps.event.addListener(infoWindowCustom, 'domready', function() {
@@ -78,15 +87,5 @@ function iniciar(){
 	      $(this).css({opacity: '1'});
 	    });
   	});
-	map.addMarker(mark);
-
-
-
-
-	
-
-	
-
-}//fin del metodo iniciar
-
+}
 window.addEventListener('load',iniciar,false);
