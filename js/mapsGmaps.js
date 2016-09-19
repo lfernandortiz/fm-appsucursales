@@ -87,11 +87,22 @@ function iniciar(){
 	GMaps.geolocate({
 		success: function(position) {
 			map.setCenter(position.coords.latitude, position.coords.longitude);
+			map.setZoom(15);
 			map.addMarker({
 				title: 'Mi ubicación',
 				lat: position.coords.latitude,
-				lng: position.coords.longitude
-			})
+				lng: position.coords.longitude,
+				// animation: google.maps.Animation.DROP,
+			});
+
+			map.drawRoute({
+				origin: [position.coords.latitude, position.coords.longitude],
+				destination: [7.908388743984923, -72.491574883461],
+				travelMode: 'driving',
+				strokeColor: '#E90525',
+				strokeOpacity: 0.6,
+				strokeWeight: 6
+			});
 		},
 		error: function(error) {
 			$('#geolocalizacion-info').css('display', 'block');
@@ -125,7 +136,7 @@ function iniciar(){
 	    icon: "images/markDromedicas.png",
 		title: 'Dromedicas del Oriente',
 		infoWindow: {content:contents},
-		animation: google.maps.Animation.DROP,
+		// animation: google.maps.Animation.DROP,
 	});
 	//obteniendo el infowindow del objeto GMap
 	infoWindowCustom = mark.infoWindow;
