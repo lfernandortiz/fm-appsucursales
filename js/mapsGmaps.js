@@ -13,13 +13,12 @@ function iniciar(){
 		lng: -72.49668959999997,
 		zoom: 13
 	});
-
-	google.maps.event.addListener(map, 'click', function() {
-		infowindow.close();
-	});
-
+	
 	infoWindowCustom = new google.maps.InfoWindow();
-	// editCssInfoWindow();
+	google.maps.event.addListener(map, 'click', function() {
+		console.log('registrando evento de infowindow');
+		infoWindowCustom.close();
+	});
 
 
 	var contents = 
@@ -45,10 +44,12 @@ function iniciar(){
 		title: 'Dromedicas del Oriente',
 		infoWindow: {content:contents},
 	});
+	//obteniendo el infowindow del objeto GMap
 	infoWindowCustom = mark.infoWindow;
+	//editando el css del infowindow
 	editCssInfoWindow();	
-
-	
+	//añadiendo la marca al mapa	
+	map.addMarker(mark);
 	
 
 }//fin del metodo iniciar
@@ -65,6 +66,7 @@ function editCssInfoWindow(){
 		* We use jQuery and create a iwBackground variable,
 		* and took advantage of the existing reference .gm-style-iw for the previous div with .prev().
 		*/
+		console.log('editando el css del infoWindow');
 		var iwBackground = iwOuter.prev();
 		// Removes background shadow DIV
 		iwBackground.children(':nth-child(2)').css({'display' : 'none'});
