@@ -292,8 +292,9 @@ img,h3,p {
 	margin: 0 auto;
 	background: #fff;
     padding: 20px;
-    box-shadow: 0 0 20px #999;
+    /*box-shadow: 0 0 20px #999;*/
     border-radius: 2px;
+    border: 1px solid #A7A7A7;
 }
 
 #map {	
