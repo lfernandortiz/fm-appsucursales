@@ -15,10 +15,7 @@ function iniciar(){
 	});
 	
 	infoWindowCustom = new google.maps.InfoWindow();
-	google.maps.event.addListener(map, 'click', function() {
-		console.log('registrando evento de infoWindow')
-		infoWindowCustom.close();
-	});
+	
 
 	var contents = 
 			'<div id="iw-container">' +
@@ -35,6 +32,8 @@ function iniciar(){
 				'</div>'+
             '</div>';
 
+
+    window.setTimeout(function(){
 	//añadir un marker con GMap
 	var mark = map.createMarker ({	
 	    lat: 7.908388743984923 ,  
@@ -42,26 +41,26 @@ function iniciar(){
 	    icon: "images/markDromedicas.png",
 		title: 'Dromedicas del Oriente',
 		infoWindow: {content:contents},
+		animation: google.maps.Animation.DROP,
 	});
 	//obteniendo el infowindow del objeto GMap
 	infoWindowCustom = mark.infoWindow;
 	//editando el css del infowindow
-	editCssInfoWindow();	
+	editCssInfoWindow();
+	//registrando manejo de evento de cierre de infowindow clic en el mapa	
+	google.maps.event.addListener(map.map, "click", function() {
+		console.log('maneje el evento de click en el mapa');	
+		map.hideInfoWindows();	
+	});
 	//añadiendo la marca al mapa	
-
-	google.maps.event.addListener(mark, 'click', (function(mark) {
-			return function() {
-				infoWindowCustom.setContent(contents); //estable el contenido del infoWindow
-				infoWindowCustom.open(map, mark);
-			}
-		})
-		(mark));
-
 	map.addMarker(mark);
+	// markers.push(mark);
+	}, 900);
+
+	
 	
 
 }//fin del metodo iniciar
-
 
 
 function editCssInfoWindow(){
@@ -98,7 +97,5 @@ function editCssInfoWindow(){
 	    });
   	});
 }// fin del metodo editCssInfoWindow
-
-
 
 window.addEventListener('load',iniciar,false);
