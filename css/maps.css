@@ -287,8 +287,8 @@ img,h3,p {
 
 /*Estilos del mapa contenedor*/
 #mainc{
-	height: 700px;
-	max-width: 1000px;
+	height: 500px;
+	max-width: 100%;
 	margin: 0 auto;
 	background: #fff;
     padding: 20px;
@@ -298,8 +298,8 @@ img,h3,p {
 }
 
 #map {	
-	height: 700px;
-	max-width: 1000px;
+	height: 500px;
+	max-width: 100%;
 }
 
 #map h1 {
