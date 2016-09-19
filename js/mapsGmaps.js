@@ -14,13 +14,8 @@ function iniciar(){
 		zoom: 13
 	});
 
-	google.maps.event.addListener(map, 'click', function() {
-		infowindow.close();
-	});
-
 	infoWindowCustom = new google.maps.InfoWindow();
 	// editCssInfoWindow();
-
 
 	var contents = 
 			'<div id="iw-container">' +
