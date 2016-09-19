@@ -46,7 +46,7 @@ var sucursales = [
 //carga el objeto mapa y crea el objeto InfoWindow
 function initMap() {
 	map = new google.maps.Map(document.getElementById('map'), {
-		zoom: 13,
+		zoom: 14,
 		center: coordenadasIniciales,
 	});
 	infowindow = new google.maps.InfoWindow();
@@ -64,6 +64,7 @@ function initMap() {
 		* We use jQuery and create a iwBackground variable,
 		* and took advantage of the existing reference .gm-style-iw for the previous div with .prev().
 		*/
+		// console.log("edit stile css InfoWindow");
 		var iwBackground = iwOuter.prev();
 		// Removes background shadow DIV
 		iwBackground.children(':nth-child(2)').css({'display' : 'none'});

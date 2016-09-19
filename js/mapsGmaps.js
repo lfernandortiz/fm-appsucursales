@@ -16,10 +16,9 @@ function iniciar(){
 	
 	infoWindowCustom = new google.maps.InfoWindow();
 	google.maps.event.addListener(map, 'click', function() {
-		console.log('registrando evento de infowindow');
+		console.log('registrando evento de infoWindow')
 		infoWindowCustom.close();
 	});
-
 
 	var contents = 
 			'<div id="iw-container">' +
@@ -49,6 +48,15 @@ function iniciar(){
 	//editando el css del infowindow
 	editCssInfoWindow();	
 	//añadiendo la marca al mapa	
+
+	google.maps.event.addListener(mark, 'click', (function(mark) {
+			return function() {
+				infoWindowCustom.setContent(contents); //estable el contenido del infoWindow
+				infoWindowCustom.open(map, mark);
+			}
+		})
+		(mark));
+
 	map.addMarker(mark);
 	
 
