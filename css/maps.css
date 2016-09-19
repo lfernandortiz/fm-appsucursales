@@ -286,14 +286,19 @@ img,h3,p {
 }
 
 /*Estilos del mapa contenedor*/
-#map {
-	height: 900px;
-	max-width: 1200px;
+#mainc{
+	height: 700px;
+	max-width: 1000px;
 	margin: 0 auto;
-	border: 2px solid #0101BE;
-	padding: 2px;
-	border-radius: 8px;
-	
+	background: #fff;
+    padding: 20px;
+    box-shadow: 0 0 20px #999;
+    border-radius: 2px;
+}
+
+#map {	
+	height: 700px;
+	max-width: 1000px;
 }
 
 #map h1 {
