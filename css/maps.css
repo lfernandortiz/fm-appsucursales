@@ -263,7 +263,9 @@ img,h3,p {
 	text-shadow: 1px 1px 1px #C1C1C1;
 }
 
-.iw-contentppal .icon-home:before, .iw-contentppal .icon-phone:before, .iw-contentppal .icon-mobile:before{
+.iw-contentppal .icon-home:before, 
+.iw-contentppal .icon-phone:before, 
+.iw-contentppal .icon-mobile:before{
 	color: #E10000;
 }
 
