@@ -219,7 +219,7 @@ function editCSSInfoWindowObject(){
 		// Moves the infowindow 115px to the right.
 		iwOuter.parent().parent().css({left: '0px'});
 		// Changes the desired tail shadow color.
-		iwBackground.children(':nth-child(3)').find('div').children().css({'box-shadow': 'rgba(0, 10, 123, .5) 0px 1px 6px', 'z-index' : '1'});
+		iwBackground.children(':nth-child(3)').find('div').children().css({'box-shadow': '0px 1px 6px rgba(0, 10, 123, .5)', 'z-index' : '1'});
 		// Reference to the div that groups the close button elements.
 		var iwCloseBtn = iwOuter.next();
 		// Apply the desired effect to the close button
