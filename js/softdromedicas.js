@@ -122,9 +122,13 @@ function addMarkerWithTimeout(position, timeout, suc, i, dir, telefono, celular,
 						'<div class="row-content"><a href="tel:(037)'+ telefono +'" class="footertext"><span class="icon-phone"></span><span class="infocontent">'+ telefono +'</span></a></div>'+	
 						'<div class="row-content"><a href="tel:'+ celular +'" class="footertext"><span class="icon-mobile"></span><span class="infocontent">'+celular+'</span></a></div>'+	
 						'<div class="row-content final"></div>'	+					
-					'<div class="row-content">'+
-						'<div class="titlesection"><h3>Horario</h3></div>'+
-						'<div class="horariocontent"><div class="estado"></div></div>'+
+						'<div class="layoutcontent">'+
+							'<div class="titlesection"><h3>Horario</h3></div>'+
+							'<div class="contentestado">'+
+								'<div class="titleestado"><h4>Lunes - Sabado</h4></div>'+
+								'<div class="infoestado">7:30 a.m. - 10:00 p.m.</div>'+
+							'</div>'+
+						'</div><!-- fin de layoutcontent-->'+
 						'<div class="rutacontent"><div class="titlehorario"></div><div class="buttoncontent"></div></div>'
 					'</div><!--fin de contenedor de horarios -->'+
 				'</div>'+

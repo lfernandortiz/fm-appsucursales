@@ -73,7 +73,7 @@ h1 {
 }
 /*Estilos del infoWindow*/
 
-img,h3,p {
+img,h3, h4, p {
 	padding: 0;
 	margin: 0;
 	font-size: 100%;	
@@ -202,7 +202,7 @@ img,h3,p {
 	justify-content: flex-start;
 	align-items: center;
 	margin: 0 0 6px 3px;
-	color: #000000
+	color: #000000;
 	/*border: 1px solid #B207BD;*/
 }
 
@@ -225,14 +225,51 @@ img,h3,p {
 
 .titlesection{
 	text-align: left;
+	margin-left: 5px;
+	width: 100%;
+	border: 1px solid peru;
 
 }
 
 .titlesection h3{
 	color: #585858 ;
 	font-size: 1rem;
-	font-weight: bold;
+	font-family: Roboto,Arial,sans-serif;
+	/*font-weight: bold;*/
 }
+
+.layoutcontent{
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	border: 1px solid #23B301;
+}
+
+/*contiene generalmente contenedores contentestado*/
+.contentinfo{
+	display: flex;
+	flex-flow: column;
+}
+
+.titlesection{}
+
+.contentestado{
+	display: flex;
+	flex-flow: column;
+	border: 1px solid #B18F0A;
+}
+
+.titleestado{
+	color: #585858 ;
+	font-size: .8rem;
+	font-family: Roboto,Arial,sans-serif;
+	margin-left: 5px;
+	/*font-weight: bold;*/
+
+}
+
+.infoestado{}
+
 
 
 /**--*/
