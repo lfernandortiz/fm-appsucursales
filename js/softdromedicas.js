@@ -263,12 +263,14 @@ function editCssInfoWindow(){
 	google.maps.event.addListener(infoWindowCustom, 'domready', function() {
 		// Reference to the DIV that wraps the bottom of infowindow
 		var iwOuter = $('.gm-style-iw');
+		console.log('editando el css del infoWindow');
+		
 		/* Since this div is in a position prior to .gm-div style-iw.
 		* We use jQuery and create a iwBackground variable,
 		* and took advantage of the existing reference .gm-style-iw for the previous div with .prev().
-		*/
-		console.log('editando el css del infoWindow');
+		*/		
 		var iwBackground = iwOuter.prev();
+		iwBackground.children(':nth-child(1)').css({'display' : 'block'});
 		// Removes background shadow DIV
 		iwBackground.children(':nth-child(2)').css({'display' : 'none'});
 		// Removes white background DIV

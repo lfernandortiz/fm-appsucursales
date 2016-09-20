@@ -179,7 +179,7 @@ img,h3,p {
 }
 #iw-container {
 	margin-bottom: 10px;
-	width: 340px;
+	max-width: 350px ;
 }
 
 .iw-content img {
@@ -234,6 +234,7 @@ img,h3,p {
 	justify-content: flex-start;
 	align-items: center;
 	width: 100%;
+	border: 1px solid #B207BD;
 
 }
 
