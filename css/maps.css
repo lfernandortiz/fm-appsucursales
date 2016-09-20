@@ -153,8 +153,8 @@ img,h3,p {
 	margin: 1px;
 	border-radius: 2px 2px 0 0; 
 	max-height: 140px;
-	/*overflow-y: auto;
-	overflow-x: hidden;*/
+	/*overflow-y: auto;*/
+	/*overflow-x: hidden;*/
 }
 
 .iw-content img {
@@ -189,42 +189,10 @@ img,h3,p {
 
 .iw-content{
 	margin: 0 5px;
-	margin-top: 10px;
-	/*border-bottom: 1px solid #9E9E9E;*/
+	margin-top: 10px;	
 	display: flex;
 	flex-direction: column;
-
-}
-
-.iw-content p {
-	margin: 5px 1px 5px 10px;	
-	text-shadow: 1px 1px 1px #C1C1C1;
-}
-
-
-
-.iw-content .horario{
-	margin-left: 10px;
-	padding-bottom: 10px;
-}
-
-.iw-content a {
-	text-decoration: none;
-	color: #000000;
-	font-size: 1.1rem;	
-	text-shadow: 1px 1px 1px #C1C1C1;
-}
-
-.iw-content a:visited {
-	color:#060101;	
-}
-
-.iw-content h3 {
-	color:#FA4A4A;	
-	font-size: 1.2rem;
-	padding: 0;
-	margin: 5px 1px 5px 10px;
-	text-shadow: 1px 1px 1px #C1C1C1;
+	justify-content: center;
 }
 
 
@@ -233,17 +201,38 @@ img,h3,p {
 	flex-direction: row;
 	justify-content: flex-start;
 	align-items: center;
-	width: 100%;
-	border: 1px solid #B207BD;
-
+	margin: 0 0 6px 3px;
+	color: #000000
+	/*border: 1px solid #B207BD;*/
 }
 
+.row-content:nth-child(4){
+	margin: 0 0 1px 3px;
+	border-bottom: 1px solid #949494;
+}
 
 .infocontent{
-	border: 1px solid green;
+	font-size: 1rem;
+	font-weight: 300;
+	text-shadow: 1px 1px 1px #C1C1C1;
+	/*border: 1px solid green;*/
+}
+
+.row-content a, a:visited{
+	text-decoration: none;
+	color: #010101;
+}
+
+.titlesection{
+	text-align: left;
 
 }
 
+.titlesection h3{
+	color: #585858 ;
+	font-size: 1rem;
+	font-weight: bold;
+}
 
 
 /**--*/
