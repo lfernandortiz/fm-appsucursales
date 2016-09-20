@@ -288,11 +288,11 @@ img,h3,p {
 /*Estilos del mapa contenedor*/
 #mainc{
 	height: 500px;
-	max-width: 100%;
+	max-width: 900px;
 	margin: 0 auto;
 	background: #fff;
     padding: 20px;
-    /*box-shadow: 0 0 20px #999;*/
+    box-shadow: 0 0 20px #999;
     border-radius: 2px;
     border: 1px solid #A7A7A7;
 }
