@@ -191,6 +191,9 @@ img,h3,p {
 	margin: 0 5px;
 	margin-top: 10px;
 	/*border-bottom: 1px solid #9E9E9E;*/
+	display: flex;
+	flex-direction: column;
+
 }
 
 .iw-content p {
@@ -223,6 +226,23 @@ img,h3,p {
 	margin: 5px 1px 5px 10px;
 	text-shadow: 1px 1px 1px #C1C1C1;
 }
+
+
+.row-content{
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;
+	width: 100%;
+
+}
+
+
+.infocontent{
+	border: 1px solid green;
+
+}
+
 
 
 /**--*/

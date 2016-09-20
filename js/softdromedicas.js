@@ -61,6 +61,7 @@ function iniciar(){
 	});
 	//metodo para geolocalizacion y trazo de la ruta
 	// findMe();
+	//creando los marcadores
 	createMarkers();
 	//registrando manejo de evento de cierre de infowindow clic en el mapa	
 	google.maps.event.addListener(map.map, "click", function() {
@@ -116,11 +117,14 @@ function addMarkerWithTimeout(position, timeout, suc, i, dir, telefono, celular,
 					'<h3>Droguería '+ suc +'</h3>'+
 				'</div>'+
 				'<div class="iw-content">'+
-					'<p><span class="icon-home"></span>'+ dir +'</p>'+
-					'<p><a href="tel:(037)'+ telefono +'" class="footertext"><span class="icon-phone"></span>'+ telefono +'</a></p>'+	
-					'<p><a href="tel:3002692042" class="footertext"><span class="icon-mobile"></span>3002692042</a></p>'+	
-					'<h3>Horarios</h3>'+
-					'<p class="horario">24 Horas.</p>'+
+						'<div class="row-content"><span class="icon-home"></span><div class="infocontent">'+ dir +'</div></div>'+
+						'<div class="row-content"><a href="tel:(037)'+ telefono +'" class="footertext"><span class="icon-phone"></span><span class="infocontent">'+ telefono +'</span></a></div>'+	
+						'<div class="row-content"><a href="tel:'+ celular +'" class="footertext"><span class="icon-mobile"></span><span class="infocontent">'+celular+'</span></a></div>'+	
+					'<div class="row-content">'+
+						'<div class="titlehorario"><h3>Horarios</h3></div>'+
+						'<div class="horariocontent"><div class="estado"></div></div>'+
+						'<div class="rutacontent"><div class="titlehorario"></div><div class="buttoncontent"></div></div>'
+					'</div><!--fin de contenedor de horarios -->'+
 				'</div>'+
             '</div>';
 
