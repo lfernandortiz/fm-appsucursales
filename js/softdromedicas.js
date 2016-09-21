@@ -51,7 +51,7 @@ function iniciar(){
 		div: '#map',
 		lat:  lat,
 		lng:  lng,
-		zoom: 14,
+		zoom: 13,
 		zoomControl : true,
 		// scrollwheel:false,		
 		// panControl: false,
@@ -267,16 +267,16 @@ function editCssInfoWindow(){
 	//Desde aca se comienza la manipulacion del DOM del objeto Info Window
 	//nos apoyamos de jQuery
 	google.maps.event.addListener(infoWindowCustom, 'domready', function() {
+		console.log('editando el css del infoWindow');
 		// Reference to the DIV that wraps the bottom of infowindow
 		var iwOuter = $('.gm-style-iw');
-		console.log('editando el css del infoWindow');
+		iwOuter.children(':nth-child(1)').css({'display' : 'block'});		
 		
 		/* Since this div is in a position prior to .gm-div style-iw.
 		* We use jQuery and create a iwBackground variable,
 		* and took advantage of the existing reference .gm-style-iw for the previous div with .prev().
 		*/		
-		var iwBackground = iwOuter.prev();
-		iwOuter.children(':nth-child(1)').css({'display' : 'block'});
+		var iwBackground = iwOuter.prev();		
 		// Removes background shadow DIV
 		iwBackground.children(':nth-child(2)').css({'display' : 'none'});
 		// Removes white background DIV
