@@ -127,12 +127,15 @@ function addMarkerWithTimeout(position, timeout, suc, i, dir, telefono, celular,
 							'<div class="layoutcontentbutton">'+
 								'<div class="contentestado">'+
 									'<div class="titleestado"><h4>Lunes - Sabado</h4></div>'+
-									'<div class="infoestado">7:30 a.m. - 10:00 p.m.</div>'+
+									'<div class="infoestado">' + aLV + ' - ' + ' 10:00 p.m.</div>'+
 								'</div>'+
 								'<div class="contentestado">'+
 									'<div class="titleestado"><h4>Domingos - Festivos</h4></div>'+
 									'<div class="infoestado">7:30 a.m. - 09:00 p.m.</div>'+
 								'</div>'+
+								// '<div class="_24horas"><h4>Servicicio 24 Horas</h4></div>'+
+
+
 								'<div class="contentestado">'+
 									'<div class="titleestado"><h4>Estado</h4></div>'+
 									'<div class="infoestado"><span class="icon-primitive-dot"></span>&nbsp;Cerrado</div>'+
@@ -165,8 +168,7 @@ function addMarkerWithTimeout(position, timeout, suc, i, dir, telefono, celular,
 					//obteniendo el infowindow del objeto GMap
 					infoWindowCustom = mark.infoWindow;
 					//editando el css del infowindow
-					editCssInfoWindow();
-					
+					editCssInfoWindow();					
 					//añadiendo la marca al mapa	
 					map.addMarker(mark);
 					// markers.push(mark);
@@ -206,7 +208,6 @@ function addMarkerWithTimeoutPpal(position, timeout, suc, i, dir, telefono, celu
 					});
 					//obteniendo el infowindow del objeto GMap
 					infoWindowCustom = mark.infoWindow;
-					infoWindowCustom.
 					//editando el css del infowindow
 					editCssInfoWindow();					
 					//añadiendo la marca al mapa	
