@@ -257,8 +257,8 @@ img,h3, h4, p {
 }
 
 .final{
-	margin: 0 0 1px 3px;
-	border-bottom: 1px solid #949494;
+	margin: 0 0 10px 3px;
+	border-bottom: 1px solid #AEAEAE;
 }
 
 
@@ -298,6 +298,14 @@ img,h3, h4, p {
 	justify-content: space-around;
 }
 
+.layoutcontentbutton{
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+
+	justify-content: flex-start;
+}
+
 /*contiene generalmente contenedores contentestado*/
 .contentinfo{
 	display: flex;
@@ -333,34 +341,34 @@ img,h3, h4, p {
 	justify-content: space-between;
 }
 
-
-.car{
-	content: "\e904";
-}
-
 .buttonruta{
+  display: flex;
+  align-items: center;
   margin: 3px 0 3px 10px;
-  border-radius: 3px;
+  border-radius: 4px;
   border: 1px solid #000A7B;
   color: #000A7B;
-  padding: 6px 10px;
+  padding: 4px 10px;
   cursor: pointer;
   text-decoration: none;
-  font-size: .9rem;
+  font-size: .75rem;
   /*font-weight: bold;*/
   background: #F9F9F9;
   /*background: linear-gradient(to bottom, #005FB0, #000A7B);*/
 }
 
-.buttonruta:hover{
- 
+.buttonruta:hover{ 
   border: 1px solid #000A7B;
   color: #FFFFFF;
-  font-size: .9rem;
-  /*font-weight: bold;*/
+  font-size: .75rem;
+  font-weight: bold;
   background: #000A7B;
-  /*background: linear-gradient(to bottom, #005FB0, #000A7B);*/
+  background: linear-gradient(to bottom, #005FB0, #000A7B);
 }
+
+.buttonruta:visited{
+	outline:0;	
+} 
 
 
 
