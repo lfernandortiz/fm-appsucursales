@@ -257,7 +257,7 @@ img,h3, h4, p {
 }
 
 .final{
-	margin: 0 0 10px 3px;
+	margin: 0 0 5px 3px;
 	border-bottom: 1px solid #B4B4B4;
 }
 
@@ -296,7 +296,7 @@ img,h3, h4, p {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
-	justify-content: space-between;
+	justify-content: flex-start;
 }
 
 .layoutcontentbutton{
@@ -445,8 +445,8 @@ img,h3, h4, p {
 
 /*Estilos del mapa contenedor*/
 #mainc{
-	height: 500px;
-	max-width: 900px;
+	height: 600px;
+	max-width: 1200px;
 	margin: 0 auto;
 	background: #fff;
     padding: 20px;
@@ -457,7 +457,7 @@ img,h3, h4, p {
 }
 
 #map {	
-	height: 500px;
+	height: 100%;
 	max-width: 100%;
 }
 
