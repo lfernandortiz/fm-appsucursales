@@ -12,7 +12,7 @@ var lng= -72.49668959999997;
 
 //informacion y coordenada de sucursales
 var sucursales = [
-	['Dromedicas del Oriente SAS', 7.908388743984923, -72.491574883461, 'Avenida 11 Be # 8Bn - 10  Guaimaral', '5740075','5777762', 'CUCUTA','','', '', '', '', 1],
+	['Dromedicas del Oriente SAS', 7.908388743984923, -72.491574883461, 'Avenida 11 Be # 8Bn - 10  Guaimaral', '5740075','5777762', 'CUCUTA','',, , , , 1],
 	['Farmanorte 01', 7.840764903473619, -72.5028133392334, 'Calle 33 Con Avenida 4 Esquina Brr La Sabana', '5808800','3167409253', 'LOS PATIOS','','7:30', '22:30', '7:30', '22:30', 2],
 	['Farmanorte 02', 7.923595410892432, -72.52201795578003, 'Avenida 5 Con Calle 2N Pescadero', '5780727','3166909962', 'CUCUTA','','8', '23:30', '', '', 3],
 	['Farmanorte 03', 7.917091999388589, -72.49572694301605, 'Avenida 4 Con Calle 20An Esquina Brr Prados Del Norte', '5796888','3166909583', 'CUCUTA','true', '', '', '', '', 4],
@@ -40,7 +40,8 @@ var sucursales = [
 	['Farmanorte 25', 7.8666476, -72.49764258, 'Centro Cial Pinar Del Rio Local 10', '5842555','3174333572', 'CUCUTA','true', '', '', '', '', 26],
 	['Farmanorte 26', 7.87187112, -72.52892628, 'Avenida 26 No 29-48 Br Belen', '5754140','3162331144', 'CUCUTA','','7:30', '21:30', '7:30', '7:30', 27],
 	['Farmanorte 27', 7.91694492, -72.4727475, 'El Escobal, Anillo Vial, Plaza Del Este Local 6', '5847808','3188135356', 'CUCUTA','','7', '22', '7', '7', 28],
-	['San Antonio del Norte', 7.88749215, -72.50609315, '', '5727091','3155997098', 'CUCUTA','','7', '20', '8', '8', 29],
+	['San Antonio del Norte', 7.88749215, -72.50609315, 'Av 7 Calle 9 Esquina Centro', '5727091','3155997098', 'CUCUTA','','7', '20', '8', '8', 29],
+
 
 
 ];
@@ -97,8 +98,8 @@ function createMarkers(){
 								 sucursales[i][5],//celular
 								 sucursales[i][6],//ciudad
 								 sucursales[i][7],//24horas
-								 sucursales[i][9],//apertura l-v
-								 sucursales[i][10],//cierre l-v
+								 sucursales[i][8],//apertura l-v
+								 sucursales[i][9],//cierre l-v
 								 sucursales[i][10],//apertura d-f
 								 sucursales[i][11]//cierre apertura d-f
 								);
@@ -110,7 +111,7 @@ function createMarkers(){
 
 //anade el marcardor "Marker" al mapa y registra el evento click sobre el marcador
 //para mostrar la informacion de la sucursal en un objeto InfoWindow
-function addMarkerWithTimeout(position, timeout, suc, i, dir, telefono, celular, ciudad, _24horas, aLV, cLV, aDF,cDF) {
+function addMarkerWithTimeout(position, timeout, suc, i, dir, telefono, celular, ciudad, _24H, aLV, cLV, aDF,cDF) {
 		
 		var contents = 
 			'<div id="iw-container">' +
@@ -125,8 +126,7 @@ function addMarkerWithTimeout(position, timeout, suc, i, dir, telefono, celular,
 						'<div class="row-content final"></div>'	+					
 						'<div class="layoutcontent">'+
 							'<div class="titlesection"><h3>Horarios</h3></div>';
-		console.log("aLV: " + aLV );
-
+		
 		var hOrdinario =	'<div class="layoutcontentbutton">'+
 								'<div class="contentestado">'+
 									'<div class="titleestado"><h4>Lunes - Sabado</h4></div>'+
@@ -136,8 +136,6 @@ function addMarkerWithTimeout(position, timeout, suc, i, dir, telefono, celular,
 									'<div class="titleestado"><h4>Domingos - Festivos</h4></div>'+
 									'<div class="infoestado">7:30 a.m. - 09:00 p.m.</div>'+
 								'</div>';
-
-		console.log(hOrdinario);
 		
 		var _24_horas= 	'<div class="_24horas"><h4>Servicicio 24 Horas</h4></div>';
 						
@@ -167,15 +165,15 @@ function addMarkerWithTimeout(position, timeout, suc, i, dir, telefono, celular,
         var ahora = fechaActual.getHours();
         var elDia = fechaActual.getDay();
 
-       
+        console.log("Es 24 horas: " + new Boolean(_24H).value);
+        console.log(new Boolean(_24H));
         //con base en el dia comparamos el rango de horas icluyendo minutos
         //genero el contenido dinamicamente
         
-        if( aLV === ''){
-        	contents +=  hOrdinario + complementoHora + footer ;
-        }else{
-        	
-        	
+        if( new Boolean(_24H)){
+        	contents +=   _24_horas + complementoHora + footer ;
+        }else{        	
+        	// contents +=  hOrdinario + complementoHora + footer ;
         }
 
 
