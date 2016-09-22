@@ -1,3 +1,5 @@
+@import url(material-design-iconic-font.css);
+
 @font-face {
 	font-family: "Babylon5";
 	src: url("../fonts/B5______.eot?") format("eot"), 
@@ -10,11 +12,11 @@
 
 @font-face {
   font-family: 'icomoon';
-  src:  url('../fonts/icomoon.eot?9ufmnh');
-  src:  url('../fonts/icomoon.eot?9ufmnh#iefix') format('embedded-opentype'),
-    url('../fonts/icomoon.ttf?9ufmnh') format('truetype'),
-    url('../fonts/icomoon.woff?9ufmnh') format('woff'),
-    url('../fonts/icomoon.svg?9ufmnh#icomoon') format('svg');
+  src:  url('../fonts/icomoon.eot?49yzs7');
+  src:  url('../fonts/icomoon.eot?49yzs7#iefix') format('embedded-opentype'),
+    url('../fonts/icomoon.ttf?49yzs7') format('truetype'),
+    url('../fonts/icomoon.woff?49yzs7') format('woff'),
+    url('../fonts/icomoon.svg?49yzs7#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -34,27 +36,71 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-home:before {
+.icon-automobile:before {
+  content: "\e904";
+}
+.icon-car:before {
+  content: "\e904";
+  font-size: .95rem;
+  line-height: 20px;
+  color: #000a7b;
+}
+
+
+.icon-primitive-dot:before {
+  content: "\e900";
+  font-size: .9rem;
+  line-height: 20px;
+  color: #00A432;
+  /*color: #ED0000;*/
+}
+.icon-mobile:before {
   content: "\e901";
   font-size: 1rem;
   color: #000a7b;
   margin-right:7px;
   text-shadow: 1px 1px 1px #7E7E7E;
 }
+.icon-cell-phone:before {
+  content: "\e901";
+}
+.icon-handheld:before {
+  content: "\e901";
+}
 .icon-phone:before {
-  content: "\e942";
+  content: "\e902";
   font-size: 1rem;
   color: #000a7b;
   margin-right:7px;
   text-shadow: 1px 1px 1px #7E7E7E;
 }
-.icon-mobile:before {
-  content: "\e958";
+.icon-telephone:before {
+  content: "\e902";
+}
+.icon-contact:before {
+  content: "\e902";
+}
+.icon-support:before {
+  content: "\e902";
+}
+.icon-call:before {
+  content: "\e902";
+}
+.icon-home:before {
+  content: "\e903";
   font-size: 1rem;
   color: #000a7b;
   margin-right:7px;
   text-shadow: 1px 1px 1px #7E7E7E;
 }
+.icon-house:before {
+  content: "\e903";
+}
+
+.zmdi-walk:before {
+  content: '\f216';
+}
+
 
 html,body {
 	height: 100%;
@@ -73,7 +119,7 @@ h1 {
 }
 /*Estilos del infoWindow*/
 
-img,h3,p {
+img,h3, h4, p {
 	padding: 0;
 	margin: 0;
 	font-size: 100%;	
@@ -153,8 +199,12 @@ img,h3,p {
 	margin: 1px;
 	border-radius: 2px 2px 0 0; 
 	max-height: 140px;
-	/*overflow-y: auto;
-	overflow-x: hidden;*/
+	/*overflow-y: auto;*/
+	/*overflow-x: hidden;*/
+}
+
+.iw-content{
+	max-width: 325px;
 }
 
 .iw-content img {
@@ -163,7 +213,7 @@ img,h3,p {
 }
 
 .gm-style-iw {
-	width: 350px !important;
+	max-width: 350px !important;
    	top: 0 !important;
    	left: 0 !important;   	
 }
@@ -179,7 +229,7 @@ img,h3,p {
 }
 #iw-container {
 	margin-bottom: 10px;
-	width: 340px;
+	max-width: 360px ;
 }
 
 .iw-content img {
@@ -189,40 +239,138 @@ img,h3,p {
 
 .iw-content{
 	margin: 0 5px;
-	margin-top: 10px;
-	/*border-bottom: 1px solid #9E9E9E;*/
-}
-
-.iw-content p {
-	margin: 5px 1px 5px 10px;	
-	text-shadow: 1px 1px 1px #C1C1C1;
+	margin-top: 10px;	
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
 }
 
 
-
-.iw-content .horario{
-	margin-left: 10px;
-	padding-bottom: 10px;
-}
-
-.iw-content a {
-	text-decoration: none;
+.row-content{
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;
+	margin: 0 0 6px 3px;
 	color: #000000;
-	font-size: 1.1rem;	
-	text-shadow: 1px 1px 1px #C1C1C1;
+	/*border: 1px solid #B207BD;*/
 }
 
-.iw-content a:visited {
-	color:#060101;	
+.final{
+	margin: 0 0 10px 3px;
+	border-bottom: 1px solid #AEAEAE;
 }
 
-.iw-content h3 {
-	color:#FA4A4A;	
-	font-size: 1.2rem;
-	padding: 0;
-	margin: 5px 1px 5px 10px;
+
+.infocontent{
+	font-size: 1rem;
+	font-weight: 300;
 	text-shadow: 1px 1px 1px #C1C1C1;
+	/*border: 1px solid green;*/
 }
+
+.infoestado{
+	font-size: .8rem;
+}
+
+.row-content a, a:visited{
+	text-decoration: none;
+	color: #010101;
+}
+
+.titlesection{
+	text-align: left;
+	margin: 0 0 3px 5px;
+	width: 100%;
+}
+
+.titlesection h3{
+	color: #585858 ;
+	font-size: .95rem;
+	font-family: Roboto,Arial,sans-serif;
+	/*font-weight: bold;*/
+}
+
+.layoutcontent{
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-around;
+}
+
+.layoutcontentbutton{
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+
+	justify-content: flex-start;
+}
+
+/*contiene generalmente contenedores contentestado*/
+.contentinfo{
+	display: flex;
+	flex-flow: column;
+}
+
+.contentestado{
+	display: flex;
+	font-size: .85rem;
+	flex-flow: column;
+	padding: 2px 2px 2px 4px;
+	margin-bottom: 3px;
+	border-right:  1px solid #747474;
+}
+
+.contentestado:last-child{	
+	border-right:  none;
+}
+
+.titleestado{
+	color: #585858 ;
+	font-size: .75rem;
+	font-family: Roboto,Arial,sans-serif;
+	margin-left: 0px;
+	/*font-weight: bold;*/
+
+}
+
+.infoestado{
+	color: #383838;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.buttonruta{
+  display: flex;
+  align-items: center;
+  margin: 3px 0 3px 10px;
+  border-radius: 4px;
+  border: 1px solid #000A7B;
+  color: #000A7B;
+  padding: 4px 10px;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: .75rem;
+  /*font-weight: bold;*/
+  background: #F9F9F9;
+  /*background: linear-gradient(to bottom, #005FB0, #000A7B);*/
+}
+
+.buttonruta:hover{ 
+  border: 1px solid #000A7B;
+  color: #FFFFFF;
+  font-size: .75rem;
+  font-weight: bold;
+  background: #000A7B;
+  background: linear-gradient(to bottom, #005FB0, #000A7B);
+}
+
+.buttonruta:visited{
+	outline:0;	
+} 
+
+
 
 
 /**--*/
@@ -236,8 +384,6 @@ img,h3,p {
 	margin: 5px 1px 5px 10px;	
 	text-shadow: 1px 1px 1px #C1C1C1;
 }
-
-
 
 .iw-contentppal .horario{
 	margin-left: 10px;
@@ -289,18 +435,20 @@ img,h3,p {
 
 /*Estilos del mapa contenedor*/
 #mainc{
-	height: 700px;
-	max-width: 1000px;
+	height: 500px;
+	max-width: 900px;
 	margin: 0 auto;
 	background: #fff;
     padding: 20px;
-    box-shadow: 0 0 20px #999;
-    border-radius: 2px;
+    /*box-shadow: 0 0 20px #999;*/
+    box-shadow: 0 1px 3px #999;
+    border-radius: 5px;
+    border: 1px solid #B5B5B5;
 }
 
 #map {	
-	height: 700px;
-	max-width: 1000px;
+	height: 500px;
+	max-width: 100%;
 }
 
 #map h1 {
