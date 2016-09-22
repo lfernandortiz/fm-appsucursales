@@ -123,13 +123,28 @@ function addMarkerWithTimeout(position, timeout, suc, i, dir, telefono, celular,
 						'<div class="row-content"><a href="tel:'+ celular +'" class="footertext"><span class="icon-mobile"></span><span class="infocontent">'+celular+'</span></a></div>'+	
 						'<div class="row-content final"></div>'	+					
 						'<div class="layoutcontent">'+
-							'<div class="titlesection"><h3>Horario</h3></div>'+
+							'<div class="titlesection"><h3>Horarios</h3></div>'+
 							'<div class="contentestado">'+
 								'<div class="titleestado"><h4>Lunes - Sabado</h4></div>'+
 								'<div class="infoestado">7:30 a.m. - 10:00 p.m.</div>'+
 							'</div>'+
+							'<div class="contentestado">'+
+								'<div class="titleestado"><h4>Domingos - Festivos</h4></div>'+
+								'<div class="infoestado">7:30 a.m. - 09:00 p.m.</div>'+
+							'</div>'+
+							'<div class="contentestado">'+
+								'<div class="titleestado"><h4>Estado</h4></div>'+
+								'<div class="infoestado"><span class="icon-primitive-dot"></span>&nbsp;Abierto</div>'+
+							'</div>'+
 						'</div><!-- fin de layoutcontent-->'+
-						'<div class="rutacontent"><div class="titlehorario"></div><div class="buttoncontent"></div></div>'
+						'<div class="row-content final"></div>'	+
+						'<div class="layoutcontent">'+
+							'<div class="titlesection"><h3>Como Llegar</h3></div>'+
+							'<div class="layoutcontent botones">'+
+								'<button class="buttonruta"><span class="car"></span>&nbsp;En carro</button>'+
+								'<button class="buttonruta"><span class="zmdi-walk"></span>Caminando</button>'+
+							'</div>'+							
+						'</div><!-- fin de layoutcontent-->'+						
 					'</div><!--fin de contenedor de horarios -->'+
 				'</div>'+
             '</div>';
@@ -268,15 +283,15 @@ function editCssInfoWindow(){
 	//nos apoyamos de jQuery
 	google.maps.event.addListener(infoWindowCustom, 'domready', function() {
 		// Reference to the DIV that wraps the bottom of infowindow
-		var iwOuter = $('.gm-style-iw');
 		console.log('editando el css del infoWindow');
+		var iwOuter = $('.gm-style-iw');		
+		iwOuter.children(':nth-child(1)').css({'display' : 'block'});
 		
 		/* Since this div is in a position prior to .gm-div style-iw.
 		* We use jQuery and create a iwBackground variable,
 		* and took advantage of the existing reference .gm-style-iw for the previous div with .prev().
 		*/		
-		var iwBackground = iwOuter.prev();
-		iwOuter.children(':nth-child(1)').css({'display' : 'block'});
+		var iwBackground = iwOuter.prev();		
 		// Removes background shadow DIV
 		iwBackground.children(':nth-child(2)').css({'display' : 'none'});
 		// Removes white background DIV
