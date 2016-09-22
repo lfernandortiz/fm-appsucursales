@@ -346,8 +346,8 @@ img,h3, h4, p {
   align-items: center;
   margin: 3px 0 3px 10px;
   border-radius: 4px;
-  border: 1px solid #000A7B;
-  color: #000A7B;
+  border: 1px solid #002B7B;
+  color: #002B7B;
   padding: 4px 10px;
   cursor: pointer;
   text-decoration: none;
@@ -358,12 +358,11 @@ img,h3, h4, p {
 }
 
 .buttonruta:hover{ 
-  border: 1px solid #000A7B;
+  border: 1px solid #002B7B;
   color: #FFFFFF;
   font-size: .75rem;
   font-weight: bold;
-  background: #000A7B;
-  background: linear-gradient(to bottom, #005FB0, #000A7B);
+  background: linear-gradient(to bottom, #001D7B ,  #005FB0);
 }
 
 .buttonruta:visited{
