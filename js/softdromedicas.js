@@ -316,10 +316,7 @@ function editCssInfoWindow(){
 		// Reference to the DIV that wraps the bottom of infowindow
 		var iwOuter = $('.gm-style-iw');
 		iwOuter.children(':nth-child(1)').css({'display' : 'block'});		
-<<<<<<< HEAD
-=======
-		
->>>>>>> 8f4c85c87f46cead80a172bd9fef0c322a3b0beb
+
 		/* Since this div is in a position prior to .gm-div style-iw.
 		* We use jQuery and create a iwBackground variable,
 		* and took advantage of the existing reference .gm-style-iw for the previous div with .prev().
