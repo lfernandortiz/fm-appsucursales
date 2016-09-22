@@ -97,8 +97,8 @@ function createMarkers(){
 								 sucursales[i][5],//celular
 								 sucursales[i][6],//ciudad
 								 sucursales[i][7],//24horas
-								 sucursales[i][8],//apertura l-v
-								 sucursales[i][9],//cierre l-v
+								 sucursales[i][9],//apertura l-v
+								 sucursales[i][10],//cierre l-v
 								 sucursales[i][10],//apertura d-f
 								 sucursales[i][11]//cierre apertura d-f
 								);
@@ -125,16 +125,19 @@ function addMarkerWithTimeout(position, timeout, suc, i, dir, telefono, celular,
 						'<div class="row-content final"></div>'	+					
 						'<div class="layoutcontent">'+
 							'<div class="titlesection"><h3>Horarios</h3></div>';
+		console.log("aLV: " + aLV );
 
 		var hOrdinario =	'<div class="layoutcontentbutton">'+
 								'<div class="contentestado">'+
 									'<div class="titleestado"><h4>Lunes - Sabado</h4></div>'+
-									'<div class="infoestado">' + '"' + aLV + '"' +' - ' + ' 10:00 p.m.</div>'+
+									'<div class="infoestado">' + aLV + ' - ' + cLV +'</div>'+
 								'</div>'+
 								'<div class="contentestado">'+
 									'<div class="titleestado"><h4>Domingos - Festivos</h4></div>'+
 									'<div class="infoestado">7:30 a.m. - 09:00 p.m.</div>'+
 								'</div>';
+
+		console.log(hOrdinario);
 		
 		var _24_horas= 	'<div class="_24horas"><h4>Servicicio 24 Horas</h4></div>';
 						
@@ -164,7 +167,7 @@ function addMarkerWithTimeout(position, timeout, suc, i, dir, telefono, celular,
         var ahora = fechaActual.getHours();
         var elDia = fechaActual.getDay();
 
-        console.log("HoraActua: " + ahora +' '+ (aLV===''));
+       
         //con base en el dia comparamos el rango de horas icluyendo minutos
         //genero el contenido dinamicamente
         
