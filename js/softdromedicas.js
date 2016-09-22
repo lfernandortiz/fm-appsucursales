@@ -124,18 +124,20 @@ function addMarkerWithTimeout(position, timeout, suc, i, dir, telefono, celular,
 						'<div class="row-content final"></div>'	+					
 						'<div class="layoutcontent">'+
 							'<div class="titlesection"><h3>Horarios</h3></div>'+
-							'<div class="contentestado">'+
-								'<div class="titleestado"><h4>Lunes - Sabado</h4></div>'+
-								'<div class="infoestado">7:30 a.m. - 10:00 p.m.</div>'+
-							'</div>'+
-							'<div class="contentestado">'+
-								'<div class="titleestado"><h4>Domingos - Festivos</h4></div>'+
-								'<div class="infoestado">7:30 a.m. - 09:00 p.m.</div>'+
-							'</div>'+
-							'<div class="contentestado">'+
-								'<div class="titleestado"><h4>Estado</h4></div>'+
-								'<div class="infoestado"><span class="icon-primitive-dot"></span>&nbsp;Abierto</div>'+
-							'</div>'+
+							'<div class="layoutcontentbutton">'+
+								'<div class="contentestado">'+
+									'<div class="titleestado"><h4>Lunes - Sabado</h4></div>'+
+									'<div class="infoestado">7:30 a.m. - 10:00 p.m.</div>'+
+								'</div>'+
+								'<div class="contentestado">'+
+									'<div class="titleestado"><h4>Domingos - Festivos</h4></div>'+
+									'<div class="infoestado">7:30 a.m. - 09:00 p.m.</div>'+
+								'</div>'+
+								'<div class="contentestado">'+
+									'<div class="titleestado"><h4>Estado</h4></div>'+
+									'<div class="infoestado"><span class="icon-primitive-dot"></span>&nbsp;Abierto</div>'+
+								'</div>'+
+							'</div><!-- fin de layoutcontentbutton de horarios-->'+
 						'</div><!-- fin de layoutcontent-->'+
 						'<div class="row-content final"></div>'	+
 						'<div class="layoutcontentbutton">'+
@@ -157,7 +159,7 @@ function addMarkerWithTimeout(position, timeout, suc, i, dir, telefono, celular,
 					    position: position,
 					    icon: "images/markFarmaAbierto.png",
 						title: 'Dromedicas del Oriente',
-						infoWindow: {content:contents},
+						infoWindow: {content:contents, maxWidth:380,},
 						animation: google.maps.Animation.DROP,
 					});
 					//obteniendo el infowindow del objeto GMap
@@ -204,6 +206,7 @@ function addMarkerWithTimeoutPpal(position, timeout, suc, i, dir, telefono, celu
 					});
 					//obteniendo el infowindow del objeto GMap
 					infoWindowCustom = mark.infoWindow;
+					infoWindowCustom.
 					//editando el css del infowindow
 					editCssInfoWindow();					
 					//añadiendo la marca al mapa	
@@ -280,14 +283,13 @@ function findMe(){
 
 //Edicion del CSS para el objeto InfoWindows
 function editCssInfoWindow(){
+	console.log('editando el css del infoWindow');		
 	//Desde aca se comienza la manipulacion del DOM del objeto Info Window
 	//nos apoyamos de jQuery
 	google.maps.event.addListener(infoWindowCustom, 'domready', function() {
 		// Reference to the DIV that wraps the bottom of infowindow
-		console.log('editando el css del infoWindow');
-		var iwOuter = $('.gm-style-iw');		
-		iwOuter.children(':nth-child(1)').css({'display' : 'block'});
-		
+		var iwOuter = $('.gm-style-iw');
+		iwOuter.children(':nth-child(1)').css({'display' : 'block'});		
 		/* Since this div is in a position prior to .gm-div style-iw.
 		* We use jQuery and create a iwBackground variable,
 		* and took advantage of the existing reference .gm-style-iw for the previous div with .prev().
