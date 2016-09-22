@@ -135,7 +135,7 @@ function addMarkerWithTimeout(position, timeout, suc, i, dir, telefono, celular,
 								'</div>'+
 								'<div class="contentestado">'+
 									'<div class="titleestado"><h4>Estado</h4></div>'+
-									'<div class="infoestado"><span class="icon-primitive-dot"></span>&nbsp;Abierto</div>'+
+									'<div class="infoestado"><span class="icon-primitive-dot"></span>&nbsp;Cerrado</div>'+
 								'</div>'+
 							'</div><!-- fin de layoutcontentbutton de horarios-->'+
 						'</div><!-- fin de layoutcontent-->'+
@@ -159,7 +159,7 @@ function addMarkerWithTimeout(position, timeout, suc, i, dir, telefono, celular,
 					    position: position,
 					    icon: "images/markFarmaAbierto.png",
 						title: 'Dromedicas del Oriente',
-						infoWindow: {content:contents, maxWidth:380,},
+						infoWindow: {content:contents, maxWidth:355,},
 						animation: google.maps.Animation.DROP,
 					});
 					//obteniendo el infowindow del objeto GMap
