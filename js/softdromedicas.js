@@ -8,12 +8,13 @@ var infoWindowCustom;
 //coordenadas iniciales
 var lat=  7.8890971;
 var lng= -72.49668959999997;
+var abiertoCerrado = false;
 
 
 //informacion y coordenada de sucursales
 var sucursales = [
 	['Dromedicas del Oriente SAS', 7.908388743984923, -72.491574883461, 'Avenida 11 Be # 8Bn - 10  Guaimaral', '5740075','5777762', 'CUCUTA','','', '', '', '', 1],
-	['Farmanorte 01', 7.840764903473619, -72.5028133392334, 'Calle 33 Con Avenida 4 Esquina Brr La Sabana', '5808800','3167409253', 'LOS PATIOS','','11:30am', '22:30', '7:30am', '22:30', 2],
+	['Farmanorte 01', 7.840764903473619, -72.5028133392334, 'Calle 33 Con Avenida 4 Esquina Brr La Sabana', '5808800','3167409253', 'LOS PATIOS','','3:00pm', '22:30', '7:30am', '22:30', 2],
 	['Farmanorte 02', 7.923595410892432, -72.52201795578003, 'Avenida 5 Con Calle 2N Pescadero', '5780727','3166909962', 'CUCUTA','','8am', '23:30', '8am', '2pm', 3],
 	['Farmanorte 03', 7.917091999388589, -72.49572694301605, 'Avenida 4 Con Calle 20An Esquina Brr Prados Del Norte', '5796888','3166909583', 'CUCUTA','true', '', '', '', '', 4],
 	['Farmanorte 04', 7.9049350202970805, -72.51519441604614, 'Avenida Kennedy Con 2Da Esquina Brr La Victoria', '5787878','3183353570', 'CUCUTA','','7:30am', '21', '7:30am', '9pm', 5],
@@ -123,17 +124,7 @@ function addMarkerWithTimeout(position, timeout, suc, i, dir, telefono, celular,
 						'<div class="row-content"><a href="tel:'+ celular +'" class="footertext"><span class="icon-mobile"></span><span class="infocontent">'+celular+'</span></a></div>'+	
 						'<div class="row-content final"></div>'	+					
 						'<div class="layoutcontent">'+
-							'<div class="titlesection"><h3>Horarios</h3></div>';
-		
-		var hOrdinario =	'<div class="layoutcontentbutton">'+
-								'<div class="contentestado">'+
-									'<div class="titleestado"><h4>Lunes - Sabado</h4></div>'+
-									'<div class="infoestado">' + aLV + ' - ' + cLV +'</div>'+
-								'</div>'+
-								'<div class="contentestado">'+
-									'<div class="titleestado"><h4>Domingos - Festivos</h4></div>'+
-									'<div class="infoestado">7:30 a.m. - 09:00 p.m.</div>'+
-								'</div>';
+							'<div class="titlesection"><h3>Horarios</h3></div>';		
 		
 		var _24_horas= 	'<div class="_24horas"><h4>Servicicio 24 Horas</h4></div>';
 						
@@ -164,40 +155,62 @@ function addMarkerWithTimeout(position, timeout, suc, i, dir, telefono, celular,
         
         if( _24H === 'true'){
         	contents +=   _24_horas + complementoHora + footer ;
+        	//registro del manejo de evento click para desplegar el objeto InfoWindow
+			window.setTimeout(function(){
+					//añadir un marker con GMap
+					var mark = map.createMarker ({	
+					    position: position,
+					    icon: "images/markFarmaAbierto.png",
+						title: 'Dromedicas del Oriente',
+						infoWindow: {content:contents, maxWidth:340,},
+						animation: google.maps.Animation.DROP,
+					});
+					//obteniendo el infowindow del objeto GMap
+					infoWindowCustom = mark.infoWindow;
+					//editando el css del infowindow
+					editCssInfoWindow();
+					//añadiendo la marca al mapa	
+					map.addMarker(mark);
+					// markers.push(mark);
+				}, i * 50);
         }else{        	
         	var fechaActual = new Date();
         	var horaActual = fechaActual.getHours();
         	var diaDeLaSemana = fechaActual.getDay();
 
-        	var horaApertura = new Date();
-        	var horaCierre = new Date();
         	//valida si el dia actual esta entre lunes y Sabado
 			if (diaDeLaSemana >= 0 && diaDeLaSemana <= 5) {
-				//valida que la hora actual este dentro del horario de la sucursal	
-				//Parsea las horas recibidas del arreglo a formato hora JavaScript
-				var time = aLV.match(/(\d+)(?::(\d\d))?\s*(p?)/);
-				horaApertura.setHours(parseInt(time[1]) + (time[3] ? 12 : 0));
-				horaApertura.setMinutes(parseInt(time[2]) || 0);
+
+				console.log(fechaActual.getHours() >= getRealHour(aLV).getHours()&&fechaActual.getHours()<=getRealHour(cLV).getHours());
 				
-				var time = cLV.match(/(\d+)(?::(\d\d))?\s*(p?)/);
-				horaCierre.setHours(parseInt(time[1]) + (time[3] ? 12 : 0));
-				horaCierre.setMinutes(parseInt(time[2]) || 0);				
-
-				// console.log("Sucursal " + suc + " " + "Abierto: " + (fechaActual.getHours() >= horaApertura.getHours()) );
+				if( (fechaActual.getHours() >= getRealHour(aLV).getHours()) && (fechaActual.getHours()<=getRealHour(cLV).getHours()) ){
+					var hOrdinario ='<div class="layoutcontentbutton">'+
+								'<div class="contentestado">'+
+								'<input id="estadoSucursal" type="hidden" value="abierto">'+
+									'<div class="titleestado"><h4>Lunes - Sabado</h4></div>'+
+									'<div class="infoestado">' + formatAMPM(getRealHour(aLV)) + ' - ' + formatAMPM(getRealHour(cLV)) +'</div>'+
+								'</div>'+
+								'<div class="contentestado">'+
+									'<div class="titleestado"><h4>Domingos - Festivos</h4></div>'+
+									'<div class="infoestado">'+ formatAMPM(getRealHour(aDF)) +' - '+ formatAMPM(getRealHour(cDF)) +' </div>'+
+								'</div>';
+				}else{
+					var hOrdinario ='<div class="layoutcontentbutton">'+
+								'<div class="contentestado">'+
+								'<input id="estadoSucursal" type="hidden" value="cerrado">'+
+									'<div class="titleestado"><h4>Lunes - Sabado</h4></div>'+
+									'<div class="infoestado">' + formatAMPM(getRealHour(aLV)) + ' - ' + formatAMPM(getRealHour(cLV)) +'</div>'+
+								'</div>'+
+								'<div class="contentestado">'+
+									'<div class="titleestado"><h4>Domingos - Festivos</h4></div>'+
+									'<div class="infoestado">'+ formatAMPM(getRealHour(aDF)) +' - '+ formatAMPM(getRealHour(cDF)) +' </div>'+
+								'</div>';
+				}
 				contents += hOrdinario + complementoHora + footer;
-				// if( (fechaActual.getHours() >= horaApertura.getHours()) && (fechaActual.getHours()<=horaCierre.getHours()) ){
-				// 	document.getElementById('iconestado').setAttribute("style","zmdi zmdi-circle iconestadoabierto");
-				// 	document.getElementById('estadosuc').appendChild(document.createTextNode("Abierto"));
-				// }else{
-				// 	document.getElementById('iconestado').setAttribute("style","zmdi zmdi-circle iconestadocerrado");
-				// 	document.getElementById('estadosuc').appendChild(document.createTextNode("Cerrado"));
-				// }
 			}//fin del if de horario
-        }//fin del else
 
-
-		//registro del manejo de evento click para desplegar el objeto InfoWindow
-		window.setTimeout(function(){
+			//registro del manejo de evento click para desplegar el objeto InfoWindow
+			window.setTimeout(function(){
 					//añadir un marker con GMap
 					var mark = map.createMarker ({	
 					    position: position,
@@ -209,11 +222,14 @@ function addMarkerWithTimeout(position, timeout, suc, i, dir, telefono, celular,
 					//obteniendo el infowindow del objeto GMap
 					infoWindowCustom = mark.infoWindow;
 					//editando el css del infowindow
-					editCssInfoWindow();					
+					editCssInfoWindowNormal();
 					//añadiendo la marca al mapa	
 					map.addMarker(mark);
 					// markers.push(mark);
-			}, i * 50);
+				}, i * 50);
+        }//fin del else
+
+		
 }
 
 //formato de hora 
@@ -226,6 +242,18 @@ function formatAMPM(date) {
 	minutes = minutes < 10 ? '0' + minutes : minutes;
 	var strTime = hours + ':' + minutes + ' ' + ampm;
 	return strTime;
+}
+
+
+//recibe una hora como String y la retorna en formato hora
+// puede recibir la hora en cualquier de esto formatos 
+//'1:00 pm','1:00 p.m.','1:00 p','1:00pm','1:00p.m.','1:00p','1 pm','1 p.m.','1 p','1pm','1p.m.', '1p','13:00','13'
+function getRealHour(stringHour){
+	var time = stringHour.match(/(\d+)(?::(\d\d))?\s*(p?)/);
+	var dateHour = new Date();
+	dateHour.setHours(parseInt(time[1]) + (time[3] ? 12 : 0));
+	dateHour.setMinutes(parseInt(time[2]) || 0);
+	return dateHour;
 }
 
 //anade el marcardor "Marker" al mapa y registra el evento click sobre el marcador
@@ -335,7 +363,7 @@ function findMe(){
 }
 
 //Edicion del CSS para el objeto InfoWindows
-function editCssInfoWindow(){
+function editCssInfoWindowNormal(){
 	console.log('editando el css del infoWindow');		
 	//Desde aca se comienza la manipulacion del DOM del objeto Info Window
 	//nos apoyamos de jQuery
@@ -370,6 +398,62 @@ function editCssInfoWindow(){
 	    iwCloseBtn.mouseout(function(){
 	      $(this).css({opacity: '1'});
 	    });
+
+	    var estado = document.getElementById('estadoSucursal').value;
+		console.log( estado);
+		if (estado === 'abierto') {
+			var iconoAbierto = document.getElementById('iconestado');
+				
+			iconoAbierto.setAttribute("class", "zmdi zmdi-circle iconestadoabierto");
+			var infoes = document.getElementById('estadosuc');
+			infoes.appendChild(document.createTextNode("Abierto"));
+		} else {
+			var iconoCerrado = document.getElementById('iconestado');
+				
+			iconoCerrado.setAttribute("class", "zmdi zmdi-circle iconestadocerrado");
+			var infoes = document.getElementById('estadosuc');
+			infoes.appendChild(document.createTextNode("Cerrado"));
+		}
+  	});
+}// fin del metodo editCssInfoWindow
+
+
+//Edicion del CSS para el objeto InfoWindows
+function editCssInfoWindow(){
+	console.log('editando el css del infoWindow');		
+	//Desde aca se comienza la manipulacion del DOM del objeto Info Window
+	//nos apoyamos de jQuery
+	google.maps.event.addListener(infoWindowCustom, 'domready', function() {
+		console.log('editando el css del infoWindow');
+		// Reference to the DIV that wraps the bottom of infowindow
+		var iwOuter = $('.gm-style-iw');
+		iwOuter.children(':nth-child(1)').css({'display' : 'block'});		
+
+		/* Since this div is in a position prior to .gm-div style-iw.
+		* We use jQuery and create a iwBackground variable,
+		* and took advantage of the existing reference .gm-style-iw for the previous div with .prev().
+		*/		
+		var iwBackground = iwOuter.prev();		
+		// Removes background shadow DIV
+		iwBackground.children(':nth-child(2)').css({'display' : 'none'});
+		// Removes white background DIV
+		iwBackground.children(':nth-child(4)').css({'display' : 'none'});
+		// Moves the infowindow 115px to the right.
+		iwOuter.parent().parent().css({left: '0px'});
+		// Changes the desired tail shadow color.
+		iwBackground.children(':nth-child(3)').find('div').children().css({'box-shadow': 'rgba(0, 10, 123, .5) 0px 1px 6px', 'z-index' : '1'});
+		// Reference to the div that groups the close button elements.
+		var iwCloseBtn = iwOuter.next();
+		// Apply the desired effect to the close button
+		iwCloseBtn.css({opacity: '1', right: '38px', top: '3px', border: '7px solid rgba(0, 10, 123, 1.0)', 'border-radius': '5px', 'box-shadow': '0 0 5px rgba(0, 10, 123, .9)'});
+		// If the content of infowindow not exceed the set maximum height, then the gradient is removed.
+		// if($('.iw-content').height() < 140){
+		// $('.iw-bottom-gradient').css({display: 'none'});
+		// }
+	    // The API automatically applies 0.7 opacity to the button after the mouseout event. This function reverses this event to the desired value.
+	    iwCloseBtn.mouseout(function(){
+	      $(this).css({opacity: '1'});
+	    });	
   	});
 }// fin del metodo editCssInfoWindow
 
