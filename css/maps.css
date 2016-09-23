@@ -347,6 +347,15 @@ img,h3, h4, p {
 	/*font-weight: bold;*/
 }
 
+
+.iconestadoabierto{
+	color: #009A36;
+}
+.iconestadocerrado{
+	color: #FB4545;
+}
+
+
 .infoestado{
 	color: #383838;
 	display: flex;
