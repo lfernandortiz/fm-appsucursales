@@ -62,7 +62,7 @@ function iniciar(){
 		// clickable: false
 	});
 	//metodo para geolocalizacion y trazo de la ruta
-	// findMe();
+	// findMe();	
 	//creando los marcadores
 	createMarkers();
 	//registrando manejo de evento de cierre de infowindow clic en el mapa	
