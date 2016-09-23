@@ -8,13 +8,13 @@ var infoWindowCustom;
 //coordenadas iniciales
 var lat=  7.8890971;
 var lng= -72.49668959999997;
-var abiertoCerrado = false;
+var urlMarker ;
 
 
 //informacion y coordenada de sucursales
 var sucursales = [
 	['Dromedicas del Oriente SAS', 7.908388743984923, -72.491574883461, 'Avenida 11 Be # 8Bn - 10  Guaimaral', '5740075','5777762', 'CUCUTA','','', '', '', '', 1],
-	['Farmanorte 01', 7.840764903473619, -72.5028133392334, 'Calle 33 Con Avenida 4 Esquina Brr La Sabana', '5808800','3167409253', 'LOS PATIOS','','3:00pm', '22:30', '7:30am', '22:30', 2],
+	['Farmanorte 01', 7.840764903473619, -72.5028133392334, 'Calle 33 Con Avenida 4 Esquina Brr La Sabana', '5808800','3167409253', 'LOS PATIOS','','5:00pm', '22:30', '7:30am', '22:30', 2],
 	['Farmanorte 02', 7.923595410892432, -72.52201795578003, 'Avenida 5 Con Calle 2N Pescadero', '5780727','3166909962', 'CUCUTA','','8am', '23:30', '8am', '2pm', 3],
 	['Farmanorte 03', 7.917091999388589, -72.49572694301605, 'Avenida 4 Con Calle 20An Esquina Brr Prados Del Norte', '5796888','3166909583', 'CUCUTA','true', '', '', '', '', 4],
 	['Farmanorte 04', 7.9049350202970805, -72.51519441604614, 'Avenida Kennedy Con 2Da Esquina Brr La Victoria', '5787878','3183353570', 'CUCUTA','','7:30am', '21', '7:30am', '9pm', 5],
@@ -67,7 +67,7 @@ function iniciar(){
 	createMarkers();
 	//registrando manejo de evento de cierre de infowindow clic en el mapa	
 	google.maps.event.addListener(map.map, "click", function() {
-		console.log('maneje el evento de click en el mapa');
+		console.log('maneje el evento de click en el mapa');	
 		map.hideInfoWindows();
 	});
 	
@@ -107,11 +107,10 @@ function createMarkers(){
 }//fin del metodo createMarkers
 
 
-
 //anade el marcardor "Marker" al mapa y registra el evento click sobre el marcador
 //para mostrar la informacion de la sucursal en un objeto InfoWindow
 function addMarkerWithTimeout(position, timeout, suc, i, dir, telefono, celular, ciudad, _24H, aLV, cLV, aDF,cDF) {
-		
+		var mark;
 		var contents = 
 			'<div id="iw-container">' +
                 '<div class="iw-title">'+
@@ -158,11 +157,12 @@ function addMarkerWithTimeout(position, timeout, suc, i, dir, telefono, celular,
         	//registro del manejo de evento click para desplegar el objeto InfoWindow
 			window.setTimeout(function(){
 					//añadir un marker con GMap
+					urlMarker = "images/markFarmaAbierto.png";
 					var mark = map.createMarker ({	
 					    position: position,
-					    icon: "images/markFarmaAbierto.png",
-						title: 'Dromedicas del Oriente',
-						infoWindow: {content:contents, maxWidth:340,},
+					    icon: urlMarker,
+						title: suc,
+						infoWindow: {content:contents, maxWidth:355,},
 						animation: google.maps.Animation.DROP,
 					});
 					//obteniendo el infowindow del objeto GMap
@@ -183,7 +183,10 @@ function addMarkerWithTimeout(position, timeout, suc, i, dir, telefono, celular,
 
 				console.log(fechaActual.getHours() >= getRealHour(aLV).getHours()&&fechaActual.getHours()<=getRealHour(cLV).getHours());
 				
-				if( (fechaActual.getHours() >= getRealHour(aLV).getHours()) && (fechaActual.getHours()<=getRealHour(cLV).getHours()) ){
+				if( (fechaActual.getHours() >= getRealHour(aLV).getHours()) && 
+							 (fechaActual.getHours()<=getRealHour(cLV).getHours()) ){
+					urlMarker = "images/markFarmaAbierto.png";
+					console.log(urlMarker);
 					var hOrdinario ='<div class="layoutcontentbutton">'+
 								'<div class="contentestado">'+
 								'<input id="estadoSucursal" type="hidden" value="abierto">'+
@@ -195,6 +198,8 @@ function addMarkerWithTimeout(position, timeout, suc, i, dir, telefono, celular,
 									'<div class="infoestado">'+ formatAMPM(getRealHour(aDF)) +' - '+ formatAMPM(getRealHour(cDF)) +' </div>'+
 								'</div>';
 				}else{
+					urlMarker = "images/markFarmaCerrado.png";
+					console.log(urlMarker);
 					var hOrdinario ='<div class="layoutcontentbutton">'+
 								'<div class="contentestado">'+
 								'<input id="estadoSucursal" type="hidden" value="cerrado">'+
@@ -205,17 +210,18 @@ function addMarkerWithTimeout(position, timeout, suc, i, dir, telefono, celular,
 									'<div class="titleestado"><h4>Domingos - Festivos</h4></div>'+
 									'<div class="infoestado">'+ formatAMPM(getRealHour(aDF)) +' - '+ formatAMPM(getRealHour(cDF)) +' </div>'+
 								'</div>';
-				}
+				}//fin del else d
 				contents += hOrdinario + complementoHora + footer;
 			}//fin del if de horario
 
-			//registro del manejo de evento click para desplegar el objeto InfoWindow
+			//registro del manejo 
 			window.setTimeout(function(){
 					//añadir un marker con GMap
+					console.log('>s'+urlMarker);
 					var mark = map.createMarker ({	
 					    position: position,
-					    icon: "images/markFarmaAbierto.png",
-						title: 'Dromedicas del Oriente',
+					    icon: urlMarker,
+						title: suc,
 						infoWindow: {content:contents, maxWidth:355,},
 						animation: google.maps.Animation.DROP,
 					});
@@ -227,9 +233,7 @@ function addMarkerWithTimeout(position, timeout, suc, i, dir, telefono, celular,
 					map.addMarker(mark);
 					// markers.push(mark);
 				}, i * 50);
-        }//fin del else
-
-		
+        }//fin del else	
 }
 
 //formato de hora 
@@ -364,11 +368,12 @@ function findMe(){
 
 //Edicion del CSS para el objeto InfoWindows
 function editCssInfoWindowNormal(){
-	console.log('editando el css del infoWindow');		
+			
 	//Desde aca se comienza la manipulacion del DOM del objeto Info Window
 	//nos apoyamos de jQuery
 	google.maps.event.addListener(infoWindowCustom, 'domready', function() {
-		console.log('editando el css del infoWindow');
+		console.log('editando el css del infoWindow+');
+
 		// Reference to the DIV that wraps the bottom of infowindow
 		var iwOuter = $('.gm-style-iw');
 		iwOuter.children(':nth-child(1)').css({'display' : 'block'});		
@@ -400,19 +405,19 @@ function editCssInfoWindowNormal(){
 	    });
 
 	    var estado = document.getElementById('estadoSucursal').value;
-		console.log( estado);
+	    document.getElementById('estadosuc').innerHTML = '';
 		if (estado === 'abierto') {
-			var iconoAbierto = document.getElementById('iconestado');
-				
+			abiertoCerrado = 'Abierto';
+			var iconoAbierto = document.getElementById('iconestado');				
 			iconoAbierto.setAttribute("class", "zmdi zmdi-circle iconestadoabierto");
 			var infoes = document.getElementById('estadosuc');
-			infoes.appendChild(document.createTextNode("Abierto"));
+			infoes.appendChild(document.createTextNode(abiertoCerrado));
 		} else {
 			var iconoCerrado = document.getElementById('iconestado');
-				
+			abiertoCerrado = 'Cerrado';
 			iconoCerrado.setAttribute("class", "zmdi zmdi-circle iconestadocerrado");
 			var infoes = document.getElementById('estadosuc');
-			infoes.appendChild(document.createTextNode("Cerrado"));
+			infoes.appendChild(document.createTextNode(abiertoCerrado));
 		}
   	});
 }// fin del metodo editCssInfoWindow
@@ -420,7 +425,7 @@ function editCssInfoWindowNormal(){
 
 //Edicion del CSS para el objeto InfoWindows
 function editCssInfoWindow(){
-	console.log('editando el css del infoWindow');		
+	// console.log('editando el css del infoWindow');		
 	//Desde aca se comienza la manipulacion del DOM del objeto Info Window
 	//nos apoyamos de jQuery
 	google.maps.event.addListener(infoWindowCustom, 'domready', function() {
@@ -454,6 +459,11 @@ function editCssInfoWindow(){
 	    iwCloseBtn.mouseout(function(){
 	      $(this).css({opacity: '1'});
 	    });	
+	    document.getElementById('estadosuc').innerHTML = '';
+	    var iconoAbierto = document.getElementById('iconestado');				
+			iconoAbierto.setAttribute("class", "zmdi zmdi-circle iconestadoabierto");
+			var infoes = document.getElementById('estadosuc');
+			infoes.appendChild(document.createTextNode("Abierto"));
   	});
 }// fin del metodo editCssInfoWindow
 
