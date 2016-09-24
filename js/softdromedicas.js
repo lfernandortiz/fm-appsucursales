@@ -14,7 +14,7 @@ var urlMarker ;
 //informacion y coordenada de sucursales
 var sucursales = [
 	['Dromedicas del Oriente SAS', 7.908388743984923, -72.491574883461, 'Avenida 11 Be # 8Bn - 10  Guaimaral', '5740075','5777762', 'CUCUTA','','', '', '', '', 1],
-	['Farmanorte 01', 7.840764903473619, -72.5028133392334, 'Calle 33 Con Avenida 4 Esquina Brr La Sabana', '5808800','3167409253', 'LOS PATIOS','','7pm', '22:30', '7:30am', '22:30', 2],
+	['Farmanorte 01', 7.840764903473619, -72.5028133392334, 'Calle 33 Con Avenida 4 Esquina Brr La Sabana', '5808800','3167409253', 'LOS PATIOS','','2pm', '22:30', '7:30am', '22:30', 2],
 	['Farmanorte 02', 7.923595410892432, -72.52201795578003, 'Avenida 5 Con Calle 2N Pescadero', '5780727','3166909962', 'CUCUTA','','8am', '23:30', '8am', '2pm', 3],
 	['Farmanorte 03', 7.917091999388589, -72.49572694301605, 'Avenida 4 Con Calle 20An Esquina Brr Prados Del Norte', '5796888','3166909583', 'CUCUTA','true', '', '', '', '', 4],
 	['Farmanorte 04', 7.9049350202970805, -72.51519441604614, 'Avenida Kennedy Con 2Da Esquina Brr La Victoria', '5787878','3183353570', 'CUCUTA','','7:30am', '21', '7:30am', '9pm', 5],
@@ -42,6 +42,7 @@ var sucursales = [
 	['Farmanorte 26', 7.87187112, -72.52892628, 'Avenida 26 No 29-48 Br Belen', '5754140','3162331144', 'CUCUTA','','7:30am', '21:30', '7:30am', '9:30pm', 27],
 	['Farmanorte 27', 7.91694492, -72.4727475, 'El Escobal, Anillo Vial, Plaza Del Este Local 6', '5847808','3188135356', 'CUCUTA','','7am', '22', '7am', '10pm', 28],
 	['San Antonio del Norte', 7.88749215, -72.50609315, 'Av 7 Calle 9 Esquina Centro', '5727091','3155997098', 'CUCUTA','','7am', '20', '8am', '2pm', 29],
+
 
 ];
 
@@ -109,7 +110,7 @@ function createMarkers(){
 
 //anade el marcardor "Marker" al mapa y registra el evento click sobre el marcador
 //para mostrar la informacion de la sucursal en un objeto InfoWindow
-function addMarkerWithTimeout(position, timeout, suc, i, dir, telefono, celular, ciudad, _24H, aLV, cLV, aDF,cDF) {
+function addMarkerWithTimeout(position, timeout, suc, i, dir, telefono, celular, ciudad, _24H, aLS, cLS, aDF,cDF) {
 		
 		var contents = 
 			'<div id="iw-container">' +
@@ -146,8 +147,6 @@ function addMarkerWithTimeout(position, timeout, suc, i, dir, telefono, celular,
 					'</div><!--fin de contenedor de horarios -->'+
 				'</div>'+
             '</div>';
-
-
         
         //con base en el dia comparamos el rango de horas icluyendo minutos
         //genero el contenido dinamicamente
@@ -180,11 +179,9 @@ function addMarkerWithTimeout(position, timeout, suc, i, dir, telefono, celular,
         	var diaDeLaSemana = fechaActual.getDay();
         	var urlMarker2;
          	//valida si el dia actual esta entre lunes y Sabado
-			if (diaDeLaSemana >= 0 && diaDeLaSemana <= 5) {
+			if (diaDeLaSemana >= 1 && diaDeLaSemana <= 6) {
 				var est;
-
-				if( (fechaActual.getHours() >= getRealHour(aLV).getHours()) && 
-							 (fechaActual.getHours()<=getRealHour(cLV).getHours()) ){
+				if( abierto(fechaActual, aLS, cLS) ){
 					urlMarker2 = "images/markFarmaAbierto.png";
 					est = 'abierto';
 					
@@ -196,7 +193,7 @@ function addMarkerWithTimeout(position, timeout, suc, i, dir, telefono, celular,
 								'<div class="contentestado">'+
 								'<input id="estadoSucursal" type="hidden" value="'+est+'">'+
 									'<div class="titleestado"><h4>Lunes - Sabado</h4></div>'+
-									'<div class="infoestado">' + formatAMPM(getRealHour(aLV)) + ' - ' + formatAMPM(getRealHour(cLV)) +'</div>'+
+									'<div class="infoestado">' + formatAMPM(getRealHour(aLS)) + ' - ' + formatAMPM(getRealHour(cLS)) +'</div>'+
 								'</div>'+
 								'<div class="contentestado">'+
 									'<div class="titleestado"><h4>Domingos - Festivos</h4></div>'+
@@ -205,8 +202,7 @@ function addMarkerWithTimeout(position, timeout, suc, i, dir, telefono, celular,
 				contents += hOrdinario + complementoHora + footer;
 				//registro del manejo 
 				window.setTimeout(function() {
-					//añadir un marker con GMap
-					
+					//añadir un marker con GMap					
 					var markd = map.createMarker({
 						position: position,
 						icon: urlMarker2,
@@ -225,9 +221,77 @@ function addMarkerWithTimeout(position, timeout, suc, i, dir, telefono, celular,
 					map.addMarker(markd);
 					// markers.push(mark);
 				}, i * 50);
-			}//fin del if de horario
+			}//fin del if de horario lunes - sabado
+
+			//valida si el dia actual es domingo
+			if (diaDeLaSemana = 0 ) {
+				var est;
+				if( abierto(fechaActual, aDF, cDF) ){
+					urlMarker2 = "images/markFarmaAbierto.png";
+					est = 'abierto';
+					
+				}else{
+					urlMarker2 = "images/markFarmaCerrado.png";
+					est = 'cerrado';
+				}//fin del else 
+				var hOrdinario ='<div class="layoutcontentbutton">'+
+								'<div class="contentestado">'+
+								'<input id="estadoSucursal" type="hidden" value="'+est+'">'+
+									'<div class="titleestado"><h4>Lunes - Sabado</h4></div>'+
+									'<div class="infoestado">' + formatAMPM(getRealHour(aLS)) + ' - ' + formatAMPM(getRealHour(cLS)) +'</div>'+
+								'</div>'+
+								'<div class="contentestado">'+
+									'<div class="titleestado"><h4>Domingos - Festivos</h4></div>'+
+									'<div class="infoestado">'+ formatAMPM(getRealHour(aDF)) +' - '+ formatAMPM(getRealHour(cDF)) +' </div>'+
+								'</div>';
+				contents += hOrdinario + complementoHora + footer; 
+				//registro del manejo 
+				window.setTimeout(function() {
+					//añadir un marker con GMap					
+					var markd = map.createMarker({
+						position: position,
+						icon: urlMarker2,
+						title: suc,
+						infoWindow: {
+							content: contents,
+							maxWidth: 330,
+						},
+						animation: google.maps.Animation.DROP,
+					});
+					//obteniendo el infowindow del objeto GMap
+					infoWindowCustom = markd.infoWindow;
+					//editando el css del infowindow
+					editCssInfoWindowNormal();
+					//añadiendo la marca al mapa	
+					map.addMarker(markd);
+					// markers.push(mark);
+				}, i * 50);
+			}//fin del if de horario para domingo
 			
         }//fin del else	
+}
+
+
+function abierto(hActual, hApertura, hCierre){
+
+	var abierto = false;
+
+	//hora actual es mayor a la hora de apertura?
+	if( hActual.getHours() > getRealHour(hApertura).getHours() && hActual.getHours()<getRealHour(hCierre).getHours() ){
+		abierto = true;
+	}
+		
+	if( hActual.getHours() == getRealHour(hApertura).getHours() ){
+			if(hActual.getMinutes() >= getRealHour(hApertura).getMinutes())
+				abierto = true;
+	}
+
+	if (hActual.getHours() == getRealHour(hCierre).getHours()) {
+		if (hActual.getMinutes() < getRealHour(hCierre).getMinutes())
+			abierto = true;
+	}
+
+	return abierto;	
 }
 
 //formato de hora 
