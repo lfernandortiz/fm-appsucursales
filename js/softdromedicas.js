@@ -14,7 +14,7 @@ var urlMarker ;
 //informacion y coordenada de sucursales
 var sucursales = [
 	['Dromedicas del Oriente SAS', 7.908388743984923, -72.491574883461, 'Avenida 11 Be # 8Bn - 10  Guaimaral', '5740075','5777762', 'CUCUTA','','', '', '', '', 1],
-	['Farmanorte 01', 7.840764903473619, -72.5028133392334, 'Calle 33 Con Avenida 4 Esquina Brr La Sabana', '5808800','3167409253', 'LOS PATIOS','','6:30pm', '22:30', '7:30am', '22:30', 2],
+	['Farmanorte 01', 7.840764903473619, -72.5028133392334, 'Calle 33 Con Avenida 4 Esquina Brr La Sabana', '5808800','3167409253', 'LOS PATIOS','','7pm', '22:30', '7:30am', '22:30', 2],
 	['Farmanorte 02', 7.923595410892432, -72.52201795578003, 'Avenida 5 Con Calle 2N Pescadero', '5780727','3166909962', 'CUCUTA','','8am', '23:30', '8am', '2pm', 3],
 	['Farmanorte 03', 7.917091999388589, -72.49572694301605, 'Avenida 4 Con Calle 20An Esquina Brr Prados Del Norte', '5796888','3166909583', 'CUCUTA','true', '', '', '', '', 4],
 	['Farmanorte 04', 7.9049350202970805, -72.51519441604614, 'Avenida Kennedy Con 2Da Esquina Brr La Victoria', '5787878','3183353570', 'CUCUTA','','7:30am', '21', '7:30am', '9pm', 5],
@@ -62,7 +62,7 @@ function iniciar(){
 		// clickable: false
 	});
 	//metodo para geolocalizacion y trazo de la ruta
-	// findMe();
+	// findMe();	
 	//creando los marcadores
 	createMarkers();
 	//registrando manejo de evento de cierre de infowindow clic en el mapa	
@@ -85,7 +85,7 @@ function createMarkers(){
 		
 		if (principal.localeCompare(sucursalt) === 0) {	
 		 	addMarkerWithTimeoutPpal(coordenadas, i * 100, 
-										sucursales[i][0], i, sucursales[i][3]);			
+										sucursales[i][0], i, sucursales[i][3], sucursales[i][4], sucursales[i][5] );			
 		} else {
 			addMarkerWithTimeout(coordenadas,	  //coordenadas del marker
 								 i * 50,		  //temporizador para la caida
@@ -262,7 +262,7 @@ function addMarkerWithTimeoutPpal(position, timeout, suc, i, dir, telefono, celu
 				'<div class="iw-contentppal">'+
 					'<p><span class="icon-home"></span>'+ dir +'</p>'+
 					'<p><a href="tel:(037)'+ telefono +'" class="footertext"><span class="icon-phone"></span>'+ telefono +'</a></p>'+	
-					'<p><a href="tel:3002692042" class="footertext"><span class="icon-mobile"></span>3002692042</a></p>'+	
+					'<p><a href="tel:'+celular+'" class="footertext"><span class="icon-phone"></span>'+celular+'</a></p>'+	
 					// '<h3>Horarios</h3>'+
 					// '<p class="horario">24 Horas.</p>'+
 				'</div>'+
@@ -299,6 +299,7 @@ function clearMarkers() {
 
 //Geolocalizacion y trazo de ruta
 function findMe(){
+	console.log("UBICACION ACTUAL");
 	map.addControl({
 		position: 'top_right',
 		content: 'Mi ubicación',
@@ -335,19 +336,18 @@ function findMe(){
 				lng: position.coords.longitude,
 				// animation: google.maps.Animation.DROP,
 			});
-
 			map.drawRoute({
 				origin: [position.coords.latitude, position.coords.longitude],
 				destination: [7.908388743984923, -72.491574883461],
 				travelMode: 'driving',
-				strokeColor: '#E90525',
+				strokeColor: '#0925D1',
 				strokeOpacity: 0.7,
 				strokeWeight: 6
 			});
 		},
 		error: function(error) {
 			$('#geolocalizacion-info').css('display', 'block');
-		},
+		}, 
 		not_supported: function() {
 			$('#geolocalizacion-info').css('display', 'block');
 		}
