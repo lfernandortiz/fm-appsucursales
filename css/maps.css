@@ -454,11 +454,11 @@ img,h3, h4, p {
 
 /*Estilos del mapa contenedor*/
 #mainc{
-	height: 600px;
-	max-width: 1100px;
+	height: 1200px;
+	max-width: 98%;
 	margin: 0 auto;
 	background: #fff;
-    padding: 20px;
+    padding: 2px;
     /*box-shadow: 0 0 20px #999;*/
     box-shadow: 0 1px 3px #999;
     border-radius: 5px;
