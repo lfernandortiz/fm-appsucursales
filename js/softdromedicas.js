@@ -181,7 +181,7 @@ function addMarkerWithTimeout(position, timeout, suc, i, dir, telefono, celular,
 			if (diaDeLaSemana >= 0 && diaDeLaSemana <= 5) {
 				var est;				
 				if( (fechaActual.getHours() >= getRealHour(aLV).getHours()) && 
-							 (fechaActual.getHours()<getRealHour(cLV).getHours()) ){
+							 (fechaActual.getHours() < getRealHour(cLV).getHours()) ){
 					urlMarker2 = "images/markFarmaAbierto.png";
 					est = 'abierto';					
 				}else{
