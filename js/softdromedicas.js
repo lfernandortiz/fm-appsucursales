@@ -6,8 +6,8 @@ var markers = [];
 var infoWindowCustom;
 
 //coordenadas iniciales
-var lat=  7.8890971;
-var lng= -72.49668959999997;
+var lat=  7.87883478;
+var lng= -72.50257802;
 var urlMarker ;
 
 
@@ -62,7 +62,7 @@ function iniciar(){
 		// clickable: false
 	});
 	//metodo para geolocalizacion y trazo de la ruta
-	// findMe();	
+	findMe();	
 	//creando los marcadores
 	createMarkers();
 	//registrando manejo de evento de cierre de infowindow clic en el mapa	
@@ -110,7 +110,7 @@ function createMarkers(){
 //anade el marcardor "Marker" al mapa y registra el evento click sobre el marcador
 //para mostrar la informacion de la sucursal en un objeto InfoWindow
 function addMarkerWithTimeout(position, timeout, suc, i, dir, telefono, celular, ciudad, _24H, aLV, cLV, aDF,cDF) {
-		
+		//variables con el contenido de infowindow
 		var contents = 
 			'<div id="iw-container">' +
                 '<div class="iw-title">'+
@@ -149,9 +149,7 @@ function addMarkerWithTimeout(position, timeout, suc, i, dir, telefono, celular,
 
 
         
-        //con base en el dia comparamos el rango de horas icluyendo minutos
-        //genero el contenido dinamicamente
-        
+        //revisa que sea 24 horas   
         if( _24H === 'true'){
         	contents +=   _24_horas + complementoHora + footer ;
         	
@@ -174,7 +172,8 @@ function addMarkerWithTimeout(position, timeout, suc, i, dir, telefono, celular,
 					map.addMarker(mark);
 					// markers.push(mark);
 				}, i * 50);
-        }else{        	
+        }else{
+        //si no es 24h, obtenemos el dia y hora actual        	
         	var fechaActual = new Date();
         	var horaActual = fechaActual.getHours();
         	var diaDeLaSemana = fechaActual.getDay();
