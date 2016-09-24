@@ -67,7 +67,7 @@ function iniciar(){
 	createMarkers();
 	//registrando manejo de evento de cierre de infowindow clic en el mapa	
 	google.maps.event.addListener(map.map, "click", function() {
-		console.log('maneje el evento de click en el mapa');	
+		// console.log('maneje el evento de click en el mapa');	
 		map.hideInfoWindows();
 	});
 	
@@ -77,7 +77,6 @@ function iniciar(){
 function createMarkers(){
 	//iteramos la coleccion de sucursales
 	for (var i = 0; i < sucursales.length; i++) {
-		// console.log(sucursales[i][1], sucursales[i][2]);
 		//se crea un objeto coordenadas para crear nuestro marcador
 		var coordenadas = new google.maps.LatLng(sucursales[i][1], sucursales[i][2]);
 		//variables creadas para comparar determinar cual es la ppal
@@ -152,7 +151,7 @@ function addMarkerWithTimeout(position, timeout, suc, i, dir, telefono, celular,
         //revisa que sea 24 horas   
         if( _24H === 'true'){
         	contents +=   _24_horas + complementoHora + footer ;
-        	
+
         	//registro del manejo de evento click para desplegar el objeto InfoWindow
 			window.setTimeout(function(){
 					//añadir un marker con GMap
@@ -180,16 +179,14 @@ function addMarkerWithTimeout(position, timeout, suc, i, dir, telefono, celular,
         	var urlMarker2;
          	//valida si el dia actual esta entre lunes y Sabado
 			if (diaDeLaSemana >= 0 && diaDeLaSemana <= 5) {
-				var est;
-
+				var est;				
 				if( (fechaActual.getHours() >= getRealHour(aLV).getHours()) && 
-							 (fechaActual.getHours()<=getRealHour(cLV).getHours()) ){
+							 (fechaActual.getHours()<getRealHour(cLV).getHours()) ){
 					urlMarker2 = "images/markFarmaAbierto.png";
-					est = 'abierto';
-					
+					est = 'abierto';					
 				}else{
 					urlMarker2 = "images/markFarmaCerrado.png";
-					est = 'cerrado';
+					est = 'cerrado';					
 				}//fin del else 
 				var hOrdinario ='<div class="layoutcontentbutton">'+
 								'<div class="contentestado">'+
@@ -205,7 +202,10 @@ function addMarkerWithTimeout(position, timeout, suc, i, dir, telefono, celular,
 				//registro del manejo 
 				window.setTimeout(function() {
 					//añadir un marker con GMap
+<<<<<<< HEAD
 					
+=======
+>>>>>>> d22749ce9b0c465e231c02895edf23a7280aa32b
 					var markd = map.createMarker({
 						position: position,
 						icon: urlMarker2,
