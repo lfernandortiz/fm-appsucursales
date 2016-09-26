@@ -71,9 +71,27 @@ function iniciar(){
 		// console.log('maneje el evento de click en el mapa');	
 		map.hideInfoWindows();
 	});
-	
+	//registro de manejo de evento del boton de menu
+	var menuboton = document.getElementById('buttonmenu');
+	menuboton.addEventListener('click', ocultarMostrar, false );
+
 }//fin del metodo iniciar
 
+
+function ocultarMostrar() {	
+    document.getElementById("menu").classList.toggle("active");
+}
+
+// cierra el menu cuando el usuario hace click por dentro y fuera de el
+window.onclick = function(event) {
+	console.log("manejando evento: " + event.target.matches('.burgermenu'));
+  
+  if (!event.target.matches('.burgermenu')  ) {  	
+    	var dropdowns = document.getElementById("menu");
+    	console.log(dropdowns);
+    	dropdowns.classList.remove('active');    
+    }  
+}//fin del manejador de evento
 
 function createMarkers(){
 	//iteramos la coleccion de sucursales
@@ -138,9 +156,9 @@ function addMarkerWithTimeout(position, timeout, suc, i, dir, telefono, celular,
 						'<div class="layoutcontentbutton">'+
 							'<div class="titlesection"><h3>Como Llegar</h3></div>'+
 							'<div class="layoutcontentbutton">'+
-								'<button class="buttonruta"><span class="zmdi zmdi zmdi-car zmdi-hc-2x"></span>&nbsp;&nbsp;En carro</button>'+
-								'<button class="buttonruta"><i class="zmdi zmdi-walk zmdi-hc-2x"></i>&nbsp;&nbsp;Caminando</button>'+
-								'<button class="buttonruta"><i class="zmdi zmdi-bus zmdi-hc-2x"></i>&nbsp;&nbsp;Bus</button>'+
+								'<button class="buttonruta"><i class="zmdi zmdi zmdi-car zmdi-hc-2x"></i>&nbsp;Carro</button>'+
+								'<button class="buttonruta"><i class="zmdi zmdi-walk zmdi-hc-2x"></i>&nbsp;Caminando</button>'+
+								'<button class="buttonruta"><i class="zmdi zmdi-bus zmdi-hc-2x"></i>&nbsp;Bus</button>'+
 							'</div>'+							
 						'</div><!-- fin de layoutcontent-->'+						
 					'</div><!--fin de contenedor de horarios -->'+
