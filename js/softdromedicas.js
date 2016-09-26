@@ -58,7 +58,7 @@ function iniciar(){
 		// panControl: false,
 		// streetViewControl: true,
 		mapTypeControl: false,
-		// overviewMapControl: false,
+		overviewMapControl: false,
 		// clickable: false
 	});
 	//metodo para geolocalizacion y trazo de la ruta
