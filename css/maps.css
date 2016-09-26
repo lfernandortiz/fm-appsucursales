@@ -483,25 +483,12 @@ h1 {
 }
 
 #mainc{	
-
-	margin: 0 auto;
 	background: #fff;
     padding: 2px;
-    width: 100%;
+    max-width: 100% ;
     height: 1100px;   
     position: relative;
     z-index: 0;    
-    
-    /*box-shadow: 0 0 20px #999;*/
-
-    box-shadow: 0 1px 1px #999;
-    border-radius: 5px;
-    border: 1px solid #B5B5B5;
-
-    /*box-shadow: 0 1px 3px #999;*/
-    /*border-radius: 5px;*/
-    /*border: 1px solid #144EF2;*/
-
 }
 
 #map {	
@@ -549,7 +536,7 @@ h1 {
 	border-radius: 10px;
 	border: 3px solid #a0a0a0;
 	position: absolute;
-	top: 150px;
+	top: 80px;
 	left: 12px;
 }
 
