@@ -363,10 +363,11 @@ img, h1,h3, h4, p {
 }
 
 .buttonruta{
-  display: flex;
+ /* display: flex;
   flex-direction: row;
-  align-items: center;
-  margin: 3px 0 3px 10px;
+  align-items: center;*/
+  vertical-align: middle;
+  margin: 3px 0 3px 5px;
   border-radius: 4px;
   border: 1px solid #002B7B;
   color: #002B7B;
@@ -391,6 +392,10 @@ img, h1,h3, h4, p {
 .buttonruta:visited{
 	outline:0;	
 } 
+
+.buttonruta i{
+	vertical-align: middle;
+}
 
 
 /**--*/
@@ -451,7 +456,9 @@ img, h1,h3, h4, p {
 	background: -ms-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%);
 }
 
-/*Estilos del mapa contenedor*/
+/*==============================================
+  Estilos para el contenedor del mapa y cabecero
+  ==============================================*/
 
 h1 {
 	color: #FFFFFF;
@@ -479,13 +486,11 @@ h1 {
     width: 100%;
     height: 1100px;   
     position: relative;
-    z-index: 0;    
-    
+    z-index: 0;        
     /*box-shadow: 0 0 20px #999;*/
     /*box-shadow: 0 1px 3px #999;*/
     /*border-radius: 5px;*/
     /*border: 1px solid #144EF2;*/
-
 }
 
 #map {	
@@ -498,30 +503,14 @@ h1 {
 	text-shadow: 1px 1px 1px #A2A2A2;
 }
 
-.buscadorcontent{
-	height: 500px;
-	width: 400px;
-	background: rgba(255, 255, 255, .7);
-    padding: 5px;
-    position: absolute;
-    top: 70px;
-    left: 10px;
-    box-shadow: 0 1px 3px #999;
-    border-radius: 5px;
-    border: 1px solid #B5B5B5;
-   
-}
-
-.titlebuscador{
-	text-align: center;
-}
-
 #map .sucursal {
 	color: #FF4444;
 	text-shadow: 1px 1px 1px #353535;
 }
 
-
+/*==============================================
+  Estilos que editan contenedor de sucursales
+  ==============================================*/
 .encuentranos{
 	width: 400px;
 	height: 600px;
@@ -557,7 +546,7 @@ h1 {
 	max-width: 380px;
 	height: 450px;
 	border-radius: 5px;
-	background: #B3B3B3;
+	background: #E2E4E6;
 	margin: 0 auto;
 	display: flex;
 	flex-direction: column;
@@ -570,12 +559,12 @@ h1 {
 	border-radius: 5px;
 	color: #000a7b;
 	background: rgba(255, 255, 255, .95);
+	border-bottom: 1px solid #ccc;
 	display: block;
 	width: 335px;
 	margin: 5px auto;
 	padding: 5px;
 }
-
 
 .divsucursal:hover{
 	background: #424AA0;
@@ -588,7 +577,6 @@ h1 {
 	justify-content: flex-start;
 	align-items: center;	
 }
-
 
 .divmarker img{
 	width: 25px;
@@ -610,7 +598,6 @@ h1 {
 	font-size: 1.2rem;
 }
 
-
 .distancediv{
 	text-align: right;
 	font-weight: bold;
@@ -621,7 +608,7 @@ h1 {
 	text-align: center;
 }
 
-.cercademi{
+.cercabutton{
 	border-radius: 2px;
 	border: none;
 	color:#000a7b;
@@ -633,12 +620,10 @@ h1 {
 	cursor: pointer;
     text-decoration: none;
     border: 1px solid #000A7B;
-    box-shadow: 1px 2px 2px #ACACAC;
-	
+    box-shadow: 1px 2px 2px #ACACAC;	
 }
 
-
-.cercademi img{
+.cercabutton img{
 	width: 15px;
 	vertical-align: middle;
 }
@@ -648,12 +633,15 @@ h1 {
 	color: #FFFFFF;
 }
 
+
+/*==============================================
+  Estilos que editan el scroll bar de sucursales
+  ==============================================*/
+
 .scrollbar
 {	
 	overflow-y: scroll;
 }
-
-
 
 #style-1::-webkit-scrollbar-track
 {

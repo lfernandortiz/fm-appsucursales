@@ -138,9 +138,9 @@ function addMarkerWithTimeout(position, timeout, suc, i, dir, telefono, celular,
 						'<div class="layoutcontentbutton">'+
 							'<div class="titlesection"><h3>Como Llegar</h3></div>'+
 							'<div class="layoutcontentbutton">'+
-								'<button class="buttonruta"><span class="zmdi zmdi zmdi-car zmdi-hc-2x"></span>&nbsp;&nbsp;En carro</button>'+
-								'<button class="buttonruta"><i class="zmdi zmdi-walk zmdi-hc-2x"></i>&nbsp;&nbsp;Caminando</button>'+
-								'<button class="buttonruta"><i class="zmdi zmdi-bus zmdi-hc-2x"></i>&nbsp;&nbsp;Bus</button>'+
+								'<button class="buttonruta"><i class="zmdi zmdi zmdi-car zmdi-hc-2x"></i>&nbsp;Carro</button>'+
+								'<button class="buttonruta"><i class="zmdi zmdi-walk zmdi-hc-2x"></i>&nbsp;Caminando</button>'+
+								'<button class="buttonruta"><i class="zmdi zmdi-bus zmdi-hc-2x"></i>&nbsp;Bus</button>'+
 							'</div>'+							
 						'</div><!-- fin de layoutcontent-->'+						
 					'</div><!--fin de contenedor de horarios -->'+
