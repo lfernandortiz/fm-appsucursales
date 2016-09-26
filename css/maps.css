@@ -1,5 +1,6 @@
-@import url(reset.css);
+@import url(normalize);
 @import url(material-design-iconic-font.css);
+@import 'https://fonts.googleapis.com/css?family=Montserrat';
 
 @font-face {
 	font-family: "Babylon5";
@@ -109,6 +110,19 @@ html,body {
 	padding: 0;
 	font-family: calibri, sans-serif;
 }
+
+
+.header{
+	text-align: center;
+}
+/*Estilos del infoWindow*/
+
+img, h1,h3, h4, p {
+	padding: 0;
+	margin: 0;
+	font-size: 100%;	
+}
+
 
 .iw-title {
 	position: relative;
@@ -440,43 +454,38 @@ html,body {
 /*Estilos del mapa contenedor*/
 
 h1 {
-	color: #000a7b;
-	text-shadow: 1px 1px 1px #07164C;
-}
-
-.headermain{
-	font-family: calibri, sans-serif;
-	text-align: center;
-	color: #FFFFFF;	
-	background: #2C3599;
-	height: 5rem;
-	box-shadow: 1px 1px 5px #04C924;
-	z-index: 2;
-
-}
-
-
-.headermain h1 {
-	padding-top: 10px;
 	color: #FFFFFF;
-	font-size: 3rem;
+	font-size: 2.5rem;
+	text-shadow: 1px 1px 1px #4A4A4A;
+
 }
 
-
-
-#mainc{
+.header{
+	text-align: center;
+	box-shadow: 1px 6px 9px rgba(97, 97, 97, .65);
+	z-index: 2;
+	background: ;
 	position: relative;
-	height: 900px;
-	max-width: 100%;
+	height: 4rem;
+	padding-top: 15px;
+	background: rgba(0, 10, 123, .85);
+
+}
+
+#mainc{	
 	margin: 0 auto;
 	background: #fff;
-    /*padding: 2px;*/
-    /*box-shadow: 0 0 20px #999;*/
-    box-shadow: 0 1px 1px #999;
-    /*border-radius: 5px;*/
-    border: 5px solid red;
-    z-index: 999;
+    padding: 2px;
+    width: 100%;
+    height: 1100px;   
+    position: relative;
+    z-index: 0;    
     
+    /*box-shadow: 0 0 20px #999;*/
+    /*box-shadow: 0 1px 3px #999;*/
+    /*border-radius: 5px;*/
+    /*border: 1px solid #144EF2;*/
+
 }
 
 #map {	
@@ -507,9 +516,162 @@ h1 {
 	text-align: center;
 }
 
-.titlebuscador h2{
-	color: #000a7b;
-	text-shadow: 1px 1px 1px #A2A2A2;
-	font-size: 1.6rem;
-
+#map .sucursal {
+	color: #FF4444;
+	text-shadow: 1px 1px 1px #353535;
 }
+
+
+.encuentranos{
+	width: 400px;
+	height: 600px;
+	background: rgba(255, 255, 255, .85);
+	box-shadow: 1px 2px 3px #8A8989;
+	z-index: 2;
+	border-radius: 10px;
+	border: 3px solid #a0a0a0;
+	position: absolute;
+	top: 80px;
+	left: 12px;
+}
+
+.linkdiv{
+	text-decoration: none;
+}
+
+.linkdiv:visited{
+	text-decoration: none;
+}
+
+.headenc{
+	color: #000a7b;
+	text-align: center;
+	font-size: 1.3rem;	
+}
+
+.headenc h2{
+	margin: 15px 0;
+}
+
+.contentsuc{
+	max-width: 380px;
+	height: 450px;
+	border-radius: 5px;
+	background: #B3B3B3;
+	margin: 0 auto;
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 10px;
+	border:1px solid #CBCBCB;
+	overflow-y: scroll;
+}
+
+.divsucursal{
+	border-radius: 5px;
+	color: #000a7b;
+	background: rgba(255, 255, 255, .95);
+	display: block;
+	width: 335px;
+	margin: 5px auto;
+	padding: 5px;
+}
+
+
+.divsucursal:hover{
+	background: #424AA0;
+	color: #FFFFFF;
+}
+
+.infosuc{
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;	
+}
+
+
+.divmarker img{
+	width: 25px;
+	margin-left: 5px;
+}
+
+.detallesuc{
+	margin: 10px 0 0 15px;	
+}
+
+.detallesuc h3{
+	font-size: 1.3rem;
+	font-family: 'Montserrat', sans-serif;
+	font-weight: bolder;
+	margin-bottom: 3px;
+}
+
+.detallesuc p{
+	font-size: 1.2rem;
+}
+
+
+.distancediv{
+	text-align: right;
+	font-weight: bold;
+	font-size: 1.1rem;
+}
+
+.divcerca{
+	text-align: center;
+}
+
+.cercademi{
+	border-radius: 2px;
+	border: none;
+	color:#000a7b;
+	background: #FFFFFF;
+	font-family: 'Montserrat', sans-serif;
+	padding: 7px;
+	font-weight: bold;
+	font-size: 1rem;
+	cursor: pointer;
+    text-decoration: none;
+    border: 1px solid #000A7B;
+    box-shadow: 1px 2px 2px #ACACAC;
+	
+}
+
+
+.cercademi img{
+	width: 15px;
+	vertical-align: middle;
+}
+
+.cercademi:hover{
+	background: #424AA0;
+	color: #FFFFFF;
+}
+
+.scrollbar
+{	
+	overflow-y: scroll;
+}
+
+
+
+#style-1::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	border-radius: 10px;
+	background-color: #F5F5F5;
+}
+
+#style-1::-webkit-scrollbar
+{
+	width: 12px;
+	background-color: #F5F5F5;
+}
+
+#style-1::-webkit-scrollbar-thumb
+{
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: #000A7B;
+}
+
