@@ -196,16 +196,10 @@ function addMarkerWithTimeout(position, timeout, suc, i, dir, telefono, celular,
         	var diaDeLaSemana = fechaActual.getDay();
         	var urlMarker2;
          	//valida si el dia actual esta entre lunes y Sabado
-<<<<<<< HEAD
+
 			if (diaDeLaSemana >= 1 && diaDeLaSemana <= 6) {
 				var est;
 				if( abierto(fechaActual, aLS, cLS) ){
-=======
-			if (diaDeLaSemana >= 0 && diaDeLaSemana <= 5) {
-				var est;				
-				if( (fechaActual.getHours() >= getRealHour(aLV).getHours()) && 
-							 (fechaActual.getHours() < getRealHour(cLV).getHours()) ){
->>>>>>> 131e79c40d4b0008317fae5d431364bed470a040
 					urlMarker2 = "images/markFarmaAbierto.png";
 					est = 'abierto';					
 				}else{
@@ -225,8 +219,6 @@ function addMarkerWithTimeout(position, timeout, suc, i, dir, telefono, celular,
 				contents += hOrdinario + complementoHora + footer;
 				//registro del manejo 
 				window.setTimeout(function() {
-<<<<<<< HEAD
-
 					var markd = map.createMarker({
 						position: position,
 						icon: urlMarker2,
@@ -273,9 +265,6 @@ function addMarkerWithTimeout(position, timeout, suc, i, dir, telefono, celular,
 				//registro del manejo 
 				window.setTimeout(function() {
 					//añadir un marker con GMap					
-=======
-					//añadir un marker con GMap
->>>>>>> 131e79c40d4b0008317fae5d431364bed470a040
 					var markd = map.createMarker({
 						position: position,
 						icon: urlMarker2,
