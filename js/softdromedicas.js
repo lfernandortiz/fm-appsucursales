@@ -82,17 +82,15 @@ function ocultarMostrar() {
     document.getElementById("menu").classList.toggle("active");
 }
 
-// cierra el menu cuando el usuario hace click por fuer de este
+// cierra el menu cuando el usuario hace click por dentro y fuera de el
 window.onclick = function(event) {
-
-	console.log("manejando evento");
+	console.log("manejando evento: " + event.target.matches('.burgermenu'));
   
-  if (!event.target.matches('.menu') && !event.target.matches('.burgermenu')  ) {  	
+  if (!event.target.matches('.burgermenu')  ) {  	
     	var dropdowns = document.getElementById("menu");
     	console.log(dropdowns);
     	dropdowns.classList.remove('active');    
-    }
-  
+    }  
 }//fin del manejador de evento
 
 function createMarkers(){

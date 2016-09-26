@@ -485,24 +485,24 @@ h1 {
 
 .buttonmenu{
 	border-radius: 2px;
-    border: 2px solid #8C90C3;
+    /*border: 2px solid #8C90C3;*/
     color: #FFFFFF;
     cursor: pointer;
     position: absolute;
-    padding: 5px;
+    padding: 5px 10px;
     left: 15px;
     top: 20px;  
     z-index: 4;  
 }
 
-
-
-.buttonmenu:hover{
-	-webkit-box-shadow: inset 0 0 19px 1px rgba(124,134,252,0.56);
-	-moz-box-shadow: inset 0 0 19px 1px rgba(124,134,252,0.56);
-	box-shadow: inset 0 0 19px 1px rgba(124,134,252,0.56);
+.zmdi-menu:hover{
+	color: #C8C8C8;
+	text-shadow: 0 1px 1px #5F5F5F;
 }
 
+.zmdi-menu:visited{
+	color: #FFFFFF;
+}
 
 
 .menu {
