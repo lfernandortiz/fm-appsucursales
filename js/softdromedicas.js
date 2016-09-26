@@ -71,9 +71,28 @@ function iniciar(){
 		// console.log('maneje el evento de click en el mapa');	
 		map.hideInfoWindows();
 	});
-	
+	//registro de manejo de evento del boton de menu
+	var menuboton = document.getElementById('buttonmenu');
+	menuboton.addEventListener('click', ocultarMostrar, false );
+
 }//fin del metodo iniciar
 
+
+function ocultarMostrar() {	
+    document.getElementById("menu").classList.toggle("active");
+}
+
+// cierra el menu cuando el usuario hace click por fuer de este
+window.onclick = function(event) {
+	console.log(!event.target.matches('.menu') &&  !event.target.matches('.buttonmenu'));
+  
+  if (!event.target.matches('.menu')  && !event.target.matches('.buttonmenu')) {  	
+    	var dropdowns = document.getElementById("menu");
+    	console.log(dropdowns);
+    	dropdowns.classList.remove('active');    
+    }
+  
+}//fin del manejador de evento
 
 function createMarkers(){
 	//iteramos la coleccion de sucursales

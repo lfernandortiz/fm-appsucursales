@@ -1,4 +1,3 @@
-@import url(normalize);
 @import url(material-design-iconic-font.css);
 @import 'https://fonts.googleapis.com/css?family=Montserrat';
 
@@ -464,21 +463,104 @@ h1 {
 	color: #FFFFFF;
 	font-size: 2.5rem;
 	text-shadow: 1px 1px 1px #4A4A4A;
-
 }
 
 .header{
 	text-align: center;
 	box-shadow: 1px 6px 9px rgba(97, 97, 97, .65);
-	z-index: 2;
 	background: ;
 	position: relative;
 	height: 4rem;
 	padding-top: 15px;
-	background: rgba(0, 10, 123, .85);
+	background: rgba(0, 10, 123, .98);
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	z-index: 3;
+	position: relative;
 
 }
 
+/*menu*/
+
+.buttonmenu{
+	border-radius: 2px;
+    border: 2px solid #8C90C3;
+    color: #FFFFFF;
+    cursor: pointer;
+    position: absolute;
+    padding: 5px;
+    left: 15px;
+    top: 20px;  
+    z-index: 4;  
+}
+
+
+
+.buttonmenu:hover{
+	-webkit-box-shadow: inset 0 0 19px 1px rgba(124,134,252,0.56);
+	-moz-box-shadow: inset 0 0 19px 1px rgba(124,134,252,0.56);
+	box-shadow: inset 0 0 19px 1px rgba(124,134,252,0.56);
+}
+
+
+
+.menu {
+	background: rgba(0, 10, 123, .9);
+	position: fixed;
+	font-family: 'Montserrat', sans-serif;
+	top: -100%;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	display: flex;
+	width: 20%;
+	height: 9rem;
+	align-items: flex-start;
+	text-align: center;
+	z-index: 2;
+	transition: .7s;
+	/*display: none;*/
+}
+
+
+.menu.active{
+	top: 79px;	
+}
+
+.menu ul{
+	padding: 10px;
+	/*background: red;*/
+}
+
+.menu a {
+  color: white;
+  text-decoration: none;
+  display: block;
+}
+
+.menu ul {
+flex: 1;
+}
+
+.menu li {
+display: block;
+margin: 0;
+padding: 8px 0;
+border-bottom: 1px solid white;
+}
+
+.menu li:first-child {
+border-top: 1px solid white;
+}
+
+.menu li:hover, a:hover{
+	background: #000750;
+	color: #FFFFFF;
+}
+
+
+/*contenedor del mapa*/
 #mainc{	
 	margin: 0 auto;
 	background: #fff;
@@ -486,7 +568,7 @@ h1 {
     width: 100%;
     height: 1100px;   
     position: relative;
-    z-index: 0;        
+    z-index: 1;
     /*box-shadow: 0 0 20px #999;*/
     /*box-shadow: 0 1px 3px #999;*/
     /*border-radius: 5px;*/
@@ -516,13 +598,41 @@ h1 {
 	height: 600px;
 	background: rgba(255, 255, 255, .85);
 	box-shadow: 1px 2px 3px #8A8989;
-	z-index: 2;
 	border-radius: 10px;
 	border: 3px solid #a0a0a0;
 	position: absolute;
 	top: 80px;
 	left: 12px;
 }
+
+
+
+/*.buttonmenu{
+	background-color: #fff;
+    border: 0;
+    border-radius: 2px;
+    box-shadow: none;
+    color: #000a7b;
+    cursor: pointer;
+    display: inline-block;
+    font: 500 14px/20px Roboto,sans-serif;
+    height: 36px;
+    margin: 0;
+    min-width: 36px;
+    outline: 0;
+    overflow: hidden;
+    padding: 8px;
+    text-align: center;
+    text-decoration: none;
+    text-overflow: ellipsis;
+    text-transform: uppercase;
+    transition: background-color .2s,box-shadow .2s;
+    vertical-align: middle;
+    white-space: nowrap;
+}*/
+
+
+
 
 .linkdiv{
 	text-decoration: none;

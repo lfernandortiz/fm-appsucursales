@@ -15,13 +15,30 @@
 </head>
 <!-- api_key_googlemaps_dromedicas  AIzaSyA3lhlUmXlLXYgbTTeGMp89zM6Ym49p5YU-->
 <body>
-<header class="header">
-	<h1>Sucursales Farmanorte</h1>
+<header id="cabecera">
+	<div class="header">
+		<div class="buttonmenu" id="buttonmenu">			
+			<span class="zmdi zmdi-menu zmdi-hc-2x"></span>				
+		</div>
+		<div class="title">
+			<h1>Sucursales Farmanorte</h1>
+		</div>		
+	</div>
+	<nav class="menu" id="menu"> <!-- menu -->
+      <ul>
+        <li>
+          <a href="#">Sucursales</a>
+        </li>
+        <li>
+          <a href="#">Ubicar la mas cercana</a>
+        </li>
+      </ul>
+	</nav>
 </header>
 <section id="mainc">
-
 	<div id="map"></div>	
-	<div class="encuentranos">
+	
+	<!-- <div class="encuentranos">
 		<div class="headenc">
 			<h2>Encuentranos</h2>			
 		</div>
@@ -118,8 +135,6 @@
 					<p>500mtrs</p>
 				</div>
 			</div>
-
-
 		</div>
 
 		<div class="divcerca">
@@ -128,7 +143,8 @@
 				Cerca de mi
 			</button>
 		</div>
-	</div>		
+	</div>	 -->
+
 </section>	
 </body>
 <script src="js/gmaps.js"></script>  
