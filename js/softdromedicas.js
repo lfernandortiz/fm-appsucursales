@@ -85,6 +85,9 @@ function iniciar(){
 	var marCerca = document.getElementById('mascercana');
 	marCerca.addEventListener('click', findMe, false);
 
+	var marCerca = document.getElementById('cercabutton');
+	marCerca.addEventListener('click', function(){ mostrarSucursales(); findMe();}, false);
+
 }//fin del metodo iniciar
 
 
@@ -423,38 +426,6 @@ function findMe(){
 	console.log("UBICACION ACTUAL");
 	var currentLatitude;
 	var currentLongitude;
-
-	// map.addControl({
-	// 	position: 'top_right',
-	// 	content: 'Mi ubicación',
-	// 	style: {
-	// 		margin: '5px',
-	// 		padding: '1px 6px',
-	// 		border: 'solid 1px #717B87',
-	// 		background: '#fff'
-	// 	},
-	// 	events: {
-	// 		click: function() {
-	// 			GMaps.geolocate({
-	// 				success: function(position) {
-	// 					map.setCenter(position.coords.latitude, position.coords.longitude);
-	// 					currentLatitude = position.coords.latitude;
-	// 					currentLongitude = position.coords.longitude;
-	// 				},
-	// 				error: function(error) {
-	// 					alert('Geolocation fallo: ' + error.message);
-	// 				},
-	// 				not_supported: function() {
-	// 					alert("Su navegador no soporta geolocalización");
-	// 				}
-	// 			})
-	// 		}
-	// 	}
-	// });
-	
-	
-	
-	// console.log(coordsMarker);
 	
 	GMaps.geolocate({
 		success: function(position) {
@@ -477,8 +448,8 @@ function findMe(){
 				destination: coordsMarker,
 				// destination: [7.908388743984923, -72.491574883461],
 				travelMode: 'driving',
-				strokeColor: '#0925D1',
-				strokeOpacity: 0.7,
+				strokeColor: '#0000FF',
+				strokeOpacity: 0.6,
 				strokeWeight: 6
 			});
 		},
@@ -641,7 +612,7 @@ function crearSucursal(position, timeout, suc, i, dir, telefono, celular, ciudad
 		divsucursalElement.appendChild(distancedivElement);
 		linkdivAncla.appendChild(divsucursalElement);
 		contenedorSucursales.appendChild(linkdivAncla);
-		console.log(linkdivAncla);
+		
 }// fin del metodo crearSucursal
 
 // tomado de http://stackoverflow.com/a/4060721
@@ -655,7 +626,7 @@ function buscarMarcador( lat, lng ) {
     var distances = [];
     var closest = -1;
     for( i=0;i<markerst.length; i++ ) {
-    	console.log(markerst[i].title);
+    	// console.log(markerst[i].title);
         var mlat = markerst[i].position.lat();
         var mlng = markerst[i].position.lng();
         var dLat  = rad(mlat - lat);
