@@ -263,7 +263,7 @@ img, h1,h3, h4, p {
 	font-weight: 300;
 	text-shadow: 1px 1px 1px #C1C1C1;
 	margin-left: 5px;
-	border: 1px solid green;
+	/*border: 1px solid green;*/
 }
 
 .infoestado{
@@ -575,7 +575,7 @@ border-top: 1px solid white;
 	background: #fff;
     padding: 2px;
     width: 100%;
-    height: 1100px;   
+    height: 1000px;   
     position: relative;
     z-index: 1;
     /*box-shadow: 0 0 20px #999;*/
@@ -604,12 +604,13 @@ border-top: 1px solid white;
   ==============================================*/
 .close{
 	color: #FFFFFF;
-	font-size: 1.5rem;
+	font-size: 1.7rem;
 	text-align: right;
 }
 
 .close .zmdi-close{
 	margin-right: 10px;
+	cursor: pointer;
 }
 
 
