@@ -223,7 +223,7 @@ function addMarkerWithTimeout(position, timeout, suc, i, dir, telefono, celular,
 					editCssInfoWindow();
 					//añadiendo la marca al mapa	
 					map.addMarker(mark);
-					// markers.push(mark);
+					markers.push(mark);
 				}, i * 50);
         }else{        	
         	var fechaActual = new Date();
@@ -271,7 +271,7 @@ function addMarkerWithTimeout(position, timeout, suc, i, dir, telefono, celular,
 					editCssInfoWindowNormal();
 					//añadiendo la marca al mapa	
 					map.addMarker(markd);
-					// markers.push(mark);
+					markers.push(mark);
 				}, i * 50);
 			}//fin del if de horario lunes - sabado
 
