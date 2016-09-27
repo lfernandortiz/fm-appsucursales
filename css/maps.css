@@ -554,9 +554,13 @@ border-bottom: 1px solid white;
 border-top: 1px solid white;
 }
 
-.menu li:hover, a:hover{
+.menu li:hover, .menu a:hover{
 	background: #000750;
 	color: #FFFFFF;
+}
+
+.menu ul li a {
+	display: block;
 }
 
 
@@ -593,19 +597,35 @@ border-top: 1px solid white;
 /*==============================================
   Estilos que editan contenedor de sucursales
   ==============================================*/
-.encuentranos{
-	width: 400px;
-	height: 600px;
-	background: rgba(255, 255, 255, .85);
-	box-shadow: 1px 2px 3px #8A8989;
-	border-radius: 10px;
-	border: 3px solid #a0a0a0;
-	position: absolute;
-	top: 80px;
-	left: 12px;
+.close{
+	color: #FFFFFF;
+	font-size: 1.5rem;
+	text-align: right;
+}
+
+.close .zmdi-close{
+	margin-right: 10px;
 }
 
 
+.encuentranos{
+	width: 400px;
+	height: 600px;
+	background: rgba(0, 10, 123, .8);
+	box-shadow: 1px 2px 3px #2F2F2F;
+	border-radius: 10px;
+	border: 3px solid #0A0051;
+	position: absolute;
+	top: 2px;
+	left: 5px;
+	display: none;
+	transition: .9s;
+}
+
+.encuentranos.eactive{
+	display: block;
+
+}
 
 /*.buttonmenu{
 	background-color: #fff;
@@ -631,9 +651,6 @@ border-top: 1px solid white;
     white-space: nowrap;
 }*/
 
-
-
-
 .linkdiv{
 	text-decoration: none;
 }
@@ -643,13 +660,13 @@ border-top: 1px solid white;
 }
 
 .headenc{
-	color: #000a7b;
+	color: #FFFFFF;
 	text-align: center;
 	font-size: 1.3rem;	
 }
 
 .headenc h2{
-	margin: 15px 0;
+	margin: 0 0 10px 0;
 }
 
 .contentsuc{
