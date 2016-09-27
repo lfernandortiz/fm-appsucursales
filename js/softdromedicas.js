@@ -125,7 +125,24 @@ function createMarkers(){
 		 	addMarkerWithTimeoutPpal(coordenadas, i * 100, 
 										sucursales[i][0], i, sucursales[i][3], sucursales[i][4], sucursales[i][5] );			
 		} else {
+			//creando los marcadores del mapa
 			addMarkerWithTimeout(coordenadas,	  //coordenadas del marker
+								 i * 50,		  //temporizador para la caida
+								 sucursales[i][0],//nombre de la sucursal
+								 i, 			  //posicion en la coleccion
+								 sucursales[i][3],//direccion
+								 sucursales[i][4],//tel fijo 
+								 sucursales[i][5],//celular
+								 sucursales[i][6],//ciudad
+								 sucursales[i][7],//24horas
+								 sucursales[i][8],//apertura l-v
+								 sucursales[i][9],//cierre l-v
+								 sucursales[i][10],//apertura d-f
+								 sucursales[i][11]//cierre apertura d-f
+								);
+
+			//creacion de la sucursal en el menu de sucursales
+			crearSucursal(coordenadas,	  //coordenadas del marker
 								 i * 50,		  //temporizador para la caida
 								 sucursales[i][0],//nombre de la sucursal
 								 i, 			  //posicion en la coleccion
@@ -206,7 +223,7 @@ function addMarkerWithTimeout(position, timeout, suc, i, dir, telefono, celular,
 					editCssInfoWindow();
 					//añadiendo la marca al mapa	
 					map.addMarker(mark);
-					// markers.push(mark);
+					markers.push(mark);
 				}, i * 50);
         }else{
         //si no es 24h, obtenemos el dia y hora actual        	
@@ -254,7 +271,7 @@ function addMarkerWithTimeout(position, timeout, suc, i, dir, telefono, celular,
 					editCssInfoWindowNormal();
 					//añadiendo la marca al mapa	
 					map.addMarker(markd);
-					// markers.push(mark);
+					markers.push(mark);
 				}, i * 50);
 
 			}//fin del if de horario lunes - sabado
@@ -307,7 +324,8 @@ function addMarkerWithTimeout(position, timeout, suc, i, dir, telefono, celular,
         }//fin del else	
 }
 
-//
+//metodo predicado que determina si la hora actual esta dentro del rango
+// de dos horas. El metodo tiene encuenta la hora y los minutos
 function abierto(hActual, hApertura, hCierre){
 	var abierto = false;
 	//hora actual es mayor a la hora de apertura?
@@ -337,7 +355,7 @@ function formatAMPM(date) {
 	minutes = minutes < 10 ? '0' + minutes : minutes;
 	var strTime = hours + ':' + minutes + ' ' + ampm;
 	return strTime;
-}
+}// fin del metodo formatAMPM 
 
 
 //recibe una hora como String y la retorna en formato hora
@@ -349,7 +367,7 @@ function getRealHour(stringHour){
 	dateHour.setHours(parseInt(time[1]) + (time[3] ? 12 : 0));
 	dateHour.setMinutes(parseInt(time[2]) || 0);
 	return dateHour;
-}
+}//fin del metodo getRealHour
 
 //anade el marcardor "Marker" al mapa y registra el evento click sobre el marcador
 //para mostrar la informacion de la sucursal en un objeto InfoWindow
@@ -388,7 +406,7 @@ function addMarkerWithTimeoutPpal(position, timeout, suc, i, dir, telefono, celu
 					map.addMarker(mark);
 					// markers.push(mark);
 			}, i * 50);
-}
+}//fin del metodo  addMarkerWithTimeoutPpal
 
 
 function clearMarkers() {
@@ -556,5 +574,59 @@ function editCssInfoWindow(){
 			infoes.appendChild(document.createTextNode("Abierto"));
   	});
 }// fin del metodo editCssInfoWindow
+
+
+function crearSucursal(position, timeout, suc, i, dir, telefono, celular, ciudad, _24H, aLS, cLS, aDF,cDF){
+	//1. creo los elementos
+	//obtengo el contenedor 
+	var contenedorSucursales = document.getElementById('contenedorSucursales');	
+	//creo el elemento ancla class linkdiv
+	var linkdivAncla  = document.createElement("a");
+	linkdivAncla.setAttribute("class", "linkdiv");
+		//creo el element div class divsucursal
+		var divsucursalElement  = document.createElement("div");
+		divsucursalElement.setAttribute("class", "divsucursal");
+			//creo el div clase infosuc
+			var infosucElement  = document.createElement("div");
+			infosucElement.setAttribute("class", "infosuc");
+				//creo el div clase divmarker
+				var divmarkerElement  = document.createElement("div");
+				divmarkerElement.setAttribute("class", "divmarker");
+					//creo el elemento img con el marker
+					var markerElement  = document.createElement("img")
+					markerElement.setAttribute("src", "images/markFarmaAbierto.png");
+				//creo el div clase detallesuc
+				var detallesucElement  = document.createElement("div");				
+				detallesucElement.setAttribute("class", "detallesuc");
+					//creo el h3 id sucursalNombre
+					var sucursalNombreElement  = document.createElement("h3");
+					sucursalNombreElement.setAttribute("id", "sucursalNombre");
+					sucursalNombreElement.appendChild( document.createTextNode( suc ) );
+					//creo el p id dirSucursal
+					var dirSucursalElement  = document.createElement("p");				
+					dirSucursalElement.setAttribute("id", "dirSucursal");	
+					dirSucursalElement.appendChild( document.createTextNode( dir ) );
+			//creo el div clase distancediv
+			var distancedivElement  = document.createElement("div");
+			distancedivElement.setAttribute("class", "distancediv");
+				//creo el elemento p id distanciaSuc	
+				var distanciaSucElement  = document.createElement("p");
+				distanciaSucElement.setAttribute("id", "distanciaSuc");
+				distanciaSucElement.appendChild( document.createTextNode( '1050mtrs' ) );
+		//2. los inserto en los contenedores respectivos	
+		distancedivElement.appendChild(distanciaSucElement);
+		detallesucElement.appendChild(sucursalNombreElement);
+		detallesucElement.appendChild(dirSucursalElement);
+		divmarkerElement.appendChild(markerElement);
+		infosucElement.appendChild(divmarkerElement);
+		infosucElement.appendChild(detallesucElement);
+		divsucursalElement.appendChild(infosucElement);
+		divsucursalElement.appendChild(distancedivElement);
+		linkdivAncla.appendChild(divsucursalElement);
+		contenedorSucursales.appendChild(linkdivAncla);
+
+
+
+}// fin del metodo crearSucursal
 
 window.addEventListener('load',iniciar,false);
