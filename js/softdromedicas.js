@@ -305,7 +305,8 @@ function addMarkerWithTimeout(position, timeout, suc, i, dir, telefono, celular,
         }//fin del else	
 }
 
-//
+//metodo predicado que determina si la hora actual esta dentro del rango
+// de dos horas. El metodo tiene encuenta la hora y los minutos
 function abierto(hActual, hApertura, hCierre){
 	var abierto = false;
 	//hora actual es mayor a la hora de apertura?
@@ -335,7 +336,7 @@ function formatAMPM(date) {
 	minutes = minutes < 10 ? '0' + minutes : minutes;
 	var strTime = hours + ':' + minutes + ' ' + ampm;
 	return strTime;
-}
+}// fin del metodo formatAMPM 
 
 
 //recibe una hora como String y la retorna en formato hora
@@ -347,7 +348,7 @@ function getRealHour(stringHour){
 	dateHour.setHours(parseInt(time[1]) + (time[3] ? 12 : 0));
 	dateHour.setMinutes(parseInt(time[2]) || 0);
 	return dateHour;
-}
+}//fin del metodo getRealHour
 
 //anade el marcardor "Marker" al mapa y registra el evento click sobre el marcador
 //para mostrar la informacion de la sucursal en un objeto InfoWindow
@@ -386,7 +387,7 @@ function addMarkerWithTimeoutPpal(position, timeout, suc, i, dir, telefono, celu
 					map.addMarker(mark);
 					// markers.push(mark);
 			}, i * 50);
-}
+}//fin del metodo  addMarkerWithTimeoutPpal
 
 
 function clearMarkers() {
@@ -554,5 +555,11 @@ function editCssInfoWindow(){
 			infoes.appendChild(document.createTextNode("Abierto"));
   	});
 }// fin del metodo editCssInfoWindow
+
+
+function crearSucursal(){
+
+
+}// fin del metodo crearSucursal
 
 window.addEventListener('load',iniciar,false);
