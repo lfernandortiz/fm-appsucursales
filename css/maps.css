@@ -111,9 +111,7 @@ html,body {
 }
 
 
-.header{
-	text-align: center;
-}
+
 /*Estilos del infoWindow*/
 
 img, h1,h3, h4, p {
@@ -484,13 +482,22 @@ h1 {
 	background: ;
 	position: relative;
 	height: 4rem;
-	padding-top: 15px;
 	background: rgba(0, 10, 123, .98);
 	display: flex;
 	flex-direction: row;
-	justify-content: center;
+	justify-content: space-between;
+	align-items: center;
+	padding: 5px 0;
 	z-index: 3;
 	position: relative;
+
+}
+
+.header img{
+	/*position: absolute;
+	left: 20px;*/
+	width: 60px;
+	margin-left: 10px;
 
 }
 
@@ -498,13 +505,11 @@ h1 {
 
 .buttonmenu{
 	border-radius: 2px;
-    /*border: 2px solid #8C90C3;*/
+    margin-right: 20px;
     color: #FFFFFF;
     cursor: pointer;
-    position: absolute;
-    padding: 5px 10px;
-    left: 15px;
-    top: 20px;  
+   /* position: absolute;   
+    right: 15px;*/
     z-index: 4;  
 }
 
@@ -523,7 +528,6 @@ h1 {
 	position: fixed;
 	font-family: 'Montserrat', sans-serif;
 	top: -100%;
-	left: 0;
 	bottom: 0;
 	right: 0;
 	display: flex;
@@ -538,7 +542,7 @@ h1 {
 
 
 .menu.active{
-	top: 79px;	
+	top: 74px;	
 }
 
 .menu ul{
