@@ -68,7 +68,6 @@ function iniciar(){
 	createMarkers();
 	//registrando manejo de evento de cierre de infowindow clic en el mapa	
 	google.maps.event.addListener(map.map, "click", function() {
-		// console.log('maneje el evento de click en el mapa');	
 		map.hideInfoWindows();
 	});
 
@@ -99,7 +98,6 @@ window.onclick = function(event) {
   
   if (!event.target.matches('.burgermenu') ) {  	
     	var dropdowns = document.getElementById("menu");    	
-    	console.log(dropdowns);
     	dropdowns.classList.remove('active'); 
     	
     }  
@@ -424,39 +422,43 @@ function findMe(){
 	var currentLatitude;
 	var currentLongitude;
 
-	map.addControl({
-		position: 'top_right',
-		content: 'Mi ubicación',
-		style: {
-			margin: '5px',
-			padding: '1px 6px',
-			border: 'solid 1px #717B87',
-			background: '#fff'
-		},
-		events: {
-			click: function() {
-				GMaps.geolocate({
-					success: function(position) {
-						map.setCenter(position.coords.latitude, position.coords.longitude);
-						// currentLatitude = position.coords.latitude;
-						// currentLongitude = position.coords.longitude;
-					},
-					error: function(error) {
-						alert('Geolocation fallo: ' + error.message);
-					},
-					not_supported: function() {
-						alert("Su navegador no soporta geolocalización");
-					}
-				})
-			}
-		}
-	});
-	console.log("Coordernadas Actuales: " +  currentLatitude + " - " + currentLongitude);
-	var coordsMarker = buscarMarcador( currentLatitude, currentLongitude)
-	console.log(coordsMarker);
+	// map.addControl({
+	// 	position: 'top_right',
+	// 	content: 'Mi ubicación',
+	// 	style: {
+	// 		margin: '5px',
+	// 		padding: '1px 6px',
+	// 		border: 'solid 1px #717B87',
+	// 		background: '#fff'
+	// 	},
+	// 	events: {
+	// 		click: function() {
+	// 			GMaps.geolocate({
+	// 				success: function(position) {
+	// 					map.setCenter(position.coords.latitude, position.coords.longitude);
+	// 					currentLatitude = position.coords.latitude;
+	// 					currentLongitude = position.coords.longitude;
+	// 				},
+	// 				error: function(error) {
+	// 					alert('Geolocation fallo: ' + error.message);
+	// 				},
+	// 				not_supported: function() {
+	// 					alert("Su navegador no soporta geolocalización");
+	// 				}
+	// 			})
+	// 		}
+	// 	}
+	// });
+	
+	
+	
+	// console.log(coordsMarker);
+	
 	GMaps.geolocate({
 		success: function(position) {
 			map.setCenter(position.coords.latitude, position.coords.longitude);
+			currentLatitude = position.coords.latitude;
+			currentLongitude = position.coords.longitude;
 			map.setZoom(15);
 			map.addMarker({
 				title: 'Mi ubicación',
@@ -464,11 +466,14 @@ function findMe(){
 				lng: position.coords.longitude,
 				// animation: google.maps.Animation.DROP,
 			});
-
+			
+			var coordsMarker = buscarMarcador( currentLatitude, currentLongitude)
+			console.log("Coordernadas Actuales: " +  currentLatitude + " <-> " + currentLongitude);
+			
 			map.drawRoute({
 				origin: [position.coords.latitude, position.coords.longitude],
-				// destination: coordsMarker,
-				destination: [7.908388743984923, -72.491574883461],
+				destination: coordsMarker,
+				// destination: [7.908388743984923, -72.491574883461],
 				travelMode: 'driving',
 				strokeColor: '#0925D1',
 				strokeOpacity: 0.7,
@@ -476,10 +481,10 @@ function findMe(){
 			});
 		},
 		error: function(error) {
-			$('#geolocalizacion-info').css('display', 'block');
+			alert("error en la geolocalizacion");
 		}, 
 		not_supported: function() {
-			$('#geolocalizacion-info').css('display', 'block');
+			alert("Geolocalizacion no soportada por el navegador");
 		}
 	});
 }
@@ -634,17 +639,21 @@ function crearSucursal(position, timeout, suc, i, dir, telefono, celular, ciudad
 		divsucursalElement.appendChild(distancedivElement);
 		linkdivAncla.appendChild(divsucursalElement);
 		contenedorSucursales.appendChild(linkdivAncla);
+		console.log(linkdivAncla);
 }// fin del metodo crearSucursal
 
 // tomado de http://stackoverflow.com/a/4060721
 function rad(x) {return x*Math.PI/180;}
 function buscarMarcador( lat, lng ) {
+	console.log( "buscarMarcador: " + lat +" & "+lng);
+
     var lat = lat;
     var lng = lng;
     var R = 6371; // radio de la tierra en kilometros
     var distances = [];
     var closest = -1;
     for( i=0;i<markerst.length; i++ ) {
+    	console.log(markerst[i].title);
         var mlat = markerst[i].position.lat();
         var mlng = markerst[i].position.lng();
         var dLat  = rad(mlat - lat);
@@ -658,6 +667,7 @@ function buscarMarcador( lat, lng ) {
             closest = i;
         }
     }
+    console.log([markerst[closest].position.lat(),  markerst[closest].position.lng()]);
     return [markerst[closest].position.lat(),  markerst[closest].position.lng()];
     
 }

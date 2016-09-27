@@ -262,7 +262,8 @@ img, h1,h3, h4, p {
 	font-size: 1rem;
 	font-weight: 300;
 	text-shadow: 1px 1px 1px #C1C1C1;
-	/*border: 1px solid green;*/
+	margin-left: 5px;
+	border: 1px solid green;
 }
 
 .infoestado{
@@ -674,13 +675,11 @@ border-top: 1px solid white;
 }
 
 .contentsuc{
-	max-width: 380px;
+	max-width: 360px;
 	height: 450px;
 	border-radius: 5px;
 	background: #E2E4E6;
-	margin: 0 auto;
-	display: flex;
-	flex-direction: column;
+	margin: 0 auto;	
 	margin-bottom: 10px;
 	border:1px solid #CBCBCB;
 	overflow-y: scroll;
@@ -688,6 +687,7 @@ border-top: 1px solid white;
 
 .divsucursal{
 	border-radius: 5px;
+	max-width: 320px;
 	color: #000a7b;
 	background: rgba(255, 255, 255, .95);
 	border-bottom: 1px solid #ccc;
@@ -695,6 +695,7 @@ border-top: 1px solid white;
 	width: 335px;
 	margin: 5px auto;
 	padding: 5px;
+	cursor: pointer;
 }
 
 .divsucursal:hover{
@@ -783,7 +784,7 @@ border-top: 1px solid white;
 
 #contenedorSucursales::-webkit-scrollbar
 {
-	width: 12px;
+	width: 14px;
 	background-color: #F5F5F5;
 }
 
