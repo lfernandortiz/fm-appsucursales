@@ -14,7 +14,7 @@ var urlMarker ;
 //informacion y coordenada de sucursales
 var sucursales = [
 	['Dromedicas del Oriente SAS', 7.908388743984923, -72.491574883461, 'Avenida 11 Be # 8Bn - 10  Guaimaral', '5740075','5777762', 'CUCUTA','','', '', '', '', 1],
-	['Farmanorte 01', 7.840764903473619, -72.5028133392334, 'Calle 33 Con Avenida 4 Esquina Brr La Sabana', '5808800','3167409253', 'LOS PATIOS','','2pm', '22:30', '7:30am', '22:30', 2],
+	['Farmanorte 01', 7.840764903473619, -72.5028133392334, 'Calle 33 Con Avenida 4 Esquina Brr La Sabana', '5808800','3167409253', 'LOS PATIOS','','7:30am', '22:30', '7:30am', '22:30', 2],
 	['Farmanorte 02', 7.923595410892432, -72.52201795578003, 'Avenida 5 Con Calle 2N Pescadero', '5780727','3166909962', 'CUCUTA','','8am', '23:30', '8am', '2pm', 3],
 	['Farmanorte 03', 7.917091999388589, -72.49572694301605, 'Avenida 4 Con Calle 20An Esquina Brr Prados Del Norte', '5796888','3166909583', 'CUCUTA','true', '', '', '', '', 4],
 	['Farmanorte 04', 7.9049350202970805, -72.51519441604614, 'Avenida Kennedy Con 2Da Esquina Brr La Victoria', '5787878','3183353570', 'CUCUTA','','7:30am', '21', '7:30am', '9pm', 5],
@@ -71,9 +71,17 @@ function iniciar(){
 		// console.log('maneje el evento de click en el mapa');	
 		map.hideInfoWindows();
 	});
+
+
 	//registro de manejo de evento del boton de menu
 	var menuboton = document.getElementById('buttonmenu');
 	menuboton.addEventListener('click', ocultarMostrar, false );
+
+	var opcionSuc = document.getElementById('sucursales');
+	opcionSuc.addEventListener('click', mostrarSucursales, false );
+
+	var opcionSuc = document.getElementById('close');
+	opcionSuc.addEventListener('click', mostrarSucursales, false );
 
 }//fin del metodo iniciar
 
@@ -86,12 +94,23 @@ function ocultarMostrar() {
 window.onclick = function(event) {
 	console.log("manejando evento: " + event.target.matches('.burgermenu'));
   
-  if (!event.target.matches('.burgermenu')  ) {  	
-    	var dropdowns = document.getElementById("menu");
+  if (!event.target.matches('.burgermenu') ) {  	
+    	var dropdowns = document.getElementById("menu");    	
     	console.log(dropdowns);
-    	dropdowns.classList.remove('active');    
+    	dropdowns.classList.remove('active'); 
+    	
     }  
 }//fin del manejador de evento
+
+
+function cerrarSucursales(){
+	 document.getElementById("encuentranos").remove('eactive');
+}
+
+
+function mostrarSucursales(){
+	document.getElementById('encuentranos').classList.toggle("eactive");
+}
 
 function createMarkers(){
 	//iteramos la coleccion de sucursales
