@@ -15,7 +15,7 @@
 </head>
 <!-- api_key_googlemaps_dromedicas  AIzaSyA3lhlUmXlLXYgbTTeGMp89zM6Ym49p5YU-->
 <body>
-<header id="cabecera">
+<header id="headerMain">
 	<div class="header">
 		<img src="images/iconoFarmanorte.png" alt="icono Farmanorte">
 		<div class="title">
@@ -23,8 +23,7 @@
 		</div>
 		<div class="buttonmenu" id="buttonmenu">			
 			<span class="zmdi zmdi-menu zmdi-hc-2x burgermenu" id="burgermenu"></span>			
-		</div>
-				
+		</div>				
 	</div>
 	<nav class="menu" id="menu"> <!-- menu -->
       <ul>
@@ -41,11 +40,12 @@
 	<div id="map"></div>	
 	
 	<div class="encuentranos" id="encuentranos">
+		<input type="hidden" id="sucursalesControl" value="false">
 		<div class="close"><span class="zmdi zmdi-close" id="close"></spa></div>
 		<div class="headenc">
 			<h2>Encuentranos</h2>			
 		</div>
-		<div class="contentsuc scrollbar" id="contenedorSucursales">
+		<div class="contentsuc scrollbar" id="contenedorSucursales">			
 		
 			<!-- <a href="#" class="linkdiv">
 				<div class="divsucursal">
