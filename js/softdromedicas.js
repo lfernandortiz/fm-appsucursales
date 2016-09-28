@@ -19,8 +19,8 @@ var distanciaActual;
 //informacion y coordenada de sucursales
 var sucursales = [
 	['Dromedicas del Oriente SAS', 7.908388743984923, -72.491574883461, 'Avenida 11 Be # 8Bn - 10  Guaimaral', '5740075','5777762', 'CUCUTA','','', '', '', '', 1],
-	['Farmanorte 02', 7.923595410892432, -72.52201795578003, 'Avenida 5 Con Calle 2N Pescadero', '5780727','3166909962', 'CUCUTA','','8am', '23:30', '8am', '2pm', 3],
 	['Farmanorte 01', 7.840764903473619, -72.5028133392334, 'Calle 33 Con Avenida 4 Esquina Brr La Sabana', '5808800','3167409253', 'LOS PATIOS','','7:30am', '22:30', '7:30am', '22:30', 2],
+	['Farmanorte 02', 7.923595410892432, -72.52201795578003, 'Avenida 5 Con Calle 2N Pescadero', '5780727','3166909962', 'CUCUTA','','8am', '23:30', '8am', '2pm', 3],
 	['Farmanorte 03', 7.917091999388589, -72.49572694301605, 'Avenida 4 Con Calle 20An Esquina Brr Prados Del Norte', '5796888','3166909583', 'CUCUTA','true', '', '', '', '', 4],
 	['Farmanorte 04', 7.9049350202970805, -72.51519441604614, 'Avenida Kennedy Con 2Da Esquina Brr La Victoria', '5787878','3183353570', 'CUCUTA','','7:30am', '21', '7:30am', '9pm', 5],
 	['Farmanorte 05', 7.898048740341691, -72.52727508544922, 'Calle 2 Con Avenida 6 Esquina Brr Ceci', '5870555','3168309523', 'CUCUTA','true', '', '', '', '', 6],
@@ -48,12 +48,10 @@ var sucursales = [
 	['Farmanorte 27', 7.91694492, -72.4727475, 'El Escobal, Anillo Vial, Plaza Del Este Local 6', '5847808','3188135356', 'CUCUTA','','7am', '22', '7am', '10pm', 28],
 	['San Antonio del Norte', 7.88749215, -72.50609315, 'Av 7 Calle 9 Esquina Centro', '5727091','3155997098', 'CUCUTA','','7am', '20', '8am', '2pm', 29],
 
-
 ];
 
 //metodo principa
 function iniciar(){
-
 	//crea el mapa con las coordenada iniciales y el zoom
 	map = new GMaps({
 		div: '#map',
@@ -130,11 +128,10 @@ function cargarSucursales(){
 	for (var i = 1; i < sucursales.length; i++) {
 		//creacion de la sucursal en el menu de sucursales
 		crearSucursal(  sucursales[i][1],//latitud
-							sucursales[i][2],//longitud
-							sucursales[i][0],//nombre de la sucursal								 
-							sucursales[i][3]//direccion
-								 
-							);
+						sucursales[i][2],//longitud
+						sucursales[i][0],//nombre de la sucursal								 
+						sucursales[i][3]//direccion								 
+					);
 
 	}//fin del for
 	document.getElementById('sucursalesControl').value = 'true';
@@ -615,14 +612,11 @@ function crearSucursal(lat, lng, suc,  dir){
 						} else {
 							console.log('3');
 							var d = response.rows[0].elements[0].distance.text;
-							distanciaSucElement.appendChild( document.createTextNode( d ) );
-							
+							distanciaSucElement.appendChild( document.createTextNode( d ) );							
 						}
 					}
 				);
-				console.log('5');
-				
-				
+								
 		//2. los inserto en los contenedores respectivos	
 		distancedivElement.appendChild(distanciaSucElement);
 		detallesucElement.appendChild(sucursalNombreElement);
@@ -716,17 +710,7 @@ function getCurrentDistanceGoogleMaps(lat, lng){
 				
 			}
 		}
-	);
-	
-}
-
-function setDistancia(distancia){
-	console.log('4');
-	distanciaActual = distancia;
-}
-
-
-
-
+	);	
+}//fin del metodo getCurrentDistanceGoogleMaps
 
 window.addEventListener('load',iniciar,false);
