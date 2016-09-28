@@ -100,8 +100,7 @@ function ocultarMostrar() {
 
 // cierra el menu cuando el usuario hace click por dentro y fuera de el
 window.onclick = function(event) {
-	// console.log("manejando evento: " + event.target.matches('.burgermenu'));
-  
+	
   if (!event.target.matches('.burgermenu') ) {  	
     	var dropdowns = document.getElementById("menu");    	
     	dropdowns.classList.remove('active'); 
