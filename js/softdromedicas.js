@@ -592,7 +592,7 @@ function crearSucursal(lat, lng, suc,  dir){
 				distanciaSucElement.setAttribute("id", "distanciaSuc");
 
 				//ACA DEBO TRAER LA DISTANCIA DE LA SUCURSAL
-				console.log('1');
+				
 				var service = new google.maps.DistanceMatrixService;
 				var origin = {
 					lat: currentLat,
@@ -601,8 +601,7 @@ function crearSucursal(lat, lng, suc,  dir){
 				var dest = {
 					lat: lat,
 					lng: lng
-				};
-				console.log('2');
+				};				
 				service.getDistanceMatrix({
 						origins: [origin],
 						destinations: [dest],
@@ -615,15 +614,12 @@ function crearSucursal(lat, lng, suc,  dir){
 						if (status !== google.maps.DistanceMatrixStatus.OK) {
 							//implementar div
 						} else {
-							console.log('3');
 							var d = response.rows[0].elements[0].distance.text;
 							distanciaSucElement.appendChild( document.createTextNode( d ) );
 							
 						}
 					}
 				);
-				console.log('5');
-				
 				
 		//2. los inserto en los contenedores respectivos	
 		distancedivElement.appendChild(distanciaSucElement);
@@ -693,42 +689,33 @@ function setCurrentCoords(){
 }
 
 //Consuta la distancia entre la aubicacion actual y las coordenadas enviadas como parametros
-function getCurrentDistanceGoogleMaps(lat, lng){
-	var service = new google.maps.DistanceMatrixService;
-	var origin = {lat: currentLat, lng: currentLng};
-	var dest = {lat: lat, lng: lng};
-	console.log('2');
-	service.getDistanceMatrix(
-	    {
-	        origins: [origin ],
-	        destinations: [dest],
-	        travelMode: google.maps.TravelMode.DRIVING,
-    		unitSystem: google.maps.UnitSystem.METRIC,
-    		avoidHighways: false,
-    		avoidTolls: false
-	    }, 
-		function(response, status) {
-			if (status !== google.maps.DistanceMatrixStatus.OK) {
-				//implementar div
-			} else {
-				console.log('3');
-				var d = response.rows[0].elements[0].distance.text;
-				setDistancia(d);
-				console.log(distanciaActual);				
+// function getCurrentDistanceGoogleMaps(lat, lng){
+// 	var service = new google.maps.DistanceMatrixService;
+// 	var origin = {lat: currentLat, lng: currentLng};
+// 	var dest = {lat: lat, lng: lng};
+// 	console.log('2');
+// 	service.getDistanceMatrix(
+// 	    {
+// 	        origins: [origin ],
+// 	        destinations: [dest],
+// 	        travelMode: google.maps.TravelMode.DRIVING,
+//     		unitSystem: google.maps.UnitSystem.METRIC,
+//     		avoidHighways: false,
+//     		avoidTolls: false
+// 	    }, 
+// 		function(response, status) {
+// 			if (status !== google.maps.DistanceMatrixStatus.OK) {
+// 				//implementar div
+// 			} else {
+// 				console.log('3');
+// 				var d = response.rows[0].elements[0].distance.text;
+// 				setDistancia(d);
+// 				console.log(distanciaActual);				
 				
-			}
-		}
-	);
+// 			}
+// 		}
+// 	);
 	
-}
-
-function setDistancia(distancia){
-	console.log('4');
-	distanciaActual = distancia;
-}
-
-
-
-
+// }
 
 window.addEventListener('load',iniciar,false);
