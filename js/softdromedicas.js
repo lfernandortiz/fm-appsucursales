@@ -13,14 +13,14 @@ var urlMarker ;
 //coordenadas usadas para establecer la ubicacion actual
 var currentLat;
 var currentLng;
-var distanciaActua;
+var distanciaActual;
 
 
 //informacion y coordenada de sucursales
 var sucursales = [
 	['Dromedicas del Oriente SAS', 7.908388743984923, -72.491574883461, 'Avenida 11 Be # 8Bn - 10  Guaimaral', '5740075','5777762', 'CUCUTA','','', '', '', '', 1],
-	['Farmanorte 01', 7.840764903473619, -72.5028133392334, 'Calle 33 Con Avenida 4 Esquina Brr La Sabana', '5808800','3167409253', 'LOS PATIOS','','7:30am', '22:30', '7:30am', '22:30', 2],
 	['Farmanorte 02', 7.923595410892432, -72.52201795578003, 'Avenida 5 Con Calle 2N Pescadero', '5780727','3166909962', 'CUCUTA','','8am', '23:30', '8am', '2pm', 3],
+	['Farmanorte 01', 7.840764903473619, -72.5028133392334, 'Calle 33 Con Avenida 4 Esquina Brr La Sabana', '5808800','3167409253', 'LOS PATIOS','','7:30am', '22:30', '7:30am', '22:30', 2],
 	['Farmanorte 03', 7.917091999388589, -72.49572694301605, 'Avenida 4 Con Calle 20An Esquina Brr Prados Del Norte', '5796888','3166909583', 'CUCUTA','true', '', '', '', '', 4],
 	['Farmanorte 04', 7.9049350202970805, -72.51519441604614, 'Avenida Kennedy Con 2Da Esquina Brr La Victoria', '5787878','3183353570', 'CUCUTA','','7:30am', '21', '7:30am', '9pm', 5],
 	['Farmanorte 05', 7.898048740341691, -72.52727508544922, 'Calle 2 Con Avenida 6 Esquina Brr Ceci', '5870555','3168309523', 'CUCUTA','true', '', '', '', '', 6],
@@ -127,7 +127,7 @@ function mostrarSucursales(){
 
 
 function cargarSucursales(){
-	for (var i = 1; i < sucursales.length; i++) {
+	for (var i = 1; i < 2; i++) {
 		//creacion de la sucursal en el menu de sucursales
 		crearSucursal(  sucursales[i][1],//latitud
 							sucursales[i][2],//longitud
@@ -590,9 +590,11 @@ function crearSucursal(lat, lng, suc,  dir){
 				distanciaSucElement.setAttribute("id", "distanciaSuc");
 
 				//ACA DEBO TRAER LA DISTANCIA DE LA SUCURSAL
-				var distancia = getCurrentDistanceGoogleMaps(lat, lng);
-
-				distanciaSucElement.appendChild( document.createTextNode( distancia ) );
+				console.log('1');
+				getCurrentDistanceGoogleMaps(lat, lng);
+				console.log("valor en disntancia actual: " + distanciaActual); 
+				console.log('5');
+				distanciaSucElement.appendChild( document.createTextNode( distanciaActual ) );
 		//2. los inserto en los contenedores respectivos	
 		distancedivElement.appendChild(distanciaSucElement);
 		detallesucElement.appendChild(sucursalNombreElement);
@@ -662,54 +664,42 @@ function setCurrentCoords(){
 
 //Consuta la distancia entre la aubicacion actual y las coordenadas enviadas como parametros
 function getCurrentDistanceGoogleMaps(lat, lng){
+	var service = new google.maps.DistanceMatrixService;
+	var origin = {lat: currentLat, lng: currentLng};
+	var dest = {lat: lat, lng: lng};
+	console.log('2');
+	service.getDistanceMatrix(
+	    {
+	        origins: [origin ],
+	        destinations: [dest],
+	        travelMode: google.maps.TravelMode.DRIVING,
+    		unitSystem: google.maps.UnitSystem.METRIC,
+    		avoidHighways: false,
+    		avoidTolls: false
+	    }, 
+		function(response, status) {
+			if (status !== google.maps.DistanceMatrixStatus.OK) {
+				//implementar div
+			} else {
+				console.log('3');
+				var d = response.rows[0].elements[0].distance.text;
+				setDistancia(d);
+				console.log(distanciaActual);				
+				
+			}
+		}
+	);
 	
-	console.log(">>>"+ currentLat +">"+currentLng)	;
-	//url de consulta a google
-	var url ="https://maps.googleapis.com/maps/api/distancematrix/json?origins="+currentLat+","+currentLng+
-						"&destinations="+lat+","+lng+"&mode=driving&language=es-ES&key=AIzaSyA3lhlUmXlLXYgbTTeGMp89zM6Ym49p5YU";
-	
-	console.log(url);
-	getServiceGoogleMatriz( url, parseData);
-	 
-
-
 }
 
-
-function getServiceGoogleMatriz( url, callBack){
-	try{
-		var solicitudAsinc = new XMLHttpRequest(); // Crea un objeto Ajax
-		// establece el metodo de callbacka y lo almacena
-		 solicitudAsinc.addEventListener("readystatechange",
-		function() { callBack( solicitudAsinc ); }, false);
-		 // envia la solicitud asincronica
-		solicitudAsinc.open( "GET", url, true );
-		solicitudAsinc.setRequestHeader("Accept",
-						"application/json; charset=utf-8" );
-		solicitudAsinc.send();
-
-	}catch(exception){
-		alert ( "Hay fallas con google maps API" );
-	}
+function setDistancia(distancia){
+	console.log('4');
+	console.log('distancia tomada: ' + distancia);
+	 distanciaActual = distancia;
 }
 
 
 
- // parsea el objeto Json
- function parseData(asyncRequest) {
- 	// si la solicitud se completo con exito procesa la respuesta
- 	if (asyncRequest.readyState == 4 && asyncRequest.status == 200) {
- 		// convierte la cadena JSON en objeto
- 		var data = JSON.parse(asyncRequest.responseText);
- 		//envia el objeto JSON de la respuesta para obtener la distancias de la sucursal
- 		setDistancia(data); 
- 	} // fin del if
- } // fin del metodo parseData
-
-
-function setDistancia(jsonObject){
-
-}
 
 
 window.addEventListener('load',iniciar,false);
