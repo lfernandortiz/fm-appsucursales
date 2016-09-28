@@ -461,16 +461,6 @@ img, h1,h3, h4, p {
   Estilos para el contenedor del mapa y cabecero
   ==============================================*/
 
-/*Estilos del mapa contenedor*/
-
-#mainc{
-
-	height: 900px;
-	max-width: 98%;
-}
-
-
-
 h1 {
 	color: #FFFFFF;
 	font-size: 2.5rem;
