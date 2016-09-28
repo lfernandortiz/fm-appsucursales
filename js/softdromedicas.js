@@ -127,7 +127,7 @@ function mostrarSucursales(){
 
 
 function cargarSucursales(){
-	for (var i = 1; i < 2; i++) {
+	for (var i = 1; i < sucursales.length; i++) {
 		//creacion de la sucursal en el menu de sucursales
 		crearSucursal(  sucursales[i][1],//latitud
 							sucursales[i][2],//longitud
@@ -591,10 +591,38 @@ function crearSucursal(lat, lng, suc,  dir){
 
 				//ACA DEBO TRAER LA DISTANCIA DE LA SUCURSAL
 				console.log('1');
-				getCurrentDistanceGoogleMaps(lat, lng);
-				console.log("valor en disntancia actual: " + distanciaActual); 
+				var service = new google.maps.DistanceMatrixService;
+				var origin = {
+					lat: currentLat,
+					lng: currentLng
+				};
+				var dest = {
+					lat: lat,
+					lng: lng
+				};
+				console.log('2');
+				service.getDistanceMatrix({
+						origins: [origin],
+						destinations: [dest],
+						travelMode: google.maps.TravelMode.DRIVING,
+						unitSystem: google.maps.UnitSystem.METRIC,
+						avoidHighways: false,
+						avoidTolls: false
+					},
+					function(response, status) {
+						if (status !== google.maps.DistanceMatrixStatus.OK) {
+							//implementar div
+						} else {
+							console.log('3');
+							var d = response.rows[0].elements[0].distance.text;
+							distanciaSucElement.appendChild( document.createTextNode( d ) );
+							
+						}
+					}
+				);
 				console.log('5');
-				distanciaSucElement.appendChild( document.createTextNode( distanciaActual ) );
+				
+				
 		//2. los inserto en los contenedores respectivos	
 		distancedivElement.appendChild(distanciaSucElement);
 		detallesucElement.appendChild(sucursalNombreElement);
@@ -694,8 +722,7 @@ function getCurrentDistanceGoogleMaps(lat, lng){
 
 function setDistancia(distancia){
 	console.log('4');
-	console.log('distancia tomada: ' + distancia);
-	 distanciaActual = distancia;
+	distanciaActual = distancia;
 }
 
 
