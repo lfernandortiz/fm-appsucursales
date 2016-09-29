@@ -91,7 +91,20 @@ function iniciar(){
 	var marCerca = document.getElementById('cercabutton');
 	marCerca.addEventListener('click', function(){ mostrarSucursales(); findMe();}, false);
 
+	
 }//fin del metodo iniciar
+
+jQuery(document).ready(function($) {
+	$('.linkdiv').click(function(event) {
+			event.preventDefault();
+			map.setCenter($(this).attr('data-lat'), $(this).attr('data-lng'));
+			map.setZoom(18);
+			$('html, body').animate({
+	        	scrollTop: $("#map").offset().top
+	    	}, 999);
+		});
+})
+
 
 
 function ocultarMostrar() {	
@@ -125,11 +138,13 @@ function mostrarSucursales(){
 
 function cargarSucursales(){
 	for (var i = 1; i < sucursales.length; i++) {
+	// for (var i = 1; i < 3; i++) {
 		//creacion de la sucursal en el menu de sucursales
 		crearSucursal(  sucursales[i][1],//latitud
 						sucursales[i][2],//longitud
 						sucursales[i][0],//nombre de la sucursal								 
-						sucursales[i][3]//direccion								 
+						sucursales[i][3],//direccion		
+						i						 
 					);
 
 	}//fin del for
@@ -424,6 +439,25 @@ function clearMarkers() {
 	markers = [];
 } //fin del metodo  clearMarkers
 
+function generarRuta(lat, lng, opcionTransporte){
+	map.setCenter(currentLat, currentLng);
+	map.setZoom(13);
+	map.addMarker({
+				title: 'Mi ubicación',
+				lat: currentLat,
+				lng: currentLng,
+				});
+	map.drawRoute({
+				origin: [currentLat, currentLng],
+				destination: [lat, lng],
+				// destination: [7.908388743984923, -72.491574883461],
+				travelMode: opcionTransporte,
+				strokeColor: '#0000FF',
+				strokeOpacity: 0.6,
+				strokeWeight: 6
+			});
+
+}
 
 //Geolocalizacion y trazo de ruta
 function findMe(){
@@ -452,8 +486,7 @@ function editCssInfoWindowNormal(){
 	//Desde aca se comienza la manipulacion del DOM del objeto Info Window
 	//nos apoyamos de jQuery
 	google.maps.event.addListener(infoWindowCustom, 'domready', function() {
-		console.log('editando el css del infoWindow+');
-
+		
 		// Reference to the DIV that wraps the bottom of infowindow
 		var iwOuter = $('.gm-style-iw');
 		iwOuter.children(':nth-child(1)').css({'display' : 'block'});		
@@ -548,13 +581,17 @@ function editCssInfoWindow(){
 }// fin del metodo editCssInfoWindow
 
 //crea los div de las sucursales y los inserta en el contenedor
-function crearSucursal(lat, lng, suc,  dir){
+function crearSucursal(lat, lng, suc,  dir, i){
 	//1. creo los elementos
 	//obtengo el contenedor 
-	var contenedorSucursales = document.getElementById('contenedorSucursales');	
+	var contenedorSucursales = document.getElementById('contenedorSucursales');		
 	//creo el elemento ancla class linkdiv
+	var id = "linkdivsuc" + i;
 	var linkdivAncla  = document.createElement("a");
 	linkdivAncla.setAttribute("class", "linkdiv");
+	linkdivAncla.setAttribute("id", id);
+	linkdivAncla.setAttribute("data-lat", lat);
+	linkdivAncla.setAttribute("data-lng", lng);
 		//creo el element div class divsucursal
 		var divsucursalElement  = document.createElement("div");
 		divsucursalElement.setAttribute("class", "divsucursal");
@@ -563,7 +600,7 @@ function crearSucursal(lat, lng, suc,  dir){
 			infosucElement.setAttribute("class", "infosuc");
 				//creo el div clase divmarker
 				var divmarkerElement  = document.createElement("div");
-				divmarkerElement.setAttribute("class", "divmarker");
+				divmarkerElement.setAttribute("class", "divmarker");				
 					//creo el elemento img con el marker
 					var markerElement  = document.createElement("img")
 					markerElement.setAttribute("src", "images/markFarmaAbierto.png");
@@ -625,6 +662,11 @@ function crearSucursal(lat, lng, suc,  dir){
 		linkdivAncla.appendChild(divsucursalElement);
 		contenedorSucursales.appendChild(linkdivAncla);
 		
+		var sucursal = document.getElementById(id);
+		sucursal.addEventListener('click', 
+						function(){ generarRuta(sucursal.getAttribute('data-lat'), 
+												sucursal.getAttribute('data-lng'))},
+								 false);
 }// fin del metodo crearSucursal
 
 
