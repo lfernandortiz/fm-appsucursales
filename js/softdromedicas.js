@@ -99,6 +99,15 @@ function iniciar(){
 	
 }//fin del metodo iniciar
 
+//los suguientes dos metdos de jquery implementan el scrroll para infosucursales
+$('.contentsuc').impulse();
+$(".encuentranos").fancy_scroll({
+  innerWrapper: ".contentsuc"
+});
+
+
+
+
 jQuery(document).ready(function($) {
 	$('.linkdiv').click(function(event) {
 			event.preventDefault();
