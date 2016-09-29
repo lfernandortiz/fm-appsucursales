@@ -6,8 +6,9 @@ var markerst = [];
 var infoWindowCustom;
 
 //coordenadas iniciales
-var lat=  7.87883478;
-var lng= -72.50257802;
+var cucutalat=  7.8890971;
+var cucutalng= -72.49668959999997;
+
 var urlMarker ;
 
 //coordenadas usadas para establecer la ubicacion actual
@@ -19,8 +20,8 @@ var distanciaActual;
 //informacion y coordenada de sucursales
 var sucursales = [
 	['Dromedicas del Oriente SAS', 7.908388743984923, -72.491574883461, 'Avenida 11 Be # 8Bn - 10  Guaimaral', '5740075','5777762', 'CUCUTA','','', '', '', '', 1],
-	['Farmanorte 02', 7.923595410892432, -72.52201795578003, 'Avenida 5 Con Calle 2N Pescadero', '5780727','3166909962', 'CUCUTA','','8am', '23:30', '8am', '2pm', 3],
 	['Farmanorte 01', 7.840764903473619, -72.5028133392334, 'Calle 33 Con Avenida 4 Esquina Brr La Sabana', '5808800','3167409253', 'LOS PATIOS','','7:30am', '22:30', '7:30am', '22:30', 2],
+	['Farmanorte 02', 7.923595410892432, -72.52201795578003, 'Avenida 5 Con Calle 2N Pescadero', '5780727','3166909962', 'CUCUTA','','8am', '23:30', '8am', '2pm', 3],
 	['Farmanorte 03', 7.917091999388589, -72.49572694301605, 'Avenida 4 Con Calle 20An Esquina Brr Prados Del Norte', '5796888','3166909583', 'CUCUTA','true', '', '', '', '', 4],
 	['Farmanorte 04', 7.9049350202970805, -72.51519441604614, 'Avenida Kennedy Con 2Da Esquina Brr La Victoria', '5787878','3183353570', 'CUCUTA','','7:30am', '21', '7:30am', '9pm', 5],
 	['Farmanorte 05', 7.898048740341691, -72.52727508544922, 'Calle 2 Con Avenida 6 Esquina Brr Ceci', '5870555','3168309523', 'CUCUTA','true', '', '', '', '', 6],
@@ -48,7 +49,6 @@ var sucursales = [
 	['Farmanorte 27', 7.91694492, -72.4727475, 'El Escobal, Anillo Vial, Plaza Del Este Local 6', '5847808','3188135356', 'CUCUTA','','7am', '22', '7am', '10pm', 28],
 	['San Antonio del Norte', 7.88749215, -72.50609315, 'Av 7 Calle 9 Esquina Centro', '5727091','3155997098', 'CUCUTA','','7am', '20', '8am', '2pm', 29],
 
-
 ];
 
 //metodo principa
@@ -57,8 +57,8 @@ function iniciar(){
 	//crea el mapa con las coordenada iniciales y el zoom
 	map = new GMaps({
 		div: '#map',
-		lat:  lat,
-		lng:  lng,
+		lat:  cucutalat,
+		lng:  cucutalng,
 		zoom: 14,
 		zoomControl : true,
 		// scrollwheel:false,		
@@ -68,6 +68,7 @@ function iniciar(){
 		overviewMapControl: false,
 		// clickable: false
 	});
+
 	//metodo para geolocalizacion y trazo de la ruta
 	setCurrentCoords();
 	//creando los marcadores
@@ -89,12 +90,54 @@ function iniciar(){
 
 	var marCerca = document.getElementById('mascercana');
 	marCerca.addEventListener('click', findMe, false);
+	
+	var marCerca = document.getElementById('resetmapa');
+	marCerca.addEventListener('click', resetMapa, false);
 
 	var marCerca = document.getElementById('cercabutton');
 	marCerca.addEventListener('click', function(){ mostrarSucursales(); findMe();}, false);
 
+	
 }//fin del metodo iniciar
 
+//los suguientes dos metdos de jquery implementan el scrroll para infosucursales
+$('.contentsuc').impulse();
+$(".encuentranos").fancy_scroll({
+  innerWrapper: ".contentsuc"
+});
+
+
+
+
+jQuery(document).ready(function($) {
+	$('.linkdiv').click(function(event) {
+			event.preventDefault();
+			map.setCenter($(this).attr('data-lat'), $(this).attr('data-lng'));
+			map.setZoom(18);
+			$('html, body').animate({
+	        	scrollTop: $("#map").offset().top
+	    	}, 999);
+		});
+})
+
+function resetMapa(){
+	//centra el mapa
+	map.setCenter(cucutalat, cucutalng);
+	//actualiza el zoom
+	map.setZoom(14);
+	//oculta el cuadro de sucursales
+	// mostrarSucursales();
+	//elimina todas las rutas 
+	map.cleanRoute();
+	//elimina el marker de ubicacion actual
+	for(var i = 0 ; i < map.markers.length ; i++){
+		if(map.markers[i].title =='Mi ubicación'){
+			map.markers[i].setMap(null);
+		}
+	}	
+	//oculta todos los infowindow
+	map.hideInfoWindows();
+}
 
 function ocultarMostrar() {	
     document.getElementById("menu").classList.toggle("active");
@@ -102,8 +145,7 @@ function ocultarMostrar() {
 
 // cierra el menu cuando el usuario hace click por dentro y fuera de el
 window.onclick = function(event) {
-	// console.log("manejando evento: " + event.target.matches('.burgermenu'));
-  
+	
   if (!event.target.matches('.burgermenu') ) {  	
     	var dropdowns = document.getElementById("menu");    	
     	dropdowns.classList.remove('active'); 
@@ -112,12 +154,13 @@ window.onclick = function(event) {
 }//fin del manejador de evento
 
 
-function cerrarSucursales(){
+function cerrarSucursales(){	
 	 document.getElementById("encuentranos").remove('eactive');
 }
 
 
 function mostrarSucursales(){
+	// console.log(document.getElementById('sucursalesControl'));
 	var control = document.getElementById('sucursalesControl').value;	
 	if(control === 'false'){
 		cargarSucursales();
@@ -128,13 +171,14 @@ function mostrarSucursales(){
 
 function cargarSucursales(){
 	for (var i = 1; i < sucursales.length; i++) {
+	// for (var i = 1; i < 3; i++) {
 		//creacion de la sucursal en el menu de sucursales
 		crearSucursal(  sucursales[i][1],//latitud
-							sucursales[i][2],//longitud
-							sucursales[i][0],//nombre de la sucursal								 
-							sucursales[i][3]//direccion
-								 
-							);
+						sucursales[i][2],//longitud
+						sucursales[i][0],//nombre de la sucursal								 
+						sucursales[i][3],//direccion		
+						i						 
+					);
 
 	}//fin del for
 	document.getElementById('sucursalesControl').value = 'true';
@@ -430,6 +474,26 @@ function clearMarkers() {
 	markers = [];
 } //fin del metodo  clearMarkers
 
+function generarRuta(lat, lng, opcionTransporte){
+	map.setCenter(lat, lng);
+	mostrarSucursales();
+	map.setZoom(16);
+	map.addMarker({
+				title: 'Mi ubicación',
+				lat: currentLat,
+				lng: currentLng,
+				});
+	map.drawRoute({
+				origin: [currentLat, currentLng],
+				destination: [lat, lng],
+				// destination: [7.908388743984923, -72.491574883461],
+				travelMode: opcionTransporte,
+				strokeColor: '#0000FF',
+				strokeOpacity: 0.6,
+				strokeWeight: 6
+			});
+
+}
 
 //Geolocalizacion y trazo de ruta
 function findMe(){
@@ -458,8 +522,7 @@ function editCssInfoWindowNormal(){
 	//Desde aca se comienza la manipulacion del DOM del objeto Info Window
 	//nos apoyamos de jQuery
 	google.maps.event.addListener(infoWindowCustom, 'domready', function() {
-		console.log('editando el css del infoWindow+');
-
+		
 		// Reference to the DIV that wraps the bottom of infowindow
 		var iwOuter = $('.gm-style-iw');
 		iwOuter.children(':nth-child(1)').css({'display' : 'block'});		
@@ -554,13 +617,17 @@ function editCssInfoWindow(){
 }// fin del metodo editCssInfoWindow
 
 //crea los div de las sucursales y los inserta en el contenedor
-function crearSucursal(lat, lng, suc,  dir){
+function crearSucursal(lat, lng, suc,  dir, i){
 	//1. creo los elementos
 	//obtengo el contenedor 
-	var contenedorSucursales = document.getElementById('contenedorSucursales');	
+	var contenedorSucursales = document.getElementById('contenedorSucursales');		
 	//creo el elemento ancla class linkdiv
+	var id = "linkdivsuc" + i;
 	var linkdivAncla  = document.createElement("a");
 	linkdivAncla.setAttribute("class", "linkdiv");
+	linkdivAncla.setAttribute("id", id);
+	linkdivAncla.setAttribute("data-lat", lat);
+	linkdivAncla.setAttribute("data-lng", lng);
 		//creo el element div class divsucursal
 		var divsucursalElement  = document.createElement("div");
 		divsucursalElement.setAttribute("class", "divsucursal");
@@ -569,7 +636,7 @@ function crearSucursal(lat, lng, suc,  dir){
 			infosucElement.setAttribute("class", "infosuc");
 				//creo el div clase divmarker
 				var divmarkerElement  = document.createElement("div");
-				divmarkerElement.setAttribute("class", "divmarker");
+				divmarkerElement.setAttribute("class", "divmarker");				
 					//creo el elemento img con el marker
 					var markerElement  = document.createElement("img")
 					markerElement.setAttribute("src", "images/markFarmaAbierto.png");
@@ -592,7 +659,6 @@ function crearSucursal(lat, lng, suc,  dir){
 				distanciaSucElement.setAttribute("id", "distanciaSuc");
 
 				//ACA DEBO TRAER LA DISTANCIA DE LA SUCURSAL
-				
 				var service = new google.maps.DistanceMatrixService;
 				var origin = {
 					lat: currentLat,
@@ -613,14 +679,14 @@ function crearSucursal(lat, lng, suc,  dir){
 					function(response, status) {
 						if (status !== google.maps.DistanceMatrixStatus.OK) {
 							//implementar div
-						} else {
+						} else {							
+
 							var d = response.rows[0].elements[0].distance.text;
-							distanciaSucElement.appendChild( document.createTextNode( d ) );
-							
+							distanciaSucElement.appendChild( document.createTextNode( d ) );							
 						}
 					}
 				);
-				
+
 		//2. los inserto en los contenedores respectivos	
 		distancedivElement.appendChild(distanciaSucElement);
 		detallesucElement.appendChild(sucursalNombreElement);
@@ -633,6 +699,11 @@ function crearSucursal(lat, lng, suc,  dir){
 		linkdivAncla.appendChild(divsucursalElement);
 		contenedorSucursales.appendChild(linkdivAncla);
 		
+		var sucursal = document.getElementById(id);
+		sucursal.addEventListener('click', 
+						function(){ generarRuta(sucursal.getAttribute('data-lat'), 
+												sucursal.getAttribute('data-lng'))},
+								 false);
 }// fin del metodo crearSucursal
 
 
@@ -689,33 +760,32 @@ function setCurrentCoords(){
 }
 
 //Consuta la distancia entre la aubicacion actual y las coordenadas enviadas como parametros
-// function getCurrentDistanceGoogleMaps(lat, lng){
-// 	var service = new google.maps.DistanceMatrixService;
-// 	var origin = {lat: currentLat, lng: currentLng};
-// 	var dest = {lat: lat, lng: lng};
-// 	console.log('2');
-// 	service.getDistanceMatrix(
-// 	    {
-// 	        origins: [origin ],
-// 	        destinations: [dest],
-// 	        travelMode: google.maps.TravelMode.DRIVING,
-//     		unitSystem: google.maps.UnitSystem.METRIC,
-//     		avoidHighways: false,
-//     		avoidTolls: false
-// 	    }, 
-// 		function(response, status) {
-// 			if (status !== google.maps.DistanceMatrixStatus.OK) {
-// 				//implementar div
-// 			} else {
-// 				console.log('3');
-// 				var d = response.rows[0].elements[0].distance.text;
-// 				setDistancia(d);
-// 				console.log(distanciaActual);				
-				
-// 			}
-// 		}
-// 	);
-	
-// }
+function getCurrentDistanceGoogleMaps(lat, lng){//----este metodo no se usa... :-(
+	var service = new google.maps.DistanceMatrixService;
+	var origin = {lat: currentLat, lng: currentLng};
+	var dest = {lat: lat, lng: lng};
+	console.log('2');
+	service.getDistanceMatrix(
+	    {
+	        origins: [origin ],
+	        destinations: [dest],
+	        travelMode: google.maps.TravelMode.DRIVING,
+    		unitSystem: google.maps.UnitSystem.METRIC,
+    		avoidHighways: false,
+    		avoidTolls: false
+	    }, 
+		function(response, status) {
+			if (status !== google.maps.DistanceMatrixStatus.OK) {
+				//implementar div
+			} else {
+				console.log('3');
+				var d = response.rows[0].elements[0].distance.text;
+				setDistancia(d);
+				console.log(distanciaActual);
+			}
+		}
+	);	
+}//fin del metodo getCurrentDistanceGoogleMaps
+
 
 window.addEventListener('load',iniciar,false);

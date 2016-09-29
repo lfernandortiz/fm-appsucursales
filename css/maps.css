@@ -465,6 +465,7 @@ h1 {
 	color: #FFFFFF;
 	font-size: 2.5rem;
 	text-shadow: 1px 1px 1px #4A4A4A;
+	cursor: pointer;
 }
 
 .header{
@@ -705,7 +706,11 @@ border-top: 1px solid white;
 	margin-bottom: 10px;
 	border:1px solid #CBCBCB;
 	overflow-y: scroll;
+	-webkit-overflow-scrolling: touch;
+	-moz-overflow-scrolling: touch;
 }
+
+
 
 .divsucursal{
 	border-radius: 5px;
