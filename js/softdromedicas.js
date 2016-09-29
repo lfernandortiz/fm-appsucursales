@@ -159,8 +159,6 @@ function cargarSucursales(){
 	for (var i = 1; i < sucursales.length; i++) {
 	// for (var i = 1; i < 3; i++) {
 		//creacion de la sucursal en el menu de sucursales
-
-		if(map.markers[i].title ==sucursales[i][0])
 		crearSucursal(  sucursales[i][1],//latitud
 						sucursales[i][2],//longitud
 						sucursales[i][0],//nombre de la sucursal								 
@@ -168,7 +166,6 @@ function cargarSucursales(){
 						i,				 //indice usado para el id de la sucursal
 						map.markers[i]	//marcador de la sucursal				 
 					);
-
 	}//fin del for
 	document.getElementById('sucursalesControl').value = 'true';
 }
@@ -692,8 +689,8 @@ function crearSucursal(lat, lng, suc,  dir, i, marker){
 		sucursal.addEventListener('click', 
 						function(){ generarRuta(sucursal.getAttribute('data-lat'), 
 												sucursal.getAttribute('data-lng'));
-									infoWindowCustom.open(map, marker);},
-								 false);
+									map.markers[i].infoWindow.open(map, map.markers[i]);},
+								  false);
 }// fin del metodo crearSucursal
 
 
