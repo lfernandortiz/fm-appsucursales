@@ -105,20 +105,6 @@ $(".encuentranos").fancy_scroll({
   innerWrapper: ".contentsuc"
 });
 
-
-
-
-jQuery(document).ready(function($) {
-	$('.linkdiv').click(function(event) {
-			event.preventDefault();
-			map.setCenter($(this).attr('data-lat'), $(this).attr('data-lng'));
-			map.setZoom(18);
-			$('html, body').animate({
-	        	scrollTop: $("#map").offset().top
-	    	}, 999);
-		});
-})
-
 function resetMapa(){
 	//centra el mapa
 	map.setCenter(cucutalat, cucutalng);
@@ -172,11 +158,14 @@ function cargarSucursales(){
 	for (var i = 1; i < sucursales.length; i++) {
 	// for (var i = 1; i < 3; i++) {
 		//creacion de la sucursal en el menu de sucursales
+
+		if(map.markers[i].title ==sucursales[i][0])
 		crearSucursal(  sucursales[i][1],//latitud
 						sucursales[i][2],//longitud
 						sucursales[i][0],//nombre de la sucursal								 
 						sucursales[i][3],//direccion		
-						i						 
+						i,				 //indice usado para el id de la sucursal
+						map.markers[i]	//marcador de la sucursal				 
 					);
 
 	}//fin del for
@@ -614,7 +603,7 @@ function editCssInfoWindow(){
 }// fin del metodo editCssInfoWindow
 
 //crea los div de las sucursales y los inserta en el contenedor
-function crearSucursal(lat, lng, suc,  dir, i){
+function crearSucursal(lat, lng, suc,  dir, i, marker){
 	//1. creo los elementos
 	//obtengo el contenedor 
 	var contenedorSucursales = document.getElementById('contenedorSucursales');		
@@ -698,7 +687,8 @@ function crearSucursal(lat, lng, suc,  dir, i){
 		var sucursal = document.getElementById(id);
 		sucursal.addEventListener('click', 
 						function(){ generarRuta(sucursal.getAttribute('data-lat'), 
-												sucursal.getAttribute('data-lng'))},
+												sucursal.getAttribute('data-lng'));
+									infoWindowCustom.open(map, marker);},
 								 false);
 }// fin del metodo crearSucursal
 
