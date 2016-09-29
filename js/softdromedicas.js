@@ -10,6 +10,8 @@ var cucutalat=  7.8890971;
 var cucutalng= -72.49668959999997;
 
 var urlMarker ;
+//este campo es usado por el metodo buscarMarcador para asignar el marcador mas cercano
+var markerNear;
 
 //coordenadas usadas para establecer la ubicacion actual
 var currentLat;
@@ -501,6 +503,7 @@ function findMe(){
 				strokeOpacity: 0.6,
 				strokeWeight: 6
 			});
+	markerNear.infoWindow.open(map, markerNear);
 }
 
 //Edicion del CSS para el objeto InfoWindows
@@ -725,6 +728,7 @@ function buscarMarcador( lat, lng ) {
             closest = i;
         }
     }
+    markerNear = markerst[closest];
     // console.log([markerst[closest].position.lat(),  markerst[closest].position.lng()]);
     return [markerst[closest].position.lat(),  markerst[closest].position.lng()];    
 }
