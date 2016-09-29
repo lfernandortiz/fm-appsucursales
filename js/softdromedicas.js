@@ -6,8 +6,8 @@ var markerst = [];
 var infoWindowCustom;
 
 //coordenadas iniciales
-var lat=  7.8890971;
-var lng= -72.49668959999997;
+var cucutalat=  7.8890971;
+var cucutalng= -72.49668959999997;
 var urlMarker ;
 
 //coordenadas usadas para establecer la ubicacion actual
@@ -52,11 +52,12 @@ var sucursales = [
 
 //metodo principa
 function iniciar(){
+
 	//crea el mapa con las coordenada iniciales y el zoom
 	map = new GMaps({
 		div: '#map',
-		lat:  lat,
-		lng:  lng,
+		lat:  cucutalat,
+		lng:  cucutalng,
 		zoom: 14,
 		zoomControl : true,
 		// scrollwheel:false,		
@@ -66,6 +67,7 @@ function iniciar(){
 		overviewMapControl: false,
 		// clickable: false
 	});
+
 	//metodo para geolocalizacion y trazo de la ruta
 	setCurrentCoords();
 	//creando los marcadores
@@ -87,6 +89,9 @@ function iniciar(){
 
 	var marCerca = document.getElementById('mascercana');
 	marCerca.addEventListener('click', findMe, false);
+	
+	var marCerca = document.getElementById('resetmapa');
+	marCerca.addEventListener('click', resetMapa, false);
 
 	var marCerca = document.getElementById('cercabutton');
 	marCerca.addEventListener('click', function(){ mostrarSucursales(); findMe();}, false);
@@ -105,7 +110,24 @@ jQuery(document).ready(function($) {
 		});
 })
 
-
+function resetMapa(){
+	//centra el mapa
+	map.setCenter(cucutalat, cucutalng);
+	//actualiza el zoom
+	map.setZoom(14);
+	//oculta el cuadro de sucursales
+	// mostrarSucursales();
+	//elimina todas las rutas 
+	map.cleanRoute();
+	//elimina el marker de ubicacion actual
+	for(var i = 0 ; i < map.markers.length ; i++){
+		if(map.markers[i].title =='Mi ubicación'){
+			map.markers[i].setMap(null);
+		}
+	}	
+	//oculta todos los infowindow
+	map.hideInfoWindows();
+}
 
 function ocultarMostrar() {	
     document.getElementById("menu").classList.toggle("active");
@@ -122,12 +144,13 @@ window.onclick = function(event) {
 }//fin del manejador de evento
 
 
-function cerrarSucursales(){
+function cerrarSucursales(){	
 	 document.getElementById("encuentranos").remove('eactive');
 }
 
 
 function mostrarSucursales(){
+	// console.log(document.getElementById('sucursalesControl'));
 	var control = document.getElementById('sucursalesControl').value;	
 	if(control === 'false'){
 		cargarSucursales();
@@ -440,8 +463,9 @@ function clearMarkers() {
 } //fin del metodo  clearMarkers
 
 function generarRuta(lat, lng, opcionTransporte){
-	map.setCenter(currentLat, currentLng);
-	map.setZoom(13);
+	map.setCenter(lat, lng);
+	mostrarSucursales();
+	map.setZoom(16);
 	map.addMarker({
 				title: 'Mi ubicación',
 				lat: currentLat,
@@ -723,7 +747,7 @@ function setCurrentCoords(){
 }
 
 //Consuta la distancia entre la aubicacion actual y las coordenadas enviadas como parametros
-function getCurrentDistanceGoogleMaps(lat, lng){
+function getCurrentDistanceGoogleMaps(lat, lng){//----este metodo no se usa... :-(
 	var service = new google.maps.DistanceMatrixService;
 	var origin = {lat: currentLat, lng: currentLng};
 	var dest = {lat: lat, lng: lng};
@@ -744,8 +768,7 @@ function getCurrentDistanceGoogleMaps(lat, lng){
 				console.log('3');
 				var d = response.rows[0].elements[0].distance.text;
 				setDistancia(d);
-				console.log(distanciaActual);				
-				
+				console.log(distanciaActual);
 			}
 		}
 	);	
