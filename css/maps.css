@@ -526,10 +526,14 @@ h1 {
 	width: 20%;
 	height: 9rem;
 	align-items: flex-start;
-	text-align: center;
+	text-align: left;
 	z-index: 2;
 	transition: .4s;
 	/*display: none;*/
+}
+
+.menu i{
+	margin: 0 8px 0 5px; 
 }
 
 

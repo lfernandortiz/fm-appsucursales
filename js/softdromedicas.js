@@ -18,6 +18,7 @@ var distanciaActual;
 
 
 //informacion y coordenada de sucursales
+//--esto se debe reemplazar por un servicio...
 var sucursales = [
 	['Dromedicas del Oriente SAS', 7.908388743984923, -72.491574883461, 'Avenida 11 Be # 8Bn - 10  Guaimaral', '5740075','5777762', 'CUCUTA','','', '', '', '', 1],
 	['Farmanorte 01', 7.840764903473619, -72.5028133392334, 'Calle 33 Con Avenida 4 Esquina Brr La Sabana', '5808800','3167409253', 'LOS PATIOS','','7:30am', '22:30', '7:30am', '22:30', 2],
@@ -474,12 +475,12 @@ function generarRuta(lat, lng, opcionTransporte){
 				destination: [lat, lng],
 				// destination: [7.908388743984923, -72.491574883461],
 				travelMode: opcionTransporte,
-				strokeColor: '#0000FF',
+				strokeColor: '#000BF1',
 				strokeOpacity: 0.6,
 				strokeWeight: 6
 			});
-
 }
+
 
 //Geolocalizacion y trazo de ruta
 function findMe(){
