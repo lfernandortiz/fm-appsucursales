@@ -126,11 +126,13 @@ function resetMapa(){
 	//elimina todas las rutas 
 	map.cleanRoute();
 	//elimina el marker de ubicacion actual
+	
 	for(var i = 0 ; i < map.markers.length ; i++){
 		if(map.markers[i].title =='Mi ubicación'){
 			map.markers[i].setMap(null);
 		}
 	}	
+
 	//oculta todos los infowindow
 	map.hideInfoWindows();
 }
@@ -156,8 +158,7 @@ function cerrarSucursales(){
 
 
 function mostrarSucursales(){
-	var control = document.getElementById('sucursalesControl').value;
-	console.log('mostrando sucursales')	;
+	var control = document.getElementById('sucursalesControl').value;	
 	if(control === 'false'){
 		cargarSucursales();
 	}	
@@ -472,7 +473,7 @@ function clearMarkers() {
 
 function generarRutaCar(lat, lng, opcionTransporte){
 	map.setCenter(lat, lng);	
-	map.setZoom(16);
+	map.setZoom(17);
 	map.addMarker({
 				title: 'Mi ubicación',
 				lat: currentLat,
@@ -491,19 +492,19 @@ function generarRutaCar(lat, lng, opcionTransporte){
 
 function generarRutaWalk(lat, lng, opcionTransporte){
 	map.setCenter(lat, lng);	
-	map.setZoom(16);
+	map.setZoom(17);
 	map.addMarker({
 				title: 'Mi ubicación',
 				lat: currentLat,
 				lng: currentLng,
-				});
+				});	
 	map.drawRoute({
 				origin: [currentLat, currentLng],
 				destination: [lat, lng],
 				// destination: [7.908388743984923, -72.491574883461],
 				travelMode: opcionTransporte,
-				strokeColor: '#FF0030',
-				strokeOpacity: 0.8,
+				strokeColor: '#FF0006',
+				strokeOpacity: 0.65,
 				strokeWeight: 6
 			});
 }
@@ -511,7 +512,7 @@ function generarRutaWalk(lat, lng, opcionTransporte){
 function generarRutaSucursal(lat, lng, opcionTransporte){
 	map.setCenter(lat, lng);	
 	mostrarSucursales();
-	map.setZoom(16);
+	map.setZoom(17);
 	map.addMarker({
 				title: 'Mi ubicación',
 				lat: currentLat,
@@ -523,7 +524,7 @@ function generarRutaSucursal(lat, lng, opcionTransporte){
 				// destination: [7.908388743984923, -72.491574883461],
 				travelMode: opcionTransporte,
 				strokeColor: '#0005D1',
-				strokeOpacity: 0.8,
+				strokeOpacity: 0.7,
 				strokeWeight: 6
 			});
 }
@@ -548,7 +549,7 @@ function findMe(){
 				// destination: [7.908388743984923, -72.491574883461],
 				travelMode: 'driving',
 				strokeColor: '#0000FF',
-				strokeOpacity: 0.6,
+				strokeOpacity: 0.7,
 				strokeWeight: 6
 			});
 	markerNear.infoWindow.open(map, markerNear);
@@ -563,8 +564,7 @@ function editCssInfoWindowNormal(){
 		
 		// Reference to the DIV that wraps the bottom of infowindow
 		var iwOuter = $('.gm-style-iw');
-		iwOuter.children(':nth-child(1)').css({'display' : 'block'});		
-
+		iwOuter.children(':nth-child(1)').css({'display' : 'block'});	
 		/* Since this div is in a position prior to .gm-div style-iw.
 		* We use jQuery and create a iwBackground variable,
 		* and took advantage of the existing reference .gm-style-iw for the previous div with .prev().
@@ -769,6 +769,7 @@ function crearSucursal(lat, lng, suc,  dir, i, marker){
 												sucursal.getAttribute('data-lng'), 'driving');
 									map.hideInfoWindows();//cierra el anterior infowindow
 									map.cleanRoute();//limpia toda la ruta
+									console.log(map.markers[i].title);
 									map.markers[i].infoWindow.open(map, map.markers[i]);},
 								  false);
 }// fin del metodo crearSucursal
@@ -810,7 +811,7 @@ function setCurrentCoords(){
 	GMaps.geolocate({
 		success: function(position) {
 			currentLat = position.coords.latitude;
-			currentLng = position.coords.longitude;			
+			currentLng = position.coords.longitude;				
 		},
 		error: function(error) {	
 		console.log("error al establecer las coordenadas")		;
