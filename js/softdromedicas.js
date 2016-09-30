@@ -126,11 +126,11 @@ function resetMapa(){
 	//elimina todas las rutas 
 	map.cleanRoute();
 	//elimina el marker de ubicacion actual	
-	for(var i = 0 ; i < map.markers.length ; i++){
-		if(map.markers[i].title =='Mi ubicación'){
-			map.markers[i].setMap(null);
-		}
-	}	
+	// for(var i = 0 ; i < map.markers.length ; i++){
+	// 	if(map.markers[i].title =='Mi ubicación'){
+	// 		map.markers[i].setMap(null);
+	// 	}
+	// }	
 	//oculta todos los infowindow
 	map.hideInfoWindows();
 }
@@ -472,15 +472,14 @@ function clearMarkers() {
 function generarRutaCar(lat, lng, opcionTransporte){
 	map.setCenter(lat, lng);	
 	map.setZoom(17);
-	map.addMarker({
-				title: 'Mi ubicación',
-				lat: currentLat,
-				lng: currentLng,
-				});
+	// map.addMarker({
+	// 			title: 'Mi ubicación',
+	// 			lat: currentLat,
+	// 			lng: currentLng,
+	// 			});
 	map.drawRoute({
 				origin: [currentLat, currentLng],
 				destination: [lat, lng],
-				// destination: [7.908388743984923, -72.491574883461],
 				travelMode: opcionTransporte,
 				strokeColor: '#0060F1',
 				strokeOpacity: 0.75,
@@ -491,15 +490,14 @@ function generarRutaCar(lat, lng, opcionTransporte){
 function generarRutaWalk(lat, lng, opcionTransporte){
 	map.setCenter(lat, lng);	
 	map.setZoom(17);
-	map.addMarker({
-				title: 'Mi ubicación',
-				lat: currentLat,
-				lng: currentLng,
-				});	
+	// map.addMarker({
+	// 			title: 'Mi ubicación',
+	// 			lat: currentLat,
+	// 			lng: currentLng,
+	// 			});	
 	map.drawRoute({
 				origin: [currentLat, currentLng],
 				destination: [lat, lng],
-				// destination: [7.908388743984923, -72.491574883461],
 				travelMode: opcionTransporte,
 				strokeColor: '#FF0006',
 				strokeOpacity: 0.65,
@@ -511,15 +509,14 @@ function generarRutaSucursal(lat, lng, opcionTransporte){
 	map.setCenter(lat, lng);	
 	mostrarSucursales();
 	map.setZoom(17);
-	map.addMarker({
-				title: 'Mi ubicación',
-				lat: currentLat,
-				lng: currentLng,
-				});
+	// map.addMarker({
+	// 			title: 'Mi ubicación',
+	// 			lat: currentLat,
+	// 			lng: currentLng,
+	// 			});
 	map.drawRoute({
 				origin: [currentLat, currentLng],
 				destination: [lat, lng],
-				// destination: [7.908388743984923, -72.491574883461],
 				travelMode: opcionTransporte,
 				strokeColor: '#0005D1',
 				strokeOpacity: 0.7,
@@ -535,11 +532,11 @@ function findMe(){
 	map.cleanRoute();//limpia toda la ruta
 	map.setCenter(currentLat, currentLng);
 	map.setZoom(16);
-	map.addMarker({
-				title: 'Mi ubicación',
-				lat: currentLat,
-				lng: currentLng,
-				});
+	// map.addMarker({
+	// 			title: 'Mi ubicación',
+	// 			lat: currentLat,
+	// 			lng: currentLng,
+	// 			});
 	var coordsMarker = buscarMarcador( currentLat, currentLng);
 	console.log("coordenadas de la mas cercana: " + coordsMarker);
 	map.drawRoute({
@@ -744,7 +741,6 @@ function crearSucursal(lat, lng, suc,  dir, i, marker){
 							//implementar div
 						} else {		
 							var d = response.rows[0].elements[0].distance.text;
-							console.log(d)
 							distanciaSucElement.appendChild( document.createTextNode( d ) );							
 						}
 					}
@@ -767,9 +763,14 @@ function crearSucursal(lat, lng, suc,  dir, i, marker){
 						function(){ generarRutaSucursal(sucursal.getAttribute('data-lat'), 
 												sucursal.getAttribute('data-lng'), 'driving');
 									map.hideInfoWindows();//cierra el anterior infowindow
-									map.cleanRoute();//limpia toda la ruta
-									console.log(map.markers[i].title);
-									map.markers[i].infoWindow.open(map, map.markers[i]);},
+									map.cleanRoute();//limpia toda la ruta	
+									console.log(suc);
+									//itera los marcadores para disparar el infowindow correspondiente
+									for( var i = 0 ; i < map.markers.length ; i++){
+										if( suc == map.markers[i].title)
+											map.markers[i].infoWindow.open(map, map.markers[i]);
+										}//fin del if
+									},
 								  false);
 }// fin del metodo crearSucursal
 
@@ -811,6 +812,11 @@ function setCurrentCoords(){
 		success: function(position) {
 			currentLat = position.coords.latitude;
 			currentLng = position.coords.longitude;				
+			map.addMarker({
+				title: 'Mi ubicación',
+				lat: currentLat,
+				lng: currentLng,
+				});
 		},
 		error: function(error) {	
 		var errorGeo = document.getElementById("errorglocate");    	
