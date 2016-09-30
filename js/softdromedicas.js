@@ -484,7 +484,7 @@ function generarRutaCar(lat, lng, opcionTransporte){
 				// destination: [7.908388743984923, -72.491574883461],
 				travelMode: opcionTransporte,
 				strokeColor: '#0060F1',
-				strokeOpacity: 0.8,
+				strokeOpacity: 0.75,
 				strokeWeight: 6
 			});
 }
@@ -503,7 +503,7 @@ function generarRutaWalk(lat, lng, opcionTransporte){
 				// destination: [7.908388743984923, -72.491574883461],
 				travelMode: opcionTransporte,
 				strokeColor: '#FF0030',
-				strokeOpacity: 0.8,
+				strokeOpacity: 0.75,
 				strokeWeight: 6
 			});
 }
@@ -523,7 +523,7 @@ function generarRutaSucursal(lat, lng, opcionTransporte){
 				// destination: [7.908388743984923, -72.491574883461],
 				travelMode: opcionTransporte,
 				strokeColor: '#0005D1',
-				strokeOpacity: 0.8,
+				strokeOpacity: 0.75,
 				strokeWeight: 6
 			});
 }
