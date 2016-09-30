@@ -96,6 +96,9 @@ function iniciar(){
 	
 	var marCerca = document.getElementById('resetmapa');
 	marCerca.addEventListener('click', resetMapa, false);
+	
+	var marCerca = document.getElementById('resetButton');
+	marCerca.addEventListener('click', resetMapa, false);
 
 	var marCerca = document.getElementById('cercabutton');
 	marCerca.addEventListener('click', function(){ mostrarSucursales(); findMe();}, false);
@@ -108,6 +111,10 @@ $('.contentsuc').impulse();
 $(".encuentranos").fancy_scroll({
   innerWrapper: ".contentsuc"
 });
+
+$( function() {
+    $( "#mainc" ).draggable();
+  } );
 
 function resetMapa(){
 	//centra el mapa
@@ -149,7 +156,6 @@ function cerrarSucursales(){
 
 
 function mostrarSucursales(){
-	// console.log(document.getElementById('sucursalesControl'));
 	var control = document.getElementById('sucursalesControl').value;	
 	if(control === 'false'){
 		cargarSucursales();
@@ -486,6 +492,8 @@ function generarRuta(lat, lng, opcionTransporte){
 
 //Geolocalizacion y trazo de ruta
 function findMe(){
+	map.hideInfoWindows();//cierra el anterior infowindow
+	map.cleanRoute();//limpia toda la ruta
 	map.setCenter(currentLat, currentLng);
 	map.setZoom(16);
 	map.addMarker({
@@ -564,11 +572,9 @@ function editCssInfoWindowNormal(){
 
 //Edicion del CSS para el objeto InfoWindows
 function editCssInfoWindow(){
-	// console.log('editando el css del infoWindow');		
 	//Desde aca se comienza la manipulacion del DOM del objeto Info Window
 	//nos apoyamos de jQuery
 	google.maps.event.addListener(infoWindowCustom, 'domready', function() {
-		console.log('editando el css del infoWindow');
 		// Reference to the DIV that wraps the bottom of infowindow
 		var iwOuter = $('.gm-style-iw');
 		iwOuter.children(':nth-child(1)').css({'display' : 'block'});		
@@ -692,7 +698,9 @@ function crearSucursal(lat, lng, suc,  dir, i, marker){
 		var sucursal = document.getElementById(id);
 		sucursal.addEventListener('click', 
 						function(){ generarRuta(sucursal.getAttribute('data-lat'), 
-												sucursal.getAttribute('data-lng'));
+												sucursal.getAttribute('data-lng'), 'driving');
+									map.hideInfoWindows();//cierra el anterior infowindow
+									map.cleanRoute();//limpia toda la ruta
 									map.markers[i].infoWindow.open(map, map.markers[i]);},
 								  false);
 }// fin del metodo crearSucursal
@@ -706,16 +714,13 @@ function crearSucursal(lat, lng, suc,  dir, i, marker){
 // tomado de http://stackoverflow.com/a/4060721
 function rad(x) {return x*Math.PI/180;}
 function buscarMarcador( lat, lng ) {
-	// console.log( "buscarMarcador: " + lat +" & "+lng);
-
-    var lat = lat;
+	var lat = lat;
     var lng = lng;
     var R = 6371; // radio de la tierra en kilometros
     var distances = [];
     var closest = -1;
     for( i=0;i<markerst.length; i++ ) {
-    	// console.log(markerst[i].title);
-        var mlat = markerst[i].position.lat();
+    	var mlat = markerst[i].position.lat();
         var mlng = markerst[i].position.lng();
         var dLat  = rad(mlat - lat);
         var dLong = rad(mlng - lng);
@@ -729,19 +734,15 @@ function buscarMarcador( lat, lng ) {
         }
     }
     markerNear = markerst[closest];
-    // console.log([markerst[closest].position.lat(),  markerst[closest].position.lng()]);
     return [markerst[closest].position.lat(),  markerst[closest].position.lng()];    
 }
 
 //establece las coordenadas de la ubicacion actual a las variables globales de longitud y latitud
 function setCurrentCoords(){
-	console.log("estableciendo las coordenadss");
-
 	GMaps.geolocate({
 		success: function(position) {
 			currentLat = position.coords.latitude;
 			currentLng = position.coords.longitude;			
-			console.log("coordenadas establecidas: lat: " + currentLat + " | lgn: " + currentLng );
 		},
 		error: function(error) {	
 		console.log("error al establecer las coordenadas")		;
@@ -756,7 +757,6 @@ function getCurrentDistanceGoogleMaps(lat, lng){//----este metodo no se usa... :
 	var service = new google.maps.DistanceMatrixService;
 	var origin = {lat: currentLat, lng: currentLng};
 	var dest = {lat: lat, lng: lng};
-	console.log('2');
 	service.getDistanceMatrix(
 	    {
 	        origins: [origin ],
@@ -770,7 +770,7 @@ function getCurrentDistanceGoogleMaps(lat, lng){//----este metodo no se usa... :
 			if (status !== google.maps.DistanceMatrixStatus.OK) {
 				//implementar div
 			} else {
-				console.log('3');
+				
 				var d = response.rows[0].elements[0].distance.text;
 				setDistancia(d);
 				console.log(distanciaActual);
