@@ -125,14 +125,12 @@ function resetMapa(){
 	// mostrarSucursales();
 	//elimina todas las rutas 
 	map.cleanRoute();
-	//elimina el marker de ubicacion actual
-	
+	//elimina el marker de ubicacion actual	
 	for(var i = 0 ; i < map.markers.length ; i++){
 		if(map.markers[i].title =='Mi ubicación'){
 			map.markers[i].setMap(null);
 		}
 	}	
-
 	//oculta todos los infowindow
 	map.hideInfoWindows();
 }
@@ -543,6 +541,7 @@ function findMe(){
 				lng: currentLng,
 				});
 	var coordsMarker = buscarMarcador( currentLat, currentLng);
+	console.log("coordenadas de la mas cercana: " + coordsMarker);
 	map.drawRoute({
 				origin: [currentLat, currentLng],
 				destination: coordsMarker,
@@ -743,9 +742,9 @@ function crearSucursal(lat, lng, suc,  dir, i, marker){
 					function(response, status) {
 						if (status !== google.maps.DistanceMatrixStatus.OK) {
 							//implementar div
-						} else {							
-
+						} else {		
 							var d = response.rows[0].elements[0].distance.text;
+							console.log(d)
 							distanciaSucElement.appendChild( document.createTextNode( d ) );							
 						}
 					}
@@ -814,6 +813,8 @@ function setCurrentCoords(){
 			currentLng = position.coords.longitude;				
 		},
 		error: function(error) {	
+		var errorGeo = document.getElementById("errorglocate");    	
+    	errorGeo.style.display = 'block';
 		console.log("error al establecer las coordenadas")		;
 		},
 		not_supported: function() {			
