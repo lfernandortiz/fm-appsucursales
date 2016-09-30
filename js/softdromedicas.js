@@ -245,9 +245,9 @@ function addMarkerWithTimeout(position, timeout, suc, i, dir, telefono, celular,
 						'<div class="layoutcontentbutton">'+
 							'<div class="titlesection"><h3>Como Llegar</h3></div>'+
 							'<div class="layoutcontentbutton">'+
-								'<button class="buttonruta"><i class="zmdi zmdi zmdi-car zmdi-hc-2x"></i>&nbsp;Carro</button>'+
-								'<button class="buttonruta"><i class="zmdi zmdi-walk zmdi-hc-2x"></i>&nbsp;Caminando</button>'+
-								'<button class="buttonruta"><i class="zmdi zmdi-bus zmdi-hc-2x"></i>&nbsp;Bus</button>'+
+								'<button class="buttonruta" id="btnCar" data-lat="'+position.lat()+'" data-lng="'+position.lng()+'"><i class="zmdi zmdi zmdi-car zmdi-hc-2x"></i>&nbsp;Carro</button>'+
+								'<button class="buttonruta" id="btnWalk" data-lat="'+position.lat()+'" data-lng="'+position.lng()+'"><i class="zmdi zmdi-walk zmdi-hc-2x"></i>&nbsp;Caminando</button>'+
+								'<button class="buttonruta" id="btnBus" data-lat="'+position.lat()+'" data-lng="'+position.lng()+'"><i class="zmdi zmdi-bus zmdi-hc-2x"></i>&nbsp;Bus</button>'+
 							'</div>'+							
 						'</div><!-- fin de layoutcontent-->'+						
 					'</div><!--fin de contenedor de horarios -->'+
@@ -470,8 +470,7 @@ function clearMarkers() {
 } //fin del metodo  clearMarkers
 
 function generarRuta(lat, lng, opcionTransporte){
-	map.setCenter(lat, lng);
-	mostrarSucursales();
+	map.setCenter(lat, lng);	
 	map.setZoom(16);
 	map.addMarker({
 				title: 'Mi ubicación',
@@ -550,7 +549,7 @@ function editCssInfoWindowNormal(){
 	    iwCloseBtn.mouseout(function(){
 	      $(this).css({opacity: '1'});
 	    });
-
+	    //aca se registran eventos para infowindow
 	    var estado = document.getElementById('estadoSucursal').value;
 	    document.getElementById('estadosuc').innerHTML = '';
 		if (estado === 'abierto') {
@@ -565,7 +564,22 @@ function editCssInfoWindowNormal(){
 			iconoCerrado.setAttribute("class", "zmdi zmdi-circle iconestadocerrado");
 			var infoes = document.getElementById('estadosuc');
 			infoes.appendChild(document.createTextNode(abiertoCerrado));
-		}
+		}//fin del else
+
+		var btnCars = document.getElementById('btnCar');
+		btnCars.addEventListener('click', function(){ generarRuta(btnCars.getAttribute('data-lat'),
+																 btnCars.getAttribute('data-lng'),
+																 'driving')}, false);
+		var btnWalk = document.getElementById('btnWalk');
+		btnWalk.addEventListener('click', function(){ generarRuta(btnWalk.getAttribute('data-lat'),
+																 btnWalk.getAttribute('data-lng'),
+																 'walking')}, false);
+		var btnBus = document.getElementById('btnBus');
+		btnBus.addEventListener('click', function(){ generarRuta(btnBus.getAttribute('data-lat'),
+																 btnBus.getAttribute('data-lng'),
+																 'bus')}, false);
+
+
   	});
 }// fin del metodo editCssInfoWindow
 
