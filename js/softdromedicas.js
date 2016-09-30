@@ -156,7 +156,8 @@ function cerrarSucursales(){
 
 
 function mostrarSucursales(){
-	var control = document.getElementById('sucursalesControl').value;	
+	var control = document.getElementById('sucursalesControl').value;
+	console.log('mostrando sucursales')	;
 	if(control === 'false'){
 		cargarSucursales();
 	}	
@@ -469,7 +470,7 @@ function clearMarkers() {
 	markers = [];
 } //fin del metodo  clearMarkers
 
-function generarRuta(lat, lng, opcionTransporte){
+function generarRutaCar(lat, lng, opcionTransporte){
 	map.setCenter(lat, lng);	
 	map.setZoom(16);
 	map.addMarker({
@@ -482,11 +483,51 @@ function generarRuta(lat, lng, opcionTransporte){
 				destination: [lat, lng],
 				// destination: [7.908388743984923, -72.491574883461],
 				travelMode: opcionTransporte,
-				strokeColor: '#000BF1',
-				strokeOpacity: 0.6,
+				strokeColor: '#0060F1',
+				strokeOpacity: 0.8,
 				strokeWeight: 6
 			});
 }
+
+function generarRutaWalk(lat, lng, opcionTransporte){
+	map.setCenter(lat, lng);	
+	map.setZoom(16);
+	map.addMarker({
+				title: 'Mi ubicación',
+				lat: currentLat,
+				lng: currentLng,
+				});
+	map.drawRoute({
+				origin: [currentLat, currentLng],
+				destination: [lat, lng],
+				// destination: [7.908388743984923, -72.491574883461],
+				travelMode: opcionTransporte,
+				strokeColor: '#FF0030',
+				strokeOpacity: 0.8,
+				strokeWeight: 6
+			});
+}
+
+function generarRutaSucursal(lat, lng, opcionTransporte){
+	map.setCenter(lat, lng);	
+	mostrarSucursales();
+	map.setZoom(16);
+	map.addMarker({
+				title: 'Mi ubicación',
+				lat: currentLat,
+				lng: currentLng,
+				});
+	map.drawRoute({
+				origin: [currentLat, currentLng],
+				destination: [lat, lng],
+				// destination: [7.908388743984923, -72.491574883461],
+				travelMode: opcionTransporte,
+				strokeColor: '#0005D1',
+				strokeOpacity: 0.8,
+				strokeWeight: 6
+			});
+}
+
 
 
 //Geolocalizacion y trazo de ruta
@@ -567,15 +608,15 @@ function editCssInfoWindowNormal(){
 		}//fin del else
 
 		var btnCars = document.getElementById('btnCar');
-		btnCars.addEventListener('click', function(){ generarRuta(btnCars.getAttribute('data-lat'),
+		btnCars.addEventListener('click', function(){ generarRutaCar(btnCars.getAttribute('data-lat'),
 																 btnCars.getAttribute('data-lng'),
 																 'driving')}, false);
 		var btnWalk = document.getElementById('btnWalk');
-		btnWalk.addEventListener('click', function(){ generarRuta(btnWalk.getAttribute('data-lat'),
+		btnWalk.addEventListener('click', function(){ generarRutaWalk(btnWalk.getAttribute('data-lat'),
 																 btnWalk.getAttribute('data-lng'),
 																 'walking')}, false);
 		var btnBus = document.getElementById('btnBus');
-		btnBus.addEventListener('click', function(){ generarRuta(btnBus.getAttribute('data-lat'),
+		btnBus.addEventListener('click', function(){ generarCar(btnBus.getAttribute('data-lat'),
 																 btnBus.getAttribute('data-lng'),
 																 'bus')}, false);
 
@@ -623,6 +664,19 @@ function editCssInfoWindow(){
 			iconoAbierto.setAttribute("class", "zmdi zmdi-circle iconestadoabierto");
 			var infoes = document.getElementById('estadosuc');
 			infoes.appendChild(document.createTextNode("Abierto"));
+
+		var btnCars = document.getElementById('btnCar');
+		btnCars.addEventListener('click', function(){ generarRutaCar(btnCars.getAttribute('data-lat'),
+																 btnCars.getAttribute('data-lng'),
+																 'driving')}, false);
+		var btnWalk = document.getElementById('btnWalk');
+		btnWalk.addEventListener('click', function(){ generarRutaWalk(btnWalk.getAttribute('data-lat'),
+																 btnWalk.getAttribute('data-lng'),
+																 'walking')}, false);
+		var btnBus = document.getElementById('btnBus');
+		btnBus.addEventListener('click', function(){ generarCar(btnBus.getAttribute('data-lat'),
+																 btnBus.getAttribute('data-lng'),
+																 'bus')}, false);
   	});
 }// fin del metodo editCssInfoWindow
 
@@ -711,7 +765,7 @@ function crearSucursal(lat, lng, suc,  dir, i, marker){
 		
 		var sucursal = document.getElementById(id);
 		sucursal.addEventListener('click', 
-						function(){ generarRuta(sucursal.getAttribute('data-lat'), 
+						function(){ generarRutaSucursal(sucursal.getAttribute('data-lat'), 
 												sucursal.getAttribute('data-lng'), 'driving');
 									map.hideInfoWindows();//cierra el anterior infowindow
 									map.cleanRoute();//limpia toda la ruta

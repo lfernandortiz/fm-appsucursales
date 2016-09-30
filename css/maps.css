@@ -672,12 +672,11 @@ border-top: 1px solid white;
 	left: 5px;
 	display: none;
 	transition: .9s;
-
+	z-index: 5;
 }
 
 .encuentranos.eactive{
-	display: block;	
-	
+	display: block;		
 }
 
 .linkdiv{
