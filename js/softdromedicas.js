@@ -692,7 +692,7 @@ function crearSucursal(lat, lng, suc,  dir, i, marker){
 		var sucursal = document.getElementById(id);
 		sucursal.addEventListener('click', 
 						function(){ generarRuta(sucursal.getAttribute('data-lat'), 
-												sucursal.getAttribute('data-lng'));
+												sucursal.getAttribute('data-lng'), 'driving');
 									map.markers[i].infoWindow.open(map, map.markers[i]);},
 								  false);
 }// fin del metodo crearSucursal
