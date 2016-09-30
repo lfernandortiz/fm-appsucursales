@@ -113,7 +113,7 @@ $(".encuentranos").fancy_scroll({
 });
 
 $( function() {
-    $( "#mainc" ).draggable();
+    $( "#encuentranos" ).draggable();
   } );
 
 function resetMapa(){
