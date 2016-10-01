@@ -577,7 +577,13 @@ function editCssInfoWindowNormal(){
 		// Reference to the div that groups the close button elements.
 		var iwCloseBtn = iwOuter.next();
 		// Apply the desired effect to the close button
-		iwCloseBtn.css({opacity: '1', right: '38px', top: '3px', border: '7px solid rgba(0, 10, 123, 1.0)', 'border-radius': '5px', 'box-shadow': '0 0 5px rgba(0, 10, 123, .9)'});
+		var consulta = window.matchMedia('(max-width:320px)');
+		console.log(consulta.matches);
+		if( consulta.matches){			
+			iwCloseBtn.css({opacity: '1', right: '18spx', top: '3px', border: '7px solid rgba(0, 10, 123, 1.0)', 'border-radius': '5px', 'box-shadow': '0 0 5px rgba(0, 10, 123, .9)'});		
+		}else{
+			iwCloseBtn.css({opacity: '1', right: '38px', top: '3px', border: '7px solid rgba(0, 10, 123, 1.0)', 'border-radius': '5px', 'box-shadow': '0 0 5px rgba(0, 10, 123, .9)'});
+		}		
 		// If the content of infowindow not exceed the set maximum height, then the gradient is removed.
 		// if($('.iw-content').height() < 140){
 		// $('.iw-bottom-gradient').css({display: 'none'});
@@ -646,11 +652,17 @@ function editCssInfoWindow(){
 		// Reference to the div that groups the close button elements.
 		var iwCloseBtn = iwOuter.next();
 		// Apply the desired effect to the close button
-		iwCloseBtn.css({opacity: '1', right: '38px', top: '3px', border: '7px solid rgba(0, 10, 123, 1.0)', 'border-radius': '5px', 'box-shadow': '0 0 5px rgba(0, 10, 123, .9)'});
-		// If the content of infowindow not exceed the set maximum height, then the gradient is removed.
-		if($('.iw-content').height() < 140){
-		$('.iw-bottom-gradient').css({display: 'none'});
+		var consulta = window.matchMedia('(max-width:320px)');
+		console.log(consulta.matches);
+		if( consulta.matches){			
+			iwCloseBtn.css({opacity: '1', right: '18spx', top: '3px', border: '7px solid rgba(0, 10, 123, 1.0)', 'border-radius': '5px', 'box-shadow': '0 0 5px rgba(0, 10, 123, .9)'});		
+		}else{
+			iwCloseBtn.css({opacity: '1', right: '38px', top: '3px', border: '7px solid rgba(0, 10, 123, 1.0)', 'border-radius': '5px', 'box-shadow': '0 0 5px rgba(0, 10, 123, .9)'});
 		}
+		// If the content of infowindow not exceed the set maximum height, then the gradient is removed.
+		// if($('.iw-content').height() < 140){
+		// $('.iw-bottom-gradient').css({display: 'none'});
+		// }
 	    // The API automatically applies 0.7 opacity to the button after the mouseout event. This function reverses this event to the desired value.
 	    iwCloseBtn.mouseout(function(){
 	      $(this).css({opacity: '1'});

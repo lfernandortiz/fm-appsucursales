@@ -212,12 +212,10 @@ img, h1,h3, h4, p {
 
 /**/
 .gm-style-iw > div:nth-child(1) {	
-	margin: 0;
+	margin: 0 !important;
 	max-width: 100% !important;
-	display: inline-block !important;
-	
+	display: inline-block !important;	
 }
-
 
 
 /*este es el contenedor hijo que contiene
@@ -883,5 +881,12 @@ border-top: 1px solid white;
 	.gm-style-iw:nth-child(1){
 		display: block;
 	}
+
+
+	 div > div > .gm-style-iw >{
+		border: 1px solid green !important;
+		left: 0px !important;
+	}
+
 	
 }
