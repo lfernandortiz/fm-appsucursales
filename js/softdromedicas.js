@@ -121,7 +121,7 @@ $(".encuentranos").fancy_scroll({
 function resetMapa(){
 	$('body,html').animate({
 				scrollTop: 0
-			}, 4000);
+			}, 400);
 	//centra el mapa
 	map.setCenter(cucutalat, cucutalng);
 	//actualiza el zoom
