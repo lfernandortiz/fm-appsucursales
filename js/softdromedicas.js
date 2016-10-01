@@ -22,20 +22,14 @@ var distanciaActual;
 //informacion y coordenada de sucursales
 //--esto se debe reemplazar por un servicio...
 var sucursales = [
-	['Dromedicas del Oriente SAS', 7.908388743984923, -72.491574883461, 'Avenida 11 Be # 8Bn - 10  Guaimaral', '5740075','5777762', 'CUCUTA','','', '', '', '', 1],
-	['Farmanorte 01', 7.840764903473619, -72.5028133392334, 'Calle 33 Con Avenida 4 Esquina Brr La Sabana', '5808800','3167409253', 'LOS PATIOS','','7:30am', '22:30', '7:30am', '22:30', 2],
-	['Farmanorte 02', 7.923595410892432, -72.52201795578003, 'Avenida 5 Con Calle 2N Pescadero', '5780727','3166909962', 'CUCUTA','','8am', '23:30', '8am', '2pm', 3],
-	['Farmanorte 03', 7.917091999388589, -72.49572694301605, 'Avenida 4 Con Calle 20An Esquina Brr Prados Del Norte', '5796888','3166909583', 'CUCUTA','true', '', '', '', '', 4],
-	['Farmanorte 04', 7.9049350202970805, -72.51519441604614, 'Avenida Kennedy Con 2Da Esquina Brr La Victoria', '5787878','3183353570', 'CUCUTA','','7:30am', '21', '7:30am', '9pm', 5],
-	['Farmanorte 05', 7.898048740341691, -72.52727508544922, 'Calle 2 Con Avenida 6 Esquina Brr Ceci', '5870555','3168309523', 'CUCUTA','true', '', '', '', '', 6],
 	['Farmanorte 06', 7.87261944, -72.52802511, 'Avenida 26 Con Calle 28 Esquina Brr Belen', '5828280','3155888094', 'CUCUTA','true', '', '', '', '', 7],
 	['Farmanorte 07', 7.8904609470678055, -72.49629020690918, 'Calle 8 # 1E-76 Junto Cafesalud La Salle', '5744094','3153437725', 'CUCUTA','true', '', '', '', '', 8],
 	['Farmanorte 08', 7.373990247532279, -72.64909029006958, 'Crr 6 # 7-99 Calle Real', '5682217','3183437726', 'PAMPLONA','','7:30am', '22', '7:30am', '10pm', 9],
 	['Farmanorte 09', 7.929875568608961, -72.50390768051147, 'Avenida 2 Con Calle 4 Esquina Brr Aeropuerto', '5818245','3166910544', 'CUCUTA','true', '', '', '', '', 10],
-	['Farmanorte 10', 7.912830721471756, -72.48752474784851, 'Avenida Libertadores # 18N-181 Brr Santa Elena Bloques Del Zulima', '5776206','3155997099', 'CUCUTA','','7:30am', '22', '7:30am', '9pm', 11],
+	['Farmanorte 10', 7.912830721471756, -72.48752474784851, 'Avenida Libertadores # 18N-181 Brr Santa Elena Bloques Del Zulima', '5776206','3155997099', 'CUCUTA','','11:30am', '22', '7:30am', '9pm', 11],
 	['Farmanorte 11', 7.8871853, -72.49622654, 'Cll 11 Con Av 2E Esquina Diagonal C.C. Ventura Plaza', '5711737','3173643955', 'CUCUTA','true', '', '', '', '', 12],
 	['Farmanorte 12', 7.88983925194856, -72.49102771282196, 'Av. 9E Con Cll 9 Esq Fte Col. Domingo Savio Brr La Riviera', '5751377','3185166993', 'CUCUTA','','7am', '22', '7am', '10pm', 13],
-	['Farmanorte 13', 7.886720134976074, -72.51558065414429, 'Av 3E # 1-108 Local 1 Frente Al Parque La Ceiba', '577770','3185166990', 'CUCUTA','','8am', '21', '8am', '9pm', 14],
+	['Farmanorte 13', 7.89593978, -72.49713292, 'Av 3E # 1-108 Local 1 Frente Al Parque La Ceiba', '577770','3185166990', 'CUCUTA','','11am', '21', '8am', '9pm', 14],
 	['Farmanorte 14', 7.88912722, -72.51350731, 'Cll 6 # 13-61 Fte Ese Loma Bolivar', '5739782','3155120028', 'CUCUTA','true', '', '', '', '', 15],
 	['Farmanorte 15', 7.91121118, -72.51772667, 'Avenida 0 # 4-68 Esquina Barrio Comuneros', '5796173','3154372258', 'CUCUTA','true', '', '', '', '', 16],
 	['Farmanorte 16', 7.607999367664449, -72.59926557540894, 'Cll 3 # 3-34  Parq Prpal Chinacota', '5864324','3173660022', 'CHINACOTA','true', '', '', '', '', 17],
@@ -51,6 +45,7 @@ var sucursales = [
 	['Farmanorte 26', 7.87187112, -72.52892628, 'Avenida 26 No 29-48 Br Belen', '5754140','3162331144', 'CUCUTA','','7:30am', '21:30', '7:30am', '9:30pm', 27],
 	['Farmanorte 27', 7.91694492, -72.4727475, 'El Escobal, Anillo Vial, Plaza Del Este Local 6', '5847808','3188135356', 'CUCUTA','','7am', '22', '7am', '10pm', 28],
 	['San Antonio del Norte', 7.88749215, -72.50609315, 'Av 7 Calle 9 Esquina Centro', '5727091','3155997098', 'CUCUTA','','7am', '20', '8am', '2pm', 29],
+
 
 ];
 
@@ -259,6 +254,7 @@ function addMarkerWithTimeout(position, timeout, suc, i, dir, telefono, celular,
         //revisa que sea 24 horas   
         if( _24H === 'true'){
         	contents +=   _24_horas + complementoHora + footer ;
+        	var est = 'abierto';	//esto se debe cambiar x ahora en codigo duro
         	//registro del manejo de evento click para desplegar el objeto InfoWindow
 			window.setTimeout(function(){
 					//añadir un marker con GMap
@@ -266,6 +262,7 @@ function addMarkerWithTimeout(position, timeout, suc, i, dir, telefono, celular,
 					var mark = map.createMarker ({	
 					    position: position,
 					    icon: urlMarker,
+					    details:{estado:est},
 						title: suc,
 						infoWindow: {content:contents, maxWidth:345,},
 						animation: google.maps.Animation.DROP,
@@ -311,6 +308,7 @@ function addMarkerWithTimeout(position, timeout, suc, i, dir, telefono, celular,
 					var markd = map.createMarker({
 						position: position,
 						icon: urlMarker2,
+						details:{estado:est},
 						title: suc,
 						infoWindow: {
 							content: contents,
@@ -357,6 +355,7 @@ function addMarkerWithTimeout(position, timeout, suc, i, dir, telefono, celular,
 					var markd = map.createMarker({
 						position: position,
 						icon: urlMarker2,
+						details:{estado:est},
 						title: suc,
 						infoWindow: {
 							content: contents,
@@ -377,8 +376,8 @@ function addMarkerWithTimeout(position, timeout, suc, i, dir, telefono, celular,
         }//fin del else	
 }
 
-//metodo predicado que determina si la hora actual esta dentro del rango
-// de dos horas. El metodo tiene encuenta la hora y los minutos
+//metodo predicado que determina si la hora actual esta dentro de un rango
+// El metodo tiene encuenta la hora y los minutos
 function abierto(hActual, hApertura, hCierre){
 	var abierto = false;
 	//hora actual es mayor a la hora de apertura?
@@ -482,7 +481,7 @@ function generarRutaCar(lat, lng, opcionTransporte){
 				destination: [lat, lng],
 				travelMode: opcionTransporte,
 				strokeColor: '#0060F1',
-				strokeOpacity: 0.75,
+				strokeOpacity: 0.6,
 				strokeWeight: 6
 			});
 }
@@ -500,7 +499,7 @@ function generarRutaWalk(lat, lng, opcionTransporte){
 				destination: [lat, lng],
 				travelMode: opcionTransporte,
 				strokeColor: '#FF0006',
-				strokeOpacity: 0.65,
+				strokeOpacity: 0.6,
 				strokeWeight: 6
 			});
 }
@@ -519,12 +518,10 @@ function generarRutaSucursal(lat, lng, opcionTransporte){
 				destination: [lat, lng],
 				travelMode: opcionTransporte,
 				strokeColor: '#0005D1',
-				strokeOpacity: 0.7,
+				strokeOpacity: 0.6,
 				strokeWeight: 6
 			});
 }
-
-
 
 //Geolocalizacion y trazo de ruta
 function findMe(){
@@ -545,7 +542,7 @@ function findMe(){
 				// destination: [7.908388743984923, -72.491574883461],
 				travelMode: 'driving',
 				strokeColor: '#0000FF',
-				strokeOpacity: 0.7,
+				strokeOpacity: 0.6,
 				strokeWeight: 6
 			});
 	markerNear.infoWindow.open(map, markerNear);
@@ -782,7 +779,8 @@ function crearSucursal(lat, lng, suc,  dir, i, marker){
 
 // tomado de http://stackoverflow.com/a/4060721
 function rad(x) {return x*Math.PI/180;}
-function buscarMarcador( lat, lng ) {
+function buscarMarcador( lat, lng ) {	
+	//variables para el calculo
 	var lat = lat;
     var lng = lng;
     var R = 6371; // radio de la tierra en kilometros
@@ -798,7 +796,8 @@ function buscarMarcador( lat, lng ) {
         var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
         var d = R * c;
         distances[i] = d;
-        if ( closest == -1 || d < distances[closest] ) {
+        
+        if ( (closest == -1 || d < distances[closest]) && (markerst[i].details.estado==='abierto')) {
             closest = i;
         }
     }
@@ -816,6 +815,7 @@ function setCurrentCoords(){
 				title: 'Mi ubicación',
 				lat: currentLat,
 				lng: currentLng,
+				// draggable:true,
 				});
 		},
 		error: function(error) {	

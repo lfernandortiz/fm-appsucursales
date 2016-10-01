@@ -534,7 +534,8 @@ h1 {
 }
 
 .menu i{
-	margin: 0 8px 0 5px; 
+	box-sizing: border-box;
+	margin: 0 10px 0 5px; 
 }
 
 
@@ -545,6 +546,10 @@ h1 {
 .menu ul{
 	padding: 10px;
 	/*background: red;*/
+}
+
+li .zmdi-gps-dot{
+	margin-right: 5px;
 }
 
 .menu ul {
@@ -574,10 +579,10 @@ border-top: 1px solid white;
 }
 
 .errorglocate{
-	color: #AD0606;
-    background-color: #FFE6E6;
+	background: #fbe9e7;
+    color: #d50000;
     font-family: Arial;
-    font-size:  1.1rem;
+    font-size:  1rem;
     text-align: center;
     padding: 5px;
     display: none;
