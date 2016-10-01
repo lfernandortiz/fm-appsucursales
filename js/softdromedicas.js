@@ -536,11 +536,6 @@ function findMe(){
 	map.cleanRoute();//limpia toda la ruta
 	map.setCenter(currentLat, currentLng);
 	map.setZoom(16);
-	// map.addMarker({
-	// 			title: 'Mi ubicación',
-	// 			lat: currentLat,
-	// 			lng: currentLng,
-	// 			});
 	var coordsMarker = buscarMarcador( currentLat, currentLng);
 	console.log("coordenadas de la mas cercana: " + coordsMarker);
 	map.drawRoute({
@@ -564,10 +559,11 @@ function editCssInfoWindowNormal(){
 		
 		// Reference to the DIV that wraps the bottom of infowindow
 		var iwOuter = $('.gm-style-iw');
-		iwOuter.children(':nth-child(1)').css({'display' : 'block'});	
+		// iwOuter.children(':nth-child(1)').css({'display' : 'block'});	
 		/* Since this div is in a position prior to .gm-div style-iw.
 		* We use jQuery and create a iwBackground variable,
-		* and took advantage of the existing reference .gm-style-iw for the previous div with .prev().
+		* and took advantage of the existing reference .gm-style-iw for 
+		* the previous div with .prev().
 		*/		
 		var iwBackground = iwOuter.prev();		
 		// Removes background shadow DIV
@@ -632,7 +628,7 @@ function editCssInfoWindow(){
 	google.maps.event.addListener(infoWindowCustom, 'domready', function() {
 		// Reference to the DIV that wraps the bottom of infowindow
 		var iwOuter = $('.gm-style-iw');
-		iwOuter.children(':nth-child(1)').css({'display' : 'block'});		
+		// iwOuter.children(':nth-child(1)').css({'display' : 'block'});		
 
 		/* Since this div is in a position prior to .gm-div style-iw.
 		* We use jQuery and create a iwBackground variable,
@@ -652,9 +648,9 @@ function editCssInfoWindow(){
 		// Apply the desired effect to the close button
 		iwCloseBtn.css({opacity: '1', right: '38px', top: '3px', border: '7px solid rgba(0, 10, 123, 1.0)', 'border-radius': '5px', 'box-shadow': '0 0 5px rgba(0, 10, 123, .9)'});
 		// If the content of infowindow not exceed the set maximum height, then the gradient is removed.
-		// if($('.iw-content').height() < 140){
-		// $('.iw-bottom-gradient').css({display: 'none'});
-		// }
+		if($('.iw-content').height() < 140){
+		$('.iw-bottom-gradient').css({display: 'none'});
+		}
 	    // The API automatically applies 0.7 opacity to the button after the mouseout event. This function reverses this event to the desired value.
 	    iwCloseBtn.mouseout(function(){
 	      $(this).css({opacity: '1'});

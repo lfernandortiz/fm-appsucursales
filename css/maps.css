@@ -157,7 +157,7 @@ img, h1,h3, h4, p {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-	width: 316px;
+	max-width: 316px;
 	padding: 5px;
 	background-color: #FFFFFF;
 	color: #000a7b;
@@ -200,7 +200,8 @@ img, h1,h3, h4, p {
   en softdromedicas.js se editan estas propiedade con selectores
   padres para manipular el DOM del infowindow*/
 .gm-style-iw {
-	max-width: 330px !important;
+	display: inline-block;
+	max-width: 330px;
 	top: 15px !important;
 	left: 0px !important;
 	background-color: #fff;
@@ -209,18 +210,28 @@ img, h1,h3, h4, p {
 	border-radius: 2px 2px 10px 10px;
 }
 
+/**/
+.gm-style-iw > div:nth-child(1) {	
+	margin: 0;
+	max-width: 100% !important;
+	display: inline-block !important;
+	
+}
+
+
+
 /*este es el contenedor hijo que contiene
   a los div´s iw-title y iw-content*/
 #iw-container {
 	margin-bottom: 10px;
-	max-width: 345px ;
+	max-width: 100%;
 }
 
 
 /*Define el ancho maximo para el 
   contenedor del detalle del infowindow*/
 .iw-content{
-	max-width: 330px;
+	max-width: 100%;
 	margin: 0 5px;
 	margin-top: 10px;	
 	display: flex;
@@ -841,4 +852,36 @@ border-top: 1px solid white;
 
 .social a:hover{
 	color: #42b3e5;
+}
+
+/***************************
+	Media Querys
+****************************/
+
+/*iphone 5 y resoluciones inferiores*/
+@media screen and (max-width: 320px) {
+	
+	.iw-title{
+		height: 1.8rem;
+	}
+	.iw-title img {
+		width: 2rem;
+		margin-left: 8px;
+	}
+	.iw-title h3 {
+		margin-left: .4rem;
+		font-size: .9rem;
+		padding: 2px;
+	}
+	.row-content{
+		margin: 0 0 2px 3px;		
+	}
+	.infocontent{
+		font-size: .7rem;
+		margin-left: 1px;		
+	}
+	.gm-style-iw:nth-child(1){
+		display: block;
+	}
+	
 }
