@@ -121,7 +121,7 @@ $( function() {
 function resetMapa(){
 	$('body,html').animate({
 				scrollTop: 0
-			}, 800);
+			}, 400);
 	//centra el mapa
 	map.setCenter(cucutalat, cucutalng);
 	//actualiza el zoom
