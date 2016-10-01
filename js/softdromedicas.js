@@ -114,14 +114,14 @@ $(".encuentranos").fancy_scroll({
   innerWrapper: ".contentsuc"
 });
 
-$( function() {
-    $( "#encuentranos" ).draggable();
-  } );
+// $( function() {
+//     $( "#encuentranos" ).draggable();
+//   } );
 
 function resetMapa(){
 	$('body,html').animate({
 				scrollTop: 0
-			}, 400);
+			}, 4000);
 	//centra el mapa
 	map.setCenter(cucutalat, cucutalng);
 	//actualiza el zoom
