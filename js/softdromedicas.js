@@ -621,9 +621,9 @@ function editCssInfoWindowNormal(){
 																 btnWalk.getAttribute('data-lng'),
 																 'walking')}, false);
 		var btnBus = document.getElementById('btnBus');
-		btnBus.addEventListener('click', function(){ generarCar(btnBus.getAttribute('data-lat'),
+		btnBus.addEventListener('click', function(){ generarRutaCar(btnBus.getAttribute('data-lat'),
 																 btnBus.getAttribute('data-lng'),
-																 'bus')}, false);
+																 'driving')}, false);
 
 
   	});
@@ -685,9 +685,9 @@ function editCssInfoWindow(){
 																 btnWalk.getAttribute('data-lng'),
 																 'walking')}, false);
 		var btnBus = document.getElementById('btnBus');
-		btnBus.addEventListener('click', function(){ generarCar(btnBus.getAttribute('data-lat'),
+		btnBus.addEventListener('click', function(){ generarRutaCar(btnBus.getAttribute('data-lat'),
 																 btnBus.getAttribute('data-lng'),
-																 'bus')}, false);
+																 'driving')}, false);
   	});
 }// fin del metodo editCssInfoWindow
 

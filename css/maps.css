@@ -383,13 +383,13 @@ img, h1,h3, h4, p {
   border: 1px solid #002B7B;
   color: #FFFFFF;
   font-size: .75rem; 
-  /*font-weight: bold;*/
   background: #000A7B;
   /*background: linear-gradient(to bottom, #001D7B ,  #005FB0);*/
 }
 
 .buttonruta:visited{
 	outline:0;	
+	text-decoration: none;
 } 
 
 .buttonruta i{
@@ -911,6 +911,15 @@ border-top: 1px solid white;
 	  text-decoration: none;
 	  font-size: .55rem;  		 
 	}
+	.buttonruta:hover {
+		text-decoration: none;
+		border: 1px solid #002B7B;
+		color: #FFFFFF;
+		font-size: .55rem;
+		padding: 2px 3px;	 
+		background: #000A7B;  /*background: linear-gradient(to bottom, #001D7B ,  #005FB0);*/
+	}
+
 	/*Titulo*/
 	.title h1{
 		font-size: 1.6rem;
@@ -918,6 +927,7 @@ border-top: 1px solid white;
 	.buttonmenu{
 		padding: 1px;
 	}
+
 
 	.burgermenu{
 		font-size: 1.8sem;
