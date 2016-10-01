@@ -383,7 +383,7 @@ img, h1,h3, h4, p {
   border: 1px solid #002B7B;
   color: #FFFFFF;
   font-size: .75rem; 
-  font-weight: bold;
+  /*font-weight: bold;*/
   background: #000A7B;
   /*background: linear-gradient(to bottom, #001D7B ,  #005FB0);*/
 }
