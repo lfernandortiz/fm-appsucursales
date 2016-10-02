@@ -103,9 +103,15 @@ function iniciar(){
 
 	var marCerca = document.getElementById('cercabutton');
 	marCerca.addEventListener('click', function(){ mostrarSucursales(); findMe();}, false);
-
 	
 }//fin del metodo iniciar
+
+//Resize Function
+google.maps.event.addDomListener(window, "resize", function() {
+	var center = map.map.getCenter();
+	google.maps.event.trigger(map.map, "resize");
+	map.map.setCenter(center);
+});
 
 //los suguientes dos metdos de jquery implementan el scrroll para infosucursales
 $('.contentsuc').impulse();
@@ -536,7 +542,6 @@ function generarRutaSucursal(lat, lng, opcionTransporte){
 function findMe(){
 	map.hideInfoWindows();//cierra el anterior infowindow
 	map.cleanRoute();//limpia toda la ruta
-	map.setCenter(currentLat, currentLng);
 	map.setZoom(16);
 	var coordsMarker = buscarMarcador( currentLat, currentLng);
 	console.log("coordenadas de la mas cercana: " + coordsMarker);
@@ -549,6 +554,7 @@ function findMe(){
 				strokeOpacity: 0.6,
 				strokeWeight: 6
 			});
+	map.setCenter(coordsMarker[0], coordsMarker[1]);
 	markerNear.infoWindow.open(map, markerNear);
 }
 
