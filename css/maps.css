@@ -210,7 +210,8 @@ img, h1,h3, h4, p {
 	border-radius: 2px 2px 10px 10px;
 }
 
-/**/
+/*Este selector edita las propiedades del primer elemento
+  hijo para el contenedor con clase .gm-style-iw  */
 .gm-style-iw > div:nth-child(1) {	
 	margin: 0 !important;
 	max-width: 100% !important;
