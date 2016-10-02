@@ -122,7 +122,7 @@ function resetMapa(){
 				scrollTop: 0
 			}, 400);
 	//centra el mapa
-	map.setCenter(cucutalat, cucutalng);
+	map.setCenter(currentLat, cucutalng);
 	//actualiza el zoom
 	map.setZoom(14);
 	//oculta el cuadro de sucursales
@@ -832,7 +832,7 @@ function setCurrentCoords(){
 				lat: currentLat,
 				lng: currentLng,
 				// draggable:true,
-				});
+				});			
 		},
 		error: function(error) {	
 		var errorGeo = document.getElementById("errorglocate");    	
@@ -841,7 +841,7 @@ function setCurrentCoords(){
 		},
 		not_supported: function() {			
 		},		
-	});
+	});	
 }
 
 //Consuta la distancia entre la aubicacion actual y las coordenadas enviadas como parametros
