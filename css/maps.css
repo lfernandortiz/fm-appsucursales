@@ -214,7 +214,7 @@ img, h1,h3, h4, p {
 .gm-style-iw > div:nth-child(1) {	
 	margin: 0 !important;
 	max-width: 100% !important;
-	display: inline-block !important;	
+	display: block !important;	
 }
 
 
@@ -927,7 +927,6 @@ border-top: 1px solid white;
 	.buttonmenu{
 		padding: 1px;
 	}
-
 
 	.burgermenu{
 		font-size: 1.8sem;

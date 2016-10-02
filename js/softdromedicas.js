@@ -53,8 +53,6 @@ var sucursales = [
 	['San Antonio del Norte', 7.88749215, -72.50609315, 'Av 7 Calle 9 Esquina Centro', '5727091','3155997098', 'CUCUTA','','7am', '20', '8am', '2pm', 29],
 
 
-
-
 ];
 
 //metodo principa
@@ -223,7 +221,7 @@ function createMarkers(){
 //anade el marcardor "Marker" al mapa y registra el evento click sobre el marcador
 //para mostrar la informacion de la sucursal en un objeto InfoWindow
 function addMarkerWithTimeout(position, timeout, suc, i, dir, telefono, celular, ciudad, _24H, aLS, cLS, aDF,cDF) {
-
+		
 		var contents = 
 			'<div id="iw-container">' +
                 '<div class="iw-title">'+
@@ -298,10 +296,10 @@ function addMarkerWithTimeout(position, timeout, suc, i, dir, telefono, celular,
 				var est;
 				if( abierto(fechaActual, aLS, cLS) ){
 					urlMarker2 = "images/markFarmaAbierto.png";
-					est = 'abierto';					
+					est = 'abierto';								
 				}else{
 					urlMarker2 = "images/markFarmaCerrado.png";
-					est = 'cerrado';					
+					est = 'cerrado';								
 				}//fin del else 
 				var hOrdinario ='<div class="layoutcontentbutton">'+
 								'<div class="contentestado">'+
@@ -319,7 +317,7 @@ function addMarkerWithTimeout(position, timeout, suc, i, dir, telefono, celular,
 					var markd = map.createMarker({
 						position: position,
 						icon: urlMarker2,
-						details:{estado:est},
+						// details:{estado:est},
 						title: suc,
 						infoWindow: {
 							content: contents,
@@ -338,8 +336,8 @@ function addMarkerWithTimeout(position, timeout, suc, i, dir, telefono, celular,
 
 			}//fin del if de horario lunes - sabado
 
-			//valida si el dia actual es domingo
-			if (diaDeLaSemana = 0 ) {
+			//valida si el dia actual es domingo			
+			if (diaDeLaSemana == 0 ) {
 				var est;
 				if( abierto(fechaActual, aDF, cDF) ){
 					urlMarker2 = "images/markFarmaAbierto.png";
@@ -380,7 +378,7 @@ function addMarkerWithTimeout(position, timeout, suc, i, dir, telefono, celular,
 					editCssInfoWindowNormal();
 					//añadiendo la marca al mapa	
 					map.addMarker(markd);
-					markerst.push(mark);
+					markerst.push(markd);
 				}, i * 50);
 			}//fin del if de horario para domingo
 			
@@ -582,7 +580,6 @@ function editCssInfoWindowNormal(){
 		var iwCloseBtn = iwOuter.next();
 		// Apply the desired effect to the close button
 		var consulta = window.matchMedia('(max-width:320px)');
-		console.log(consulta.matches);
 		if( consulta.matches){			
 			iwCloseBtn.css({opacity: '1', right: '18spx', top: '3px', border: '7px solid rgba(0, 10, 123, 1.0)', 'border-radius': '5px', 'box-shadow': '0 0 5px rgba(0, 10, 123, .9)'});		
 		}else{
@@ -867,8 +864,7 @@ function getCurrentDistanceGoogleMaps(lat, lng){//----este metodo no se usa... :
 			} else {
 				
 				var d = response.rows[0].elements[0].distance.text;
-				setDistancia(d);
-				console.log(distanciaActual);
+				setDistancia(d);				
 			}
 		}
 	);	
