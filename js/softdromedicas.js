@@ -68,8 +68,14 @@ function setCurrentCoords(){
 	GMaps.geolocate({
 		success: function(position) {
 			console.log('2');
-			currentLat = position.coords.latitude;
-			currentLng = position.coords.longitude;	
+			console.log(position.coords.latitude != null);
+			if(position.coords.latitude != null){
+				currentLat = position.coords.latitude;
+				currentLng = position.coords.longitude;	
+			}else{
+				currentLat = currentLat;
+				currentLng = cucutalng;	
+			}
 			console.log("Coordenadas Actuales Lat: " + currentLat + " Lng: " + currentLng);	
 			crearMapa();//mando a crear el mapa y registrar eventos
 		},
