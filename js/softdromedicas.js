@@ -123,6 +123,9 @@ function crearMapa(){
 	//registro de manejo de evento del boton de menu
 	var menuboton = document.getElementById('buttonmenu');
 	menuboton.addEventListener('click', ocultarMostrar, false );
+	
+	var consulta = window.matchMedia('(max-width: 320px)');
+    consulta.addListener(mediaQuery);
 
 	var opcionSuc = document.getElementById('sucursales');
 	opcionSuc.addEventListener('click', mostrarSucursales, false );
@@ -157,9 +160,6 @@ $(".encuentranos").fancy_scroll({
   innerWrapper: ".contentsuc"
 });
 
-// $( function() {
-//     $( "#encuentranos" ).draggable();
-//   } );
 
 function resetMapa(){
 	$('body,html').animate({
@@ -204,6 +204,21 @@ function mostrarSucursales(){
 	}	
 	document.getElementById('encuentranos').classList.toggle("eactive");
 }
+
+
+function mediaQuery() {
+	var menuboton = document.getElementById('buttonmenu');
+	if (consulta.matches) {
+		// si se cumple hagamos esto
+		console.log('se cumplió la condicion');
+		menuboton.addEventListener('touchstart', mostrarSucursales);
+	} else {
+		menuboton.removeEventListener('touchstart', mostrarSucursales);
+		// si no se cumple hagamos esto
+		console.log('no se cumplió la condicion');
+	}
+}
+
 
 
 function cargarSucursales(){
