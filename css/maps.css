@@ -952,8 +952,8 @@ border-top: 1px solid white;
 
 	/*Cuadro Sucursales*/
 	.encuentranos{
-		width: 295px;
-		height: 449px;
+		width: 92vw;
+		height: 79vh;
 		background: rgba(0, 10, 123, .75);		
 		border-radius: 6px;		
 		left: 6px;		

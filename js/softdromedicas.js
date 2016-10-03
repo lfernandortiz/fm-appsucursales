@@ -1,4 +1,4 @@
-console.log("test GMaps");
+console.log("test GMaps***");
 
 var map;
 var markerst = [];
@@ -70,9 +70,11 @@ function setCurrentCoords(){
 			console.log('2');
 			console.log(position.coords.latitude != null);
 			if(position.coords.latitude != null){
+				console.log('ingrese al else');
 				currentLat = position.coords.latitude;
 				currentLng = position.coords.longitude;	
 			}else{
+				console.log('ingrese al else');
 				currentLat = currentLat;
 				currentLng = cucutalng;	
 			}
