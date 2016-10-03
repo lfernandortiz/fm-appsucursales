@@ -69,7 +69,8 @@ function setCurrentCoords(){
 		success: function(position) {
 			console.log('2');
 			currentLat = position.coords.latitude;
-			currentLng = position.coords.longitude;		
+			currentLng = position.coords.longitude;	
+			console.log("Coordenadas Actuales Lat: " + currentLat + " Lng: " + currentLng);	
 			crearMapa();//mando a crear el mapa y registrar eventos
 		},
 		error: function(error) {	

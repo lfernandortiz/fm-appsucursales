@@ -597,7 +597,7 @@ border-top: 1px solid white;
 	background: #fff;
     padding: 0px;   
 	width: 100vw; 
-	height: 90vh;
+	height: 87vh;
     position: relative;    
     z-index: 0;    
     border: 1px solid #979797;
@@ -646,6 +646,21 @@ border-top: 1px solid white;
   Estilos que editan contenedor de sucursales
   ==============================================*/
 
+.encuentranos{
+	width: 400px;
+	height: 600px;
+	background: rgba(0, 10, 123, .8);
+	/*box-shadow: 1px 2px 3px #2F2F2F;*/
+	border-radius: 10px;
+	border: 2px solid #0A0051;
+	position: absolute;
+	top: 2px;
+	left: 5px;
+	display: none;
+	transition: .9s;
+	z-index: 5;
+}
+
 .buscadorcontent{
 	height: 500px;
 	width: 450px;
@@ -669,20 +684,6 @@ border-top: 1px solid white;
 	cursor: pointer;
 }
 
-.encuentranos{
-	width: 400px;
-	height: 600px;
-	background: rgba(0, 10, 123, .8);
-	/*box-shadow: 1px 2px 3px #2F2F2F;*/
-	border-radius: 10px;
-	border: 2px solid #0A0051;
-	position: absolute;
-	top: 2px;
-	left: 5px;
-	display: none;
-	transition: .9s;
-	z-index: 5;
-}
 
 .encuentranos.eactive{
 	display: block;		
@@ -948,6 +949,92 @@ border-top: 1px solid white;
 		transition: .4s;
 		/*display: none;*/
 	}	
+
+	/*Cuadro Sucursales*/
+	.encuentranos{
+		width: 92vw;
+		height: 79vh;
+		background: rgba(0, 10, 123, .75);		
+		border-radius: 6px;		
+		left: 6px;		
+	}
+	/********/
+	
+	.close{
+		color: #FFFFFF;
+		font-size: 1.6rem;
+		text-align: right;
+	}
+
+	
+	.headenc h2{
+		font-size: 1.6rem;
+		margin: 0 0 10px 0;
+	}
+
+	.contentsuc{
+		max-width: 95%;
+		height: 75%;
+		border-radius: 3px;	
+		margin: 0 auto;
+		margin-bottom: 6px;
+	}
+
+	.divsucursal{
+		border-radius: 5px;
+		max-width: 92%;	
+		margin: 4px auto;
+		padding: 1px 6px;		
+	}
+
+	.divmarker img{
+		width: 20px;
+		margin-left: 1px;
+	}
+
+	.detallesuc{
+		margin: 5px 0 0 10px;	
+	}
+
+	.detallesuc h3{
+		font-size: 1rem;		
+		margin-bottom: 3px;
+	}
+
+	.detallesuc p{
+		font-size: .9rem;
+	}
+
+	.distancediv{
+		text-align: right;
+		font-weight: bold;
+		font-size: .8rem;
+	}
+
+	.divcerca{
+		text-align: center;
+	}
+
+	.cercabutton{
+		border-radius: 2px;
+		padding: 3px;
+		font-weight: bold;
+		font-size: .8rem;
+		margin-bottom: 4px;
+	   	
+	}
+
+.cercabutton img{
+	width: 10px;
+	vertical-align: middle;
+}
+
+.cercademi:hover{
+	background: #424AA0;
+	color: #FFFFFF;
+}
+
+
 }
 
 
