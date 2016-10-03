@@ -595,14 +595,10 @@ border-top: 1px solid white;
 /*contenedor del mapa*/
 #mainc{	
 	background: #fff;
-    padding: 0px;
-    width: 100%;
-    height: 900px; 
-    position: relative;
-    /*box-shadow: 0 0 20px #999;*/
-    /*box-shadow: 0 1px 3px #999;*/
-    /*border-radius: 5px;*/
-    /*border: 1px solid #144EF2;*/
+    padding: 0px;   
+	width: 100vw; 
+	height: 90vh;
+    position: relative;    
     z-index: 0;    
     border: 1px solid #979797;
 }
@@ -951,9 +947,7 @@ border-top: 1px solid white;
 		z-index: 2;
 		transition: .4s;
 		/*display: none;*/
-	}
-
-
-
-	
+	}	
 }
+
+

@@ -56,15 +56,40 @@ var sucursales = [
 
 ];
 
-//metodo principa
 function iniciar(){
+	//se cargan las coordenadas actuales
+	//dentro de este medoto se manda a crear el mapa 
+	//invocando la funcion crearMapa
+	setCurrentCoords();	
+}
 
+//establece las coordenadas de la ubicacion actual a las variables globales de longitud y latitud
+function setCurrentCoords(){
+	GMaps.geolocate({
+		success: function(position) {
+			console.log('2');
+			currentLat = position.coords.latitude;
+			currentLng = position.coords.longitude;		
+			crearMapa();//mando a crear el mapa y registrar eventos
+		},
+		error: function(error) {	
+		var errorGeo = document.getElementById("errorglocate");    	
+    	errorGeo.style.display = 'block';
+		console.log("error al establecer las coordenadas")		;
+		},
+		not_supported: function() {			
+		},		
+	});	
+}
+
+//metodo principa
+function crearMapa(){	
 	//crea el mapa con las coordenada iniciales y el zoom
 	map = new GMaps({
 		div: '#map',
-		lat:  cucutalat,
-		lng:  cucutalng,
-		zoom: 14,
+		lat:  currentLat,
+		lng:  currentLng,
+		zoom: 13,
 		zoomControl : true,
 		// scrollwheel:false,		
 		// panControl: false,
@@ -72,10 +97,13 @@ function iniciar(){
 		mapTypeControl: false,
 		overviewMapControl: false,
 		// clickable: false
-	});
-
-	//metodo para geolocalizacion y trazo de la ruta
-	setCurrentCoords();
+	});	
+	map.addMarker({
+				title: 'Mi ubicación',
+				lat: currentLat,
+				lng: currentLng,
+				// draggable:true,
+				});
 	//creando los marcadores
 	createMarkers();
 	//registrando manejo de evento de cierre de infowindow clic en el mapa	
@@ -136,12 +164,6 @@ function resetMapa(){
 	// mostrarSucursales();
 	//elimina todas las rutas 
 	map.cleanRoute();
-	//elimina el marker de ubicacion actual	
-	// for(var i = 0 ; i < map.markers.length ; i++){
-	// 	if(map.markers[i].title =='Mi ubicación'){
-	// 		map.markers[i].setMap(null);
-	// 	}
-	// }	
 	//oculta todos los infowindow
 	map.hideInfoWindows();
 }
@@ -486,11 +508,6 @@ function clearMarkers() {
 function generarRutaCar(lat, lng, opcionTransporte){
 	map.setCenter(lat, lng);	
 	map.setZoom(17);
-	// map.addMarker({
-	// 			title: 'Mi ubicación',
-	// 			lat: currentLat,
-	// 			lng: currentLng,
-	// 			});
 	map.drawRoute({
 				origin: [currentLat, currentLng],
 				destination: [lat, lng],
@@ -504,11 +521,6 @@ function generarRutaCar(lat, lng, opcionTransporte){
 function generarRutaWalk(lat, lng, opcionTransporte){
 	map.setCenter(lat, lng);	
 	map.setZoom(17);
-	// map.addMarker({
-	// 			title: 'Mi ubicación',
-	// 			lat: currentLat,
-	// 			lng: currentLng,
-	// 			});	
 	map.drawRoute({
 				origin: [currentLat, currentLng],
 				destination: [lat, lng],
@@ -523,16 +535,11 @@ function generarRutaSucursal(lat, lng, opcionTransporte){
 	map.setCenter(lat, lng);	
 	mostrarSucursales();
 	map.setZoom(17);
-	// map.addMarker({
-	// 			title: 'Mi ubicación',
-	// 			lat: currentLat,
-	// 			lng: currentLng,
-	// 			});
 	map.drawRoute({
 				origin: [currentLat, currentLng],
 				destination: [lat, lng],
 				travelMode: opcionTransporte,
-				strokeColor: '#0005D1',
+				strokeColor: '#0060F1',
 				strokeOpacity: 0.6,
 				strokeWeight: 6
 			});
@@ -550,7 +557,7 @@ function findMe(){
 				destination: coordsMarker,
 				// destination: [7.908388743984923, -72.491574883461],
 				travelMode: 'driving',
-				strokeColor: '#0000FF',
+				strokeColor: '#0060F1',				
 				strokeOpacity: 0.6,
 				strokeWeight: 6
 			});
@@ -827,28 +834,6 @@ function buscarMarcador( lat, lng ) {
     return [markerst[closest].position.lat(),  markerst[closest].position.lng()];    
 }
 
-//establece las coordenadas de la ubicacion actual a las variables globales de longitud y latitud
-function setCurrentCoords(){
-	GMaps.geolocate({
-		success: function(position) {
-			currentLat = position.coords.latitude;
-			currentLng = position.coords.longitude;				
-			map.addMarker({
-				title: 'Mi ubicación',
-				lat: currentLat,
-				lng: currentLng,
-				// draggable:true,
-				});			
-		},
-		error: function(error) {	
-		var errorGeo = document.getElementById("errorglocate");    	
-    	errorGeo.style.display = 'block';
-		console.log("error al establecer las coordenadas")		;
-		},
-		not_supported: function() {			
-		},		
-	});	
-}
 
 //Consuta la distancia entre la aubicacion actual y las coordenadas enviadas como parametros
 function getCurrentDistanceGoogleMaps(lat, lng){//----este metodo no se usa... :-(
