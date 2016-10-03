@@ -124,9 +124,6 @@ function crearMapa(){
 	var menuboton = document.getElementById('buttonmenu');
 	menuboton.addEventListener('click', ocultarMostrar, false );
 	
-	var consulta = window.matchMedia('(max-width: 320px)');
-    consulta.addListener(mediaQuery);
-
 	var opcionSuc = document.getElementById('sucursales');
 	opcionSuc.addEventListener('click', mostrarSucursales, false );
 
@@ -205,6 +202,8 @@ function mostrarSucursales(){
 	document.getElementById('encuentranos').classList.toggle("eactive");
 }
 
+var consulta = window.matchMedia('(max-width: 320px)');
+consulta.addListener(mediaQuery);
 
 function mediaQuery() {
 	var menuboton = document.getElementById('buttonmenu');
