@@ -596,7 +596,7 @@ border-top: 1px solid white;
 #mainc{	
 	background: #fff;
     padding: 0px;   
-	width: 100vw; 
+	width: 99vw; 
 	height: 87vh;
     position: relative;    
     z-index: 0;    
@@ -906,7 +906,6 @@ border-top: 1px solid white;
 		color: #4F4F4F ;
 		font-size: .6rem;	
 	}
-	.
 
 	.buttonruta{	 	  
 	  padding: 2px 3px;	  
