@@ -957,7 +957,7 @@ border-top: 1px solid white;
 	/*Cuadro Sucursales*/
 	.encuentranos{
 		width: 92vw;
-		height: 79vh;
+		height: 65vh;
 		background: rgba(0, 10, 123, .75);		
 		border-radius: 6px;		
 		left: 6px;		
@@ -978,7 +978,7 @@ border-top: 1px solid white;
 
 	.contentsuc{
 		max-width: 95%;
-		height: 75%;
+		height: 70%;
 		border-radius: 3px;	
 		margin: 0 auto;
 		margin-bottom: 6px;
@@ -1028,15 +1028,12 @@ border-top: 1px solid white;
 	   	
 	}
 
-.cercabutton img{
-	width: 10px;
-	vertical-align: middle;
-}
+	.cercabutton img{
+		width: 10px;
+		vertical-align: middle;
+	}
 
-.cercademi:hover{
-	background: #424AA0;
-	color: #FFFFFF;
-}
+	
 
 
 }
