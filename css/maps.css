@@ -486,6 +486,7 @@ h1 {
 	padding: 5px 0;
 	z-index: 3;
 	position: relative;
+	width: 100%;
 }
 
 .header img{
@@ -594,13 +595,13 @@ border-top: 1px solid white;
 
 /*contenedor del mapa*/
 #mainc{	
+	display: block;
 	background: #fff;
     padding: 0px;   
-	width: 99vw; 
+	width: 100%; 
 	height: 87vh;
     position: relative;    
-    z-index: 0;    
-    border: 1px solid #979797;
+    z-index: 0;  
 }
 
 #map {	
@@ -952,6 +953,12 @@ border-top: 1px solid white;
 		transition: .4s;
 		/*display: none;*/
 	}	
+
+	#mainc {
+		display: block;		
+		width: 100%;
+		height: 87vh;		
+	}
 
 	/*Cuadro Sucursales*/
 	.encuentranos{
