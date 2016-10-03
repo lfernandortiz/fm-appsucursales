@@ -324,7 +324,7 @@ function addMarkerWithTimeout(position, timeout, suc, i, dir, telefono, celular,
 					var markd = map.createMarker({
 						position: position,
 						icon: urlMarker2,
-						// details:{estado:est},
+						details:{estado:est},
 						title: suc,
 						infoWindow: {
 							content: contents,
@@ -352,7 +352,6 @@ function addMarkerWithTimeout(position, timeout, suc, i, dir, telefono, celular,
 				}else{
 					urlMarker2 = "images/markFarmaCerrado.png";
 					est = 'cerrado';
-
 				}//fin del else 
 				var hOrdinario ='<div class="layoutcontentbutton">'+
 								'<div class="contentestado">'+
@@ -514,7 +513,7 @@ function generarRutaWalk(lat, lng, opcionTransporte){
 				origin: [currentLat, currentLng],
 				destination: [lat, lng],
 				travelMode: opcionTransporte,
-				strokeColor: '#FF0006',
+				strokeColor: '#FD3C41',
 				strokeOpacity: 0.6,
 				strokeWeight: 6
 			});
@@ -819,7 +818,7 @@ function buscarMarcador( lat, lng ) {
         var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
         var d = R * c;
         distances[i] = d;
-        
+        console.log(markerst[i].details.estado);
         if ( (closest == -1 || d < distances[closest]) && (markerst[i].details.estado==='abierto')) {
             closest = i;
         }
