@@ -268,8 +268,8 @@ function addMarkerWithTimeout(position, timeout, suc, i, dir, telefono, celular,
 				'</div>'+
 				'<div class="iw-content">'+
 						'<div class="row-content"><span class="icon-home"></span><div class="infocontent">'+ dir +'</div></div>'+
-						'<div class="row-content"><a href="tel:(037)'+ telefono +'" class="footertext"><span class="icon-phone"></span><span class="infocontent">'+ telefono +'</span></a></div>'+	
-						'<div class="row-content"><a href="tel:'+ celular +'" class="footertext"><span class="icon-mobile"></span><span class="infocontent">'+celular+'</span></a></div>'+	
+						'<div class="row-content"><a href="tel:(037)'+ telefono +'" class="footertext"><span class="icon-phone"></span><span class="infocontent"><span class="phonesuc">'+ telefono +'</span></span></a></div>'+	
+						'<div class="row-content"><a href="tel:'+ celular +'" class="footertext"><span class="icon-mobile"></span><span class="infocontent"><span class="phonesuc">'+celular+'</span></span></a></div>'+	
 						'<div class="row-content final"></div>'	+					
 						'<div class="layoutcontent">'+
 							'<div class="titlesection"><h3>Horarios</h3></div>';		

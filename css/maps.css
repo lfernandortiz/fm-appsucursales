@@ -882,6 +882,9 @@ border-top: 1px solid white;
 	.final{
 		margin: 0 0 4px 3px;		
 	}
+	.phonesuc{
+		font-weight: bold;
+	}
 
 	.infoestado{
 		font-size: .55rem;
@@ -903,6 +906,7 @@ border-top: 1px solid white;
 		color: #4F4F4F ;
 		font-size: .6rem;	
 	}
+	.
 
 	.buttonruta{	 	  
 	  padding: 2px 3px;	  
@@ -923,7 +927,7 @@ border-top: 1px solid white;
 		font-size: 1.6rem;
 	}
 	.buttonmenu{
-		padding: 1px;
+		padding: 5px;
 	}
 
 	.burgermenu{
@@ -1019,8 +1023,8 @@ border-top: 1px solid white;
 		border-radius: 2px;
 		padding: 3px;
 		font-weight: bold;
-		font-size: .8rem;
-		margin-bottom: 4px;
+		font-size: .75rem;
+		margin-bottom: 2px;
 	   	
 	}
 
