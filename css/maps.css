@@ -984,7 +984,7 @@ border-top: 1px solid white;
 
 	.contentsuc{
 		max-width: 95%;
-		height: 65%;
+		height: 70%;
 		border-radius: 3px;	
 		margin: 0 auto;
 		margin-bottom: 6px;
@@ -1026,7 +1026,7 @@ border-top: 1px solid white;
 	}
 
 	.cercabutton{
-		border-radius: 2px;
+		border-radius: 6px;
 		padding: 3px;
 		font-weight: bold;
 		font-size: .75rem;
