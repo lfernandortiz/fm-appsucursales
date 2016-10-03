@@ -18,7 +18,6 @@ var currentLat;
 var currentLng;
 var distanciaActual;
 
-
 //informacion y coordenada de sucursales
 //--esto se debe reemplazar por un servicio...
 var sucursales = [
@@ -68,9 +67,9 @@ function setCurrentCoords(){
 	GMaps.geolocate({
 		success: function(position) {
 			console.log('2');
-			console.log(position.coords.latitude != null);
+			// console.log(position.coords.latitude != null);
 			if(position.coords.latitude != null){
-				console.log('ingrese al else');
+				console.log('ingrese al if de coordenadass');
 				currentLat = position.coords.latitude;
 				currentLng = position.coords.longitude;	
 			}else{
@@ -178,9 +177,9 @@ function ocultarMostrar() {
     document.getElementById("menu").classList.toggle("active");
 }
 
-// cierra el menu cuando el usuario hace click por dentro y fuera de el
-window.onclick = function(event) {
-	
+// cierra el menu cuando el usuario hace click por dentro y fuera de el area
+//del menu 
+window.onclick = function(event) {	
   if (!event.target.matches('.burgermenu') ) {  	
     	var dropdowns = document.getElementById("menu");    	
     	dropdowns.classList.remove('active'); 
@@ -201,23 +200,6 @@ function mostrarSucursales(){
 	}	
 	document.getElementById('encuentranos').classList.toggle("eactive");
 }
-
-var consulta = window.matchMedia('(max-width: 320px)');
-consulta.addListener(mediaQuery);
-
-function mediaQuery() {
-	var menuboton = document.getElementById('buttonmenu');
-	if (consulta.matches) {
-		// si se cumple hagamos esto
-		console.log('se cumplió la condicion');
-		menuboton.addEventListener('touchstart', mostrarSucursales);
-	} else {
-		menuboton.removeEventListener('touchstart', mostrarSucursales);
-		// si no se cumple hagamos esto
-		console.log('no se cumplió la condicion');
-	}
-}
-
 
 
 function cargarSucursales(){
