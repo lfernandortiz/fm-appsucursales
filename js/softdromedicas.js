@@ -19,6 +19,8 @@ var currentLng;
 var distanciaActual;
 var geoLocateActive;
 
+console.log("test GMaps***");
+
 //informacion y coordenada de sucursales
 //--esto se debe reemplazar por un servicio...
 var sucursales = [
@@ -874,7 +876,7 @@ function crearSucursal(lat, lng, suc,  dir, i, marker){
 									//itera los marcadores para disparar el infowindow correspondiente
 									for( var i = 0 ; i < map.markers.length ; i++){
 										if( suc == map.markers[i].title)
-											map.markers[i].infoWindow.open(map, map.markers[i]);
+											map.markers[i].infoWindow.open(map, map.markers[i]);										
 										}//fin del if
 									},
 								  false);
