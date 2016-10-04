@@ -11,8 +11,37 @@
 	      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA3lhlUmXlLXYgbTTeGMp89zM6Ym49p5YU&callback=initMap" async defer>
 	</script> -->	
 	<link rel="stylesheet" href="css/maps.css">
+	 <meta name="HandheldFriendly" content="True">
+  	<meta name="MobileOptimized" content="320">
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=2.0, minimum-scale=1.0">
 	<link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico">
+	<link rel="apple-touch-icon" href="images/touch-icon-iphone-60x60.png">
+	<link rel="apple-touch-icon" sizes="60x60" href="images/touch-icon-ipad-76x76.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="images/touch-icon-iphone-retina-120x120.png">
+	<link rel="apple-touch-icon" sizes="144x144" href="images/touch-icon-ipad-retina-152x152.png">
+			
+	<!-- For iOS web apps. Delete if not needed. https://github.com/h5bp/mobile-boilerplate/issues/94 -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Sucursales Farmanorte">
+    <meta name="format-detection" content="telephone=no">
+
+	<script>(function(a, b, c) {
+			if(c in b&&b[c]) {
+				var d, e=a.location, f=/^(a|html)$/i;
+
+				a.addEventListener("click", function(a) {
+					d=a.target;
+					while(!f.test(d.nodeName))d=d.parentNode;
+					"href"in d&&(d.href.indexOf("http")||~d.href.indexOf(e.host))&&(a.preventDefault(), e.href=d.href)
+				}
+				, !1)
+			}
+		}
+		)(document, window.navigator, "standalone")
+	</script>
+
+
 </head>
 <!-- api_key_googlemaps_dromedicas  AIzaSyA3lhlUmXlLXYgbTTeGMp89zM6Ym49p5YU-->
 <body>
