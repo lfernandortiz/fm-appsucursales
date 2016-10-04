@@ -120,13 +120,19 @@ function crearMapa(){
 	
 	//registro de manejo de evento del boton de menu
 	var menuboton = document.getElementById('buttonmenu');	
+	var closemenul = document.getElementById('closemenu');	
 
 	var consulta = window.matchMedia('(max-width: 768px)');
     // consulta.addListener(mediaQuery);}
     console.log(consulta.matches);
     if(consulta.matches){
     	var mc = new Hammer(menuboton);
+    	var mcp = new Hammer(closemenul);
 		mc.on("tap press", function(ev) {
+			console.log(ev.type +" gesto detectado.");
+    		ocultarMostrar();
+		});
+		mcp.on("tap press", function(ev) {
 			console.log(ev.type +" gesto detectado.");
     		ocultarMostrar();
 		});
@@ -289,9 +295,9 @@ function addMarkerWithTimeout(position, timeout, suc, i, dir, telefono, celular,
 						'<div class="row-content"><a href="tel:'+ celular +'" class="footertext"><span class="icon-mobile"></span><span class="infocontent"><span class="phonesuc">'+celular+'</span></span></a></div>'+	
 						'<div class="row-content final"></div>'	+					
 						'<div class="layoutcontent">'+
-							'<div class="titlesection"><h3>Horarios</h3></div>';		
+							'<div class="titlesection" id="titulohorario"><h3>Horarios</h3></div>';		
 		
-		var _24_horas= 	'<div class="_24horas"><h4>Servicicio 24 Horas</h4></div>';
+		var _24_horas= 	'<div class="_24horas" id="detalle24h"><h4>Servicicio 24 Horas</h4></div>';
 						
 		var complementoHora = 	'<div class="contentestado">'+
 									'<div class="titleestado"><h4>Estado</h4></div>'+
@@ -300,8 +306,8 @@ function addMarkerWithTimeout(position, timeout, suc, i, dir, telefono, celular,
 							'</div><!-- fin de layoutcontentbutton de horarios-->'+
 						'</div><!-- fin de layoutcontent-->';
 						
-		var footer =	'<div class="row-content final"></div>'	+
-						'<div class="layoutcontentbutton">'+
+		var footer =	'<div class="row-content final" id="infoHora"></div>'	+
+						'<div class="layoutcontentbutton" >'+
 							'<div class="titlesection"><h3>Como Llegar</h3></div>'+
 							'<div class="layoutcontentbutton">'+
 								'<button class="buttonruta" id="btnCar" data-lat="'+position.lat()+'" data-lng="'+position.lng()+'"><i class="zmdi zmdi zmdi-car zmdi-hc-2x"></i>&nbsp;Carro</button>'+
@@ -356,7 +362,7 @@ function addMarkerWithTimeout(position, timeout, suc, i, dir, telefono, celular,
 					urlMarker2 = "images/markFarmaCerrado.png";
 					est = 'cerrado';								
 				}//fin del else 
-				var hOrdinario ='<div class="layoutcontentbutton">'+
+				var hOrdinario ='<div class="layoutcontentbutton" id="infoHoradetalle">'+
 								'<div class="contentestado">'+
 								'<input id="estadoSucursal" type="hidden" value="'+est+'">'+
 									'<div class="titleestado"><h4>Lunes - Sabado</h4></div>'+
