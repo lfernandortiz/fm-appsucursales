@@ -17,6 +17,7 @@ var markerNear;
 var currentLat;
 var currentLng;
 var distanciaActual;
+var geoLocateActive;
 
 //informacion y coordenada de sucursales
 //--esto se debe reemplazar por un servicio...
@@ -54,8 +55,8 @@ var sucursales = [
 ];
 
 function iniciar(){
-	//se cargan las coordenadas actuales
-	//dentro de este medoto se manda a crear el mapa 
+	//se cargan las coordenadas actuales y dentro 
+	//de este medoto se manda a crear el mapa 
 	//invocando la funcion crearMapa
 	setCurrentCoords();	
 }
@@ -63,25 +64,20 @@ function iniciar(){
 //establece las coordenadas de la ubicacion actual a las variables globales de longitud y latitud
 function setCurrentCoords(){
 	GMaps.geolocate({
-		success: function(position) {
-			console.log('2');
-			// console.log(position.coords.latitude != null);
-			if(position.coords.latitude != null){
-				console.log('ingrese al if de coordenadass');
-				currentLat = position.coords.latitude;
-				currentLng = position.coords.longitude;	
-			}else{
-				console.log('ingrese al else');
-				currentLat = currentLat;
-				currentLng = cucutalng;	
-			}
-			console.log("Coordenadas Actuales Lat: " + currentLat + " Lng: " + currentLng);	
-			crearMapa();//mando a crear el mapa y registrar eventos
+		success: function(position) {					
+			currentLat = position.coords.latitude;
+			currentLng = position.coords.longitude;	
+			geoLocateActive = true;				
+			crearMapa();//manda a crear el mapa y registrar eventos
 		},
 		error: function(error) {	
-		var errorGeo = document.getElementById("errorglocate");    	
-    	errorGeo.style.display = 'block';
-		console.log("error al establecer las coordenadas")		;
+			var errorGeo = document.getElementById("errorglocate");    	
+    		errorGeo.style.display = 'block';
+    		currentLat = cucutalat;
+			currentLng = cucutalng;	
+			geoLocateActive = false;			
+			crearMapa();//manda a crear el mapa, egistrar eventos pero sin marker de ubicacion actual
+					
 		},
 		not_supported: function() {			
 		},		
@@ -95,7 +91,7 @@ function crearMapa(){
 		div: '#map',
 		lat:  currentLat,
 		lng:  currentLng,
-		zoom: 13,
+		zoom: 14,
 		zoomControl : true,
 		// scrollwheel:false,		
 		// panControl: false,
@@ -104,12 +100,17 @@ function crearMapa(){
 		overviewMapControl: false,
 		// clickable: false
 	});	
-	map.addMarker({
+	//si la geolocalizacion esta desactivada no añade marker 
+	//de ubicacion actual
+	if(geoLocateActive){
+		map.addMarker({
 				title: 'Mi ubicación',
 				lat: currentLat,
 				lng: currentLng,
 				// draggable:true,
 				});
+	}
+	
 	//creando los marcadores
 	createMarkers();
 	//registrando manejo de evento de cierre de infowindow clic en el mapa	
@@ -118,16 +119,21 @@ function crearMapa(){
 	});
 	
 	//registro de manejo de evento del boton de menu
-	var menuboton = document.getElementById('buttonmenu');
-	// menuboton.addEventListener('click', ocultarMostrar, false );
+	var menuboton = document.getElementById('buttonmenu');	
 
-	var consulta = window.matchMedia('(max-width: 500px)');
+	var consulta = window.matchMedia('(max-width: 320px)');
     // consulta.addListener(mediaQuery);}
-
-	var mc = new Hammer(menuboton);
-	mc.on("tap press", function(ev) {
-    ocultarMostrar();
-	});
+    console.log(consulta.matches);
+    if(consulta.matches){
+    	var mc = new Hammer(menuboton);
+		mc.on("tap press", function(ev) {
+			console.log(ev.type +" gesto detectado.");
+    		ocultarMostrar();
+		});
+    }else{
+    	menuboton.addEventListener('click', function(){ ocultarMostrar(event);} , false );
+    }
+	
 	
 	var opcionSuc = document.getElementById('sucursales');
 	opcionSuc.addEventListener('click', mostrarSucursales, false );
@@ -146,15 +152,17 @@ function crearMapa(){
 
 	var marCerca = document.getElementById('cercabutton');
 	marCerca.addEventListener('click', function(){ mostrarSucursales(); findMe();}, false);
+
+	google.maps.event.addDomListener(window, "resize", function() {
+		var center = map.map.getCenter();
+		google.maps.event.trigger(map.map, "resize");
+		map.map.setCenter(center);
+	});
 	
 }//fin del metodo iniciar
 
 //Resize Function
-google.maps.event.addDomListener(window, "resize", function() {
-	var center = map.map.getCenter();
-	google.maps.event.trigger(map.map, "resize");
-	map.map.setCenter(center);
-});
+
 
 //los suguientes dos metdos de jquery implementan el scrroll para infosucursales
 $('.contentsuc').impulse();
@@ -179,7 +187,8 @@ function resetMapa(){
 	map.hideInfoWindows();
 }
 
-function ocultarMostrar() {	
+function ocultarMostrar(ev) {	
+	console.log('Ocultar Mostrar funcion ' + ev);
     document.getElementById("menu").classList.toggle("active");
 }
 
