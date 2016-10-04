@@ -488,21 +488,17 @@ function getRealHour(stringHour){
 //para mostrar la informacion de la sucursal en un objeto InfoWindow
 function addMarkerWithTimeoutPpal(position, timeout, suc, i, dir, telefono, celular) {
 		
-		var contents = 
+		var contentsp = 
 			'<div id="iw-container">' +
                 '<div class="iw-titleppal">'+
-					'<img src="images/iconoDromedicas.png" alt="logoFarmanorte">'+
+					'<img src="images/iconoDromedicas.png" alt="logoDromedicas">'+
 					'<h3>'+ suc +'</h3>'+
 				'</div>'+
 				'<div class="iw-contentppal">'+
-					'<p><span class="icon-home"></span>'+ dir +'</p>'+
-					'<p><a href="tel:(037)'+ telefono +'" class="footertext"><span class="icon-phone"></span>'+ telefono +'</a></p>'+	
-					'<p><a href="tel:'+celular+'" class="footertext"><span class="icon-phone"></span>'+celular+'</a></p>'+	
-					// '<h3>Horarios</h3>'+
-					// '<p class="horario">24 Horas.</p>'+
-				'</div>'+
-            '</div>';
-        
+						'<div class="row-content"><span class="icon-home"></span><div class="infocontent">'+ dir +'</div></div>'+
+						'<div class="row-content"><a href="tel:(037)'+ telefono +'" class="footertext"><span class="icon-phone"></span><span class="infocontent"><span class="phonesuc">'+ telefono +'</span></span></a></div>'+	
+						'<div class="row-content"><a href="tel:'+ celular +'" class="footertext"><span class="icon-mobile"></span><span class="infocontent"><span class="phonesuc">'+celular+'</span></span></a></div>';
+		
 		//registro del manejo de evento click para desplegar el objeto InfoWindow
 		window.setTimeout(function(){
 					//añadir un marker con GMap
@@ -510,7 +506,7 @@ function addMarkerWithTimeoutPpal(position, timeout, suc, i, dir, telefono, celu
 					    position: position,
 					    icon: "images/markDromedicas.png",
 						title: 'Dromedicas del Oriente',
-						infoWindow: {content:contents},
+						infoWindow: {content:contentsp},
 						animation: google.maps.Animation.DROP,
 					});
 					//obteniendo el infowindow del objeto GMap
@@ -618,12 +614,17 @@ function editCssInfoWindowNormal(){
 		// Reference to the div that groups the close button elements.
 		var iwCloseBtn = iwOuter.next();
 		// Apply the desired effect to the close button
-		var consulta = window.matchMedia('(max-width:320px)');
+		var consulta = window.matchMedia('(max-width:320px)');		
 		if( consulta.matches){			
-			iwCloseBtn.css({opacity: '1', right: '18spx', top: '3px', border: '7px solid rgba(0, 10, 123, 1.0)', 'border-radius': '5px', 'box-shadow': '0 0 5px rgba(0, 10, 123, .9)'});		
+			iwCloseBtn.css({opacity: '1', right: '2px', top: '3px', border: '7px solid rgba(0, 10, 123, 1.0)', 'border-radius': '5px', 'box-shadow': '0 0 5px rgba(0, 10, 123, .9)'});		
 		}else{
 			iwCloseBtn.css({opacity: '1', right: '38px', top: '3px', border: '7px solid rgba(0, 10, 123, 1.0)', 'border-radius': '5px', 'box-shadow': '0 0 5px rgba(0, 10, 123, .9)'});
 		}		
+		consulta = window.matchMedia('(min-width:321px) and (max-width:550px)');		
+		if( consulta.matches){			
+			iwCloseBtn.css({opacity: '1', right: '10px', top: '3px', border: '7px solid rgba(0, 10, 123, 1.0)', 'border-radius': '5px', 'box-shadow': '0 0 5px rgba(0, 10, 123, .9)'});		
+		}
+
 		// If the content of infowindow not exceed the set maximum height, then the gradient is removed.
 		// if($('.iw-content').height() < 140){
 		// $('.iw-bottom-gradient').css({display: 'none'});
@@ -692,12 +693,15 @@ function editCssInfoWindow(){
 		// Reference to the div that groups the close button elements.
 		var iwCloseBtn = iwOuter.next();
 		// Apply the desired effect to the close button
-		var consulta = window.matchMedia('(max-width:320px)');
-		console.log(consulta.matches);
+		var consulta = window.matchMedia('(max-width:320px)');		
 		if( consulta.matches){			
-			iwCloseBtn.css({opacity: '1', right: '18spx', top: '3px', border: '7px solid rgba(0, 10, 123, 1.0)', 'border-radius': '5px', 'box-shadow': '0 0 5px rgba(0, 10, 123, .9)'});		
+			iwCloseBtn.css({opacity: '1', right: '2px', top: '3px', border: '7px solid rgba(0, 10, 123, 1.0)', 'border-radius': '5px', 'box-shadow': '0 0 5px rgba(0, 10, 123, .9)'});		
 		}else{
 			iwCloseBtn.css({opacity: '1', right: '38px', top: '3px', border: '7px solid rgba(0, 10, 123, 1.0)', 'border-radius': '5px', 'box-shadow': '0 0 5px rgba(0, 10, 123, .9)'});
+		}		
+		consulta = window.matchMedia('(min-width:321px) and (max-width:550px)');		
+		if( consulta.matches){			
+			iwCloseBtn.css({opacity: '1', right: '10px', top: '3px', border: '7px solid rgba(0, 10, 123, 1.0)', 'border-radius': '5px', 'box-shadow': '0 0 5px rgba(0, 10, 123, .9)'});		
 		}
 		// If the content of infowindow not exceed the set maximum height, then the gradient is removed.
 		// if($('.iw-content').height() < 140){
@@ -733,6 +737,7 @@ function editCssInfoWindow(){
 function editCssInfoWindowPpal(){
 	//Desde aca se comienza la manipulacion del DOM del objeto Info Window
 	//nos apoyamos de jQuery
+	console.log('css ppal');
 	google.maps.event.addListener(infoWindowCustom, 'domready', function() {
 		// Reference to the DIV that wraps the bottom of infowindow
 		var iwOuter = $('.gm-style-iw');
@@ -749,12 +754,15 @@ function editCssInfoWindowPpal(){
 		// Reference to the div that groups the close button elements.
 		var iwCloseBtn = iwOuter.next();
 		// Apply the desired effect to the close button
-		var consulta = window.matchMedia('(max-width:320px)');
-		console.log(consulta.matches);
+		var consulta = window.matchMedia('(max-width:320px)');		
 		if( consulta.matches){			
-			iwCloseBtn.css({opacity: '1', right: '18spx', top: '3px', border: '7px solid rgba(0, 10, 123, 1.0)', 'border-radius': '5px', 'box-shadow': '0 0 5px rgba(0, 10, 123, .9)'});		
+			iwCloseBtn.css({opacity: '1', right: '2px', top: '3px', border: '7px solid rgba(0, 10, 123, 1.0)', 'border-radius': '5px', 'box-shadow': '0 0 5px rgba(0, 10, 123, .9)'});		
 		}else{
 			iwCloseBtn.css({opacity: '1', right: '38px', top: '3px', border: '7px solid rgba(0, 10, 123, 1.0)', 'border-radius': '5px', 'box-shadow': '0 0 5px rgba(0, 10, 123, .9)'});
+		}		
+		consulta = window.matchMedia('(min-width:321px) and (max-width:550px)');		
+		if( consulta.matches){			
+			iwCloseBtn.css({opacity: '1', right: '10px', top: '3px', border: '7px solid rgba(0, 10, 123, 1.0)', 'border-radius': '5px', 'box-shadow': '0 0 5px rgba(0, 10, 123, .9)'});		
 		}
 		// If the content of infowindow not exceed the set maximum height, then the gradient is removed.
 		// if($('.iw-content').height() < 140){

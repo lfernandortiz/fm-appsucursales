@@ -861,11 +861,23 @@ border-top: 1px solid white;
 	.iw-title{
 		height: 1.8rem;
 	}
+	.iw-titleppal{
+		height: 1.8rem;
+	}
 	.iw-title img {
 		width: 2rem;
 		margin-left: 8px;
 	}
+	.iw-titleppal img {
+		width: 2rem;
+		margin-left: 8px;
+	}
 	.iw-title h3 {
+		margin-left: .4rem;
+		font-size: .9rem;
+		padding: 2px;
+	}
+	.iw-titleppal h3 {
 		margin-left: .4rem;
 		font-size: .9rem;
 		padding: 2px;
@@ -1026,22 +1038,187 @@ border-top: 1px solid white;
 	}
 
 	.cercabutton{
-		border-radius: 6px;
-		padding: 3px;
-		font-weight: bold;
-		font-size: .75rem;
-		margin-bottom: 2px;
+		display: none;
 	   	
 	}
+}/*end mq 320px*/
 
-	.cercabutton img{
-		width: 10px;
-		vertical-align: middle;
+
+@media screen and (min-width:321px) and (max-width:550px) {
+	
+	.iw-title{
+		height: 1.8rem;
+	}
+	.iw-title img {
+		width: 2rem;
+		margin-left: 8px;
+	}
+	.iw-title h3 {
+		margin-left: .4rem;
+		font-size: .9rem;
+		padding: 2px;
+	}
+	.row-content{
+		margin: 0 0 2px 3px;		
+	}
+	.infocontent{
+		font-size: .75rem;
+		margin-left: 1px;		
+	}
+	.gm-style-iw:nth-child(1){
+		display: block;
+	}
+	.final{
+		margin: 0 0 4px 3px;		
+	}
+	.phonesuc{
+		font-weight: bold;
+	}
+
+	.infoestado{
+		font-size: .55rem;
+		font-weight: bold;		
+	}
+	.layoutcontentbutton{
+		justify-content: center;
+	}
+	.titleestado h4{
+		font-size: .5rem;
+	}
+	._24horas{
+		margin: 0 10px 3px 5px;
+	}
+	._24horas h4{
+		font-size: .65rem;
+	}
+	.titlesection h3{
+		color: #4F4F4F ;
+		font-size: .6rem;	
+	}
+
+	.buttonruta{	 	  
+	  padding: 2px 3px;	  
+	  text-decoration: none;
+	  font-size: .55rem;  		 
+	}
+	.buttonruta:hover {
+		text-decoration: none;
+		border: 1px solid #002B7B;
+		color: #FFFFFF;
+		font-size: .55rem;
+		padding: 2px 3px;	 
+		background: #000A7B;  /*background: linear-gradient(to bottom, #001D7B ,  #005FB0);*/
+	}
+
+	/*Titulo*/
+	.title h1{
+		font-size: 1.9rem;
+	}
+	.buttonmenu{
+		padding: 5px;
+	}
+
+	.burgermenu{
+		font-size: 1.7rem;
+	}
+
+	.header img{
+		width: 48px;
+	}
+	.errorglocate{		
+	    font-size:  .9rem;	    
+	    padding: 5px;	    
+	}
+	.buttonreset{		
+		font-size: .75rem;		
+		padding: 4px 6px;		
+	}
+	.menu {		
+		font-family: 'Montserrat', sans-serif;
+		width: 70%;
+		height: 9rem;
+		z-index: 2;
+		transition: .4s;
+		/*display: none;*/
+	}	
+
+	#mainc {
+		display: block;		
+		width: 100%;
+		height: 80vh;		
+	}
+
+	/*Cuadro Sucursales*/
+	.encuentranos{
+		width: 92vw;
+		height: 65vh;
+		background: rgba(0, 10, 123, .75);		
+		border-radius: 6px;		
+		left: 6px;		
+	}
+	/********/
+	
+	.close{
+		color: #FFFFFF;
+		font-size: 1.6rem;
+		text-align: right;
 	}
 
 	
+	.headenc h2{
+		font-size: 1.7rem;
+		margin: 0 0 10px 0;
+	}
 
+	.contentsuc{
+		max-width: 95%;
+		height: 71%;
+		border-radius: 3px;	
+		margin: 0 auto;
+		margin-bottom: 6px;
+	}
 
-}
+	.divsucursal{
+		border-radius: 5px;
+		max-width: 92%;	
+		margin: 4px auto;
+		padding: 1px 6px;		
+	}
 
+	.divmarker img{
+		width: 20px;
+		margin-left: 1px;
+	}
 
+	.detallesuc{
+		margin: 5px 0 0 10px;	
+	}
+
+	.detallesuc h3{
+		font-size: 1.2rem;		
+		margin-bottom: 3px;
+	}
+
+	.detallesuc p{
+		font-size: 1rem;
+	}
+
+	.distancediv{
+		text-align: right;
+		font-weight: bold;
+		font-size: .95rem;
+	}
+
+	.divcerca{
+		text-align: center;
+	}
+
+	.cercabutton{
+		padding: 3px;
+		font-size: .85rem;	   	
+	}
+	.cercabutton img{
+		width: 12px;
+	}
+
+}/*(min-width:321px) and (max-width:550px)*/
