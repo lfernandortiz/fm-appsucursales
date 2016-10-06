@@ -66,7 +66,8 @@ function iniciar(){
 //establece las coordenadas de la ubicacion actual a las variables globales de longitud y latitud
 function setCurrentCoords(){
 	GMaps.geolocate({
-		success: function(position) {					
+		success: function(position) {		
+			alert("Latitud: " + position.coords.latitude + "\n" + "Longitud: " + position.coords.longitude);		
 			currentLat = position.coords.latitude;
 			currentLng = position.coords.longitude;	
 			geoLocateActive = true;				
