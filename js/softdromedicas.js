@@ -67,7 +67,7 @@ function iniciar(){
 function setCurrentCoords(){
 	GMaps.geolocate({
 		success: function(position) {		
-			alert("Latitud: " + position.coords.latitude + "\n" + "Longitud: " + position.coords.longitude);		
+			// alert("Latitud: " + position.coords.latitude + "\n" + "Longitud: " + position.coords.longitude);		
 			currentLat = position.coords.latitude;
 			currentLng = position.coords.longitude;	
 			geoLocateActive = true;				
