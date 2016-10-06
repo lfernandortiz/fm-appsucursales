@@ -73,7 +73,7 @@ function setCurrentCoords(){
 			crearMapa();//manda a crear el mapa y registrar eventos
 		},
 		error: function(error) {	
-			
+
 			var errorGeo = document.getElementById("errorglocate");    	
     		errorGeo.style.display = 'block';
     		currentLat = cucutalat;
@@ -908,7 +908,6 @@ function buscarMarcador( lat, lng ) {
         var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
         var d = R * c;
         distances[i] = d;
-        console.log(markerst[i].details.estado);
         if ( (closest == -1 || d < distances[closest]) && (markerst[i].details.estado==='abierto')) {
             closest = i;
         }
