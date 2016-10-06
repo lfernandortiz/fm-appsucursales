@@ -73,7 +73,7 @@ function setCurrentCoords(){
 			crearMapa();//manda a crear el mapa y registrar eventos
 		},
 		error: function(error) {	
-			alert(':-(');
+			
 			var errorGeo = document.getElementById("errorglocate");    	
     		errorGeo.style.display = 'block';
     		currentLat = cucutalat;
