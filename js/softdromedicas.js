@@ -850,8 +850,14 @@ function crearSucursal(lat, lng, suc,  dir, i, marker){
 						if (status !== google.maps.DistanceMatrixStatus.OK) {
 							//implementar div
 						} else {		
-							var d = response.rows[0].elements[0].distance.text;
-							distanciaSucElement.appendChild( document.createTextNode( d ) );							
+							var d = response.rows[0].elements[0].distance.value;
+							var distancia;
+							if( d < 1000){
+								distancia = d + " mts";
+							}else{
+								distancia = (d/1000).toFixed(2) + " Km"
+							}
+							distanciaSucElement.appendChild( document.createTextNode( distancia ) );							
 						}
 					}
 				);
