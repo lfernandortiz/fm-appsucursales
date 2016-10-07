@@ -1,14 +1,16 @@
 console.log("test GMaps***");
 
+//objeto Mapa usado en toda la aplicacion
 var map;
+//coleccion de objetos Marker con todo los marcadores unicamente de las sucursales
 var markerst = [];
-//varible para objeto de informacion del marcador 
+//varible para objeto de informacion del infowindow del  marcador 
 var infoWindowCustom;
 
-//coordenadas iniciales
+//coordenadas iniciales para cucuta usadas en caso de estar desactivado el gps del dispositivo
 var cucutalat=  7.8890971;
 var cucutalng= -72.49668959999997;
-
+//ubicacion del archivo de imagen del marcador
 var urlMarker ;
 //este campo es usado por el metodo buscarMarcador para asignar el marcador mas cercano
 var markerNear;
@@ -17,6 +19,7 @@ var markerNear;
 var currentLat;
 var currentLng;
 var distanciaActual;
+//variable predicada que establece si el gps esta activo o no
 var geoLocateActive;
 
 console.log("test GMaps***");
@@ -56,6 +59,7 @@ var sucursales = [
 
 ];
 
+//funcion llamada al final por el registro de evento load del objeto window
 function iniciar(){
 	//se cargan las coordenadas actuales y dentro 
 	//de este medoto se manda a crear el mapa 
@@ -73,22 +77,22 @@ function setCurrentCoords(){
 			geoLocateActive = true;				
 			crearMapa();//manda a crear el mapa y registrar eventos
 		},
-		error: function(error) {	
-
+		error: function(error) {//si el gps esta desactivado
+			//muestra el div rojo
 			var errorGeo = document.getElementById("errorglocate");    	
     		errorGeo.style.display = 'block';
+    		//asigna como ubicacion local las coordenadas de cucuta
     		currentLat = cucutalat;
 			currentLng = cucutalng;	
 			geoLocateActive = false;			
-			crearMapa();//manda a crear el mapa, egistrar eventos pero sin marker de ubicacion actual
-					
+			crearMapa();//manda a crear el mapa, egistrar eventos pero sin marker de ubicacion actual					
 		},
 		not_supported: function() {			
 		},		
 	});	
 }
 
-//metodo principa
+//metodo principal que crea el mapa y registra eventos
 function crearMapa(){	
 	//crea el mapa con las coordenada iniciales y el zoom
 	map = new GMaps({
@@ -104,8 +108,7 @@ function crearMapa(){
 		overviewMapControl: false,
 		// clickable: false
 	});	
-	//si la geolocalizacion esta desactivada no añade marker 
-	//de ubicacion actual
+	//si el gps esta activo añade un marker con la ubicacion actual
 	if(geoLocateActive){
 		map.addMarker({
 				title: 'Mi ubicación',
@@ -113,10 +116,10 @@ function crearMapa(){
 				lng: currentLng,
 				// draggable:true,
 				});
-	}
-	
+	}	
 	//creando los marcadores
 	createMarkers();
+
 	//registrando manejo de evento de cierre de infowindow clic en el mapa	
 	google.maps.event.addListener(map.map, "click", function() {
 		map.hideInfoWindows();
@@ -259,6 +262,7 @@ function createMarkers(){
 		var sucursalt = new String('Dromedicas del Oriente SAS');
 		
 		if (principal.localeCompare(sucursalt) === 0) {	
+			//crea el marcador para la oficina ppal
 		 	addMarkerWithTimeoutPpal(coordenadas, i * 100, 
 										sucursales[i][0], i, sucursales[i][3], sucursales[i][4], sucursales[i][5] );			
 		} else {
