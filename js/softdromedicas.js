@@ -131,7 +131,8 @@ function crearMapa(){
 
 	var consulta = window.matchMedia('(max-width: 768px)');
     // consulta.addListener(mediaQuery);}
-    console.log(consulta.matches);
+
+   //si es un dispositivo movil registra eventos touch como tap y press
     if(consulta.matches){
     	var mc = new Hammer(menuboton);
     	var mcp = new Hammer(closemenul);
@@ -173,8 +174,6 @@ function crearMapa(){
 	});
 	
 }//fin del metodo iniciar
-
-//Resize Function
 
 
 //los suguientes dos metdos de jquery implementan el scrroll para infosucursales
@@ -228,12 +227,6 @@ function mostrarSucursales(){
 	}	
 	document.getElementById('encuentranos').classList.toggle("eactive");
 }
-
-
-//eventos hammer
-
-
-
 
 
 function cargarSucursales(){
@@ -487,6 +480,7 @@ function formatAMPM(date) {
 }// fin del metodo formatAMPM 
 
 
+
 //recibe una hora como String y la retorna en formato hora
 // puede recibir la hora en cualquier de esto formatos 
 //'1:00 pm','1:00 p.m.','1:00 p','1:00pm','1:00p.m.','1:00p','1 pm','1 p.m.','1 p','1pm','1p.m.', '1p','13:00','13'
@@ -497,6 +491,7 @@ function getRealHour(stringHour){
 	dateHour.setMinutes(parseInt(time[2]) || 0);
 	return dateHour;
 }//fin del metodo getRealHour
+
 
 //anade el marcardor "Marker" al mapa y registra el evento click sobre el marcador
 //para mostrar la informacion de la sucursal en un objeto InfoWindow
