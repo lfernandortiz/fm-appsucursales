@@ -107,11 +107,11 @@ function iniciar(){
 }//fin del metodo iniciar
 
 //Resize Function
-google.maps.event.addDomListener(window, "resize", function() {
-	var center = map.map.getCenter();
-	google.maps.event.trigger(map.map, "resize");
-	map.map.setCenter(center);
-});
+// google.maps.event.addDomListener(window, "resize", function() {
+// 	var center = map.map.getCenter();
+// 	google.maps.event.trigger(map.map, "resize");
+// 	map.map.setCenter(center);
+// });
 
 //los suguientes dos metdos de jquery implementan el scrroll para infosucursales
 $('.contentsuc').impulse();
