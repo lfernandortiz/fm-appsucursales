@@ -474,7 +474,7 @@ h1 {
 
 .header{
 	text-align: center;
-	box-shadow: 1px 4px 7px rgba(97, 97, 97, .55);
+	/*box-shadow: 1px 4px 7px rgba(97, 97, 97, .55);*/
 	background: ;
 	position: relative;
 	height: 4rem;
