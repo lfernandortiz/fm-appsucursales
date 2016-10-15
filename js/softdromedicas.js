@@ -1,14 +1,16 @@
-console.log("test GMaps");
+console.log("test GMaps***");
 
+//objeto Mapa usado en toda la aplicacion
 var map;
+//coleccion de objetos Marker con todo los marcadores unicamente de las sucursales
 var markerst = [];
-//varible para objeto de informacion del marcador 
+//varible para objeto de informacion del infowindow del  marcador 
 var infoWindowCustom;
 
-//coordenadas iniciales
+//coordenadas iniciales para cucuta usadas en caso de estar desactivado el gps del dispositivo
 var cucutalat=  7.8890971;
 var cucutalng= -72.49668959999997;
-
+//ubicacion del archivo de imagen del marcador
 var urlMarker ;
 //este campo es usado por el metodo buscarMarcador para asignar el marcador mas cercano
 var markerNear;
@@ -17,7 +19,10 @@ var markerNear;
 var currentLat;
 var currentLng;
 var distanciaActual;
+//variable predicada que establece si el gps esta activo o no
+var geoLocateActive;
 
+console.log("test GMaps***");
 
 //informacion y coordenada de sucursales
 //--esto se debe reemplazar por un servicio...
@@ -52,17 +57,48 @@ var sucursales = [
 	['Farmanorte 27', 7.91694492, -72.4727475, 'El Escobal, Anillo Vial, Plaza Del Este Local 6', '5847808','3188135356', 'CUCUTA','','7am', '22', '7am', '10pm', 28],
 	['San Antonio del Norte', 7.88749215, -72.50609315, 'Av 7 Calle 9 Esquina Centro', '5727091','3155997098', 'CUCUTA','','7am', '20', '8am', '2pm', 29],
 
-
 ];
 
-//metodo principa
+//funcion llamada al final por el registro de evento load del objeto window
 function iniciar(){
+	//se cargan las coordenadas actuales y dentro 
+	//de este medoto se manda a crear el mapa 
+	//invocando la funcion crearMapa
+	setCurrentCoords();	
+}
 
+//establece las coordenadas de la ubicacion actual a las variables globales de longitud y latitud
+function setCurrentCoords(){
+	GMaps.geolocate({
+		success: function(position) {		
+			// alert("Latitud: " + position.coords.latitude + "\n" + "Longitud: " + position.coords.longitude);		
+			currentLat = position.coords.latitude;
+			currentLng = position.coords.longitude;	
+			geoLocateActive = true;				
+			crearMapa();//manda a crear el mapa y registrar eventos
+		},
+		error: function(error) {//si el gps esta desactivado
+			//muestra el div rojo
+			var errorGeo = document.getElementById("errorglocate");    	
+    		errorGeo.style.display = 'block';
+    		//asigna como ubicacion local las coordenadas de cucuta
+    		currentLat = cucutalat;
+			currentLng = cucutalng;	
+			geoLocateActive = false;			
+			crearMapa();//manda a crear el mapa, egistrar eventos pero sin marker de ubicacion actual					
+		},
+		not_supported: function() {			
+		},		
+	});	
+}
+
+//metodo principal que crea el mapa y registra eventos
+function crearMapa(){	
 	//crea el mapa con las coordenada iniciales y el zoom
 	map = new GMaps({
 		div: '#map',
-		lat:  cucutalat,
-		lng:  cucutalng,
+		lat:  currentLat,
+		lng:  currentLng,
 		zoom: 14,
 		zoomControl : true,
 		// scrollwheel:false,		
@@ -71,21 +107,48 @@ function iniciar(){
 		mapTypeControl: false,
 		overviewMapControl: false,
 		// clickable: false
-	});
-
-	//metodo para geolocalizacion y trazo de la ruta
-	setCurrentCoords();
+	});	
+	//si el gps esta activo añade un marker con la ubicacion actual
+	if(geoLocateActive){
+		map.addMarker({
+				title: 'Mi ubicación',
+				lat: currentLat,
+				lng: currentLng,
+				// draggable:true,
+				});
+	}	
 	//creando los marcadores
 	createMarkers();
+
 	//registrando manejo de evento de cierre de infowindow clic en el mapa	
 	google.maps.event.addListener(map.map, "click", function() {
 		map.hideInfoWindows();
 	});
 	
 	//registro de manejo de evento del boton de menu
-	var menuboton = document.getElementById('buttonmenu');
-	menuboton.addEventListener('click', ocultarMostrar, false );
+	var menuboton = document.getElementById('buttonmenu');	
+	var closemenul = document.getElementById('closemenu');	
 
+	var consulta = window.matchMedia('(max-width: 768px)');
+    // consulta.addListener(mediaQuery);}
+
+   //si es un dispositivo movil registra eventos touch como tap y press
+    if(consulta.matches){
+    	var mc = new Hammer(menuboton);
+    	var mcp = new Hammer(closemenul);
+		mc.on("tap press", function(ev) {
+			console.log(ev.type +" gesto detectado.");
+    		ocultarMostrar();
+		});
+		mcp.on("tap press", function(ev) {
+			console.log(ev.type +" gesto detectado.");
+    		ocultarMostrar();
+		});
+    }else{
+    	menuboton.addEventListener('click', function(){ ocultarMostrar(event);} , false );
+    }
+	
+	
 	var opcionSuc = document.getElementById('sucursales');
 	opcionSuc.addEventListener('click', mostrarSucursales, false );
 
@@ -103,8 +166,15 @@ function iniciar(){
 
 	var marCerca = document.getElementById('cercabutton');
 	marCerca.addEventListener('click', function(){ mostrarSucursales(); findMe();}, false);
+
+	google.maps.event.addDomListener(window, "resize", function() {
+		var center = map.map.getCenter();
+		google.maps.event.trigger(map.map, "resize");
+		map.map.setCenter(center);
+	});
 	
 }//fin del metodo iniciar
+
 
 //Resize Function
 // google.maps.event.addDomListener(window, "resize", function() {
@@ -113,15 +183,13 @@ function iniciar(){
 // 	map.map.setCenter(center);
 // });
 
+
 //los suguientes dos metdos de jquery implementan el scrroll para infosucursales
 $('.contentsuc').impulse();
 $(".encuentranos").fancy_scroll({
   innerWrapper: ".contentsuc"
 });
 
-// $( function() {
-//     $( "#encuentranos" ).draggable();
-//   } );
 
 function resetMapa(){
 	$('body,html').animate({
@@ -135,23 +203,18 @@ function resetMapa(){
 	// mostrarSucursales();
 	//elimina todas las rutas 
 	map.cleanRoute();
-	//elimina el marker de ubicacion actual	
-	// for(var i = 0 ; i < map.markers.length ; i++){
-	// 	if(map.markers[i].title =='Mi ubicación'){
-	// 		map.markers[i].setMap(null);
-	// 	}
-	// }	
 	//oculta todos los infowindow
 	map.hideInfoWindows();
 }
 
-function ocultarMostrar() {	
+function ocultarMostrar(ev) {	
+	console.log('Ocultar Mostrar funcion ' + ev);
     document.getElementById("menu").classList.toggle("active");
 }
 
-// cierra el menu cuando el usuario hace click por dentro y fuera de el
-window.onclick = function(event) {
-	
+// cierra el menu cuando el usuario hace click por dentro y fuera de el area
+//del menu 
+window.onclick = function(event) {	
   if (!event.target.matches('.burgermenu') ) {  	
     	var dropdowns = document.getElementById("menu");    	
     	dropdowns.classList.remove('active'); 
@@ -200,6 +263,7 @@ function createMarkers(){
 		var sucursalt = new String('Dromedicas del Oriente SAS');
 		
 		if (principal.localeCompare(sucursalt) === 0) {	
+			//crea el marcador para la oficina ppal
 		 	addMarkerWithTimeoutPpal(coordenadas, i * 100, 
 										sucursales[i][0], i, sucursales[i][3], sucursales[i][4], sucursales[i][5] );			
 		} else {
@@ -236,13 +300,13 @@ function addMarkerWithTimeout(position, timeout, suc, i, dir, telefono, celular,
 				'</div>'+
 				'<div class="iw-content">'+
 						'<div class="row-content"><span class="icon-home"></span><div class="infocontent">'+ dir +'</div></div>'+
-						'<div class="row-content"><a href="tel:(037)'+ telefono +'" class="footertext"><span class="icon-phone"></span><span class="infocontent">'+ telefono +'</span></a></div>'+	
-						'<div class="row-content"><a href="tel:'+ celular +'" class="footertext"><span class="icon-mobile"></span><span class="infocontent">'+celular+'</span></a></div>'+	
+						'<div class="row-content"><a href="tel:(037)'+ telefono +'" class="footertext"><span class="icon-phone"></span><span class="infocontent"><span class="phonesuc">'+ telefono +'</span></span></a></div>'+	
+						'<div class="row-content"><a href="tel:'+ celular +'" class="footertext"><span class="icon-mobile"></span><span class="infocontent"><span class="phonesuc">'+celular+'</span></span></a></div>'+	
 						'<div class="row-content final"></div>'	+					
 						'<div class="layoutcontent">'+
-							'<div class="titlesection"><h3>Horarios</h3></div>';		
+							'<div class="titlesection" id="titulohorario"><h3>Horarios</h3></div>';		
 		
-		var _24_horas= 	'<div class="_24horas"><h4>Servicicio 24 Horas</h4></div>';
+		var _24_horas= 	'<div class="_24horas" id="detalle24h"><h4>Servicicio 24 Horas</h4></div>';
 						
 		var complementoHora = 	'<div class="contentestado">'+
 									'<div class="titleestado"><h4>Estado</h4></div>'+
@@ -251,8 +315,8 @@ function addMarkerWithTimeout(position, timeout, suc, i, dir, telefono, celular,
 							'</div><!-- fin de layoutcontentbutton de horarios-->'+
 						'</div><!-- fin de layoutcontent-->';
 						
-		var footer =	'<div class="row-content final"></div>'	+
-						'<div class="layoutcontentbutton">'+
+		var footer =	'<div class="row-content final" id="infoHora"></div>'	+
+						'<div class="layoutcontentbutton" >'+
 							'<div class="titlesection"><h3>Como Llegar</h3></div>'+
 							'<div class="layoutcontentbutton">'+
 								'<button class="buttonruta" id="btnCar" data-lat="'+position.lat()+'" data-lng="'+position.lng()+'"><i class="zmdi zmdi zmdi-car zmdi-hc-2x"></i>&nbsp;Carro</button>'+
@@ -307,7 +371,7 @@ function addMarkerWithTimeout(position, timeout, suc, i, dir, telefono, celular,
 					urlMarker2 = "images/markFarmaCerrado.png";
 					est = 'cerrado';								
 				}//fin del else 
-				var hOrdinario ='<div class="layoutcontentbutton">'+
+				var hOrdinario ='<div class="layoutcontentbutton" id="infoHoradetalle">'+
 								'<div class="contentestado">'+
 								'<input id="estadoSucursal" type="hidden" value="'+est+'">'+
 									'<div class="titleestado"><h4>Lunes - Sabado</h4></div>'+
@@ -323,7 +387,7 @@ function addMarkerWithTimeout(position, timeout, suc, i, dir, telefono, celular,
 					var markd = map.createMarker({
 						position: position,
 						icon: urlMarker2,
-						// details:{estado:est},
+						details:{estado:est},
 						title: suc,
 						infoWindow: {
 							content: contents,
@@ -351,7 +415,6 @@ function addMarkerWithTimeout(position, timeout, suc, i, dir, telefono, celular,
 				}else{
 					urlMarker2 = "images/markFarmaCerrado.png";
 					est = 'cerrado';
-
 				}//fin del else 
 				var hOrdinario ='<div class="layoutcontentbutton">'+
 								'<div class="contentestado">'+
@@ -425,6 +488,7 @@ function formatAMPM(date) {
 }// fin del metodo formatAMPM 
 
 
+
 //recibe una hora como String y la retorna en formato hora
 // puede recibir la hora en cualquier de esto formatos 
 //'1:00 pm','1:00 p.m.','1:00 p','1:00pm','1:00p.m.','1:00p','1 pm','1 p.m.','1 p','1pm','1p.m.', '1p','13:00','13'
@@ -436,25 +500,22 @@ function getRealHour(stringHour){
 	return dateHour;
 }//fin del metodo getRealHour
 
+
 //anade el marcardor "Marker" al mapa y registra el evento click sobre el marcador
 //para mostrar la informacion de la sucursal en un objeto InfoWindow
 function addMarkerWithTimeoutPpal(position, timeout, suc, i, dir, telefono, celular) {
 		
-		var contents = 
+		var contentsp = 
 			'<div id="iw-container">' +
                 '<div class="iw-titleppal">'+
-					'<img src="images/iconoDromedicas.png" alt="logoFarmanorte">'+
+					'<img src="images/iconoDromedicas.png" alt="logoDromedicas">'+
 					'<h3>'+ suc +'</h3>'+
 				'</div>'+
 				'<div class="iw-contentppal">'+
-					'<p><span class="icon-home"></span>'+ dir +'</p>'+
-					'<p><a href="tel:(037)'+ telefono +'" class="footertext"><span class="icon-phone"></span>'+ telefono +'</a></p>'+	
-					'<p><a href="tel:'+celular+'" class="footertext"><span class="icon-phone"></span>'+celular+'</a></p>'+	
-					// '<h3>Horarios</h3>'+
-					// '<p class="horario">24 Horas.</p>'+
-				'</div>'+
-            '</div>';
-        
+						'<div class="row-content"><span class="icon-home"></span><div class="infocontent">'+ dir +'</div></div>'+
+						'<div class="row-content"><a href="tel:(037)'+ telefono +'" class="footertext"><span class="icon-phone"></span><span class="infocontent"><span class="phonesuc">'+ telefono +'</span></span></a></div>'+	
+						'<div class="row-content"><a href="tel:'+ celular +'" class="footertext"><span class="icon-mobile"></span><span class="infocontent"><span class="phonesuc">'+celular+'</span></span></a></div>';
+		
 		//registro del manejo de evento click para desplegar el objeto InfoWindow
 		window.setTimeout(function(){
 					//añadir un marker con GMap
@@ -462,13 +523,13 @@ function addMarkerWithTimeoutPpal(position, timeout, suc, i, dir, telefono, celu
 					    position: position,
 					    icon: "images/markDromedicas.png",
 						title: 'Dromedicas del Oriente',
-						infoWindow: {content:contents},
+						infoWindow: {content:contentsp},
 						animation: google.maps.Animation.DROP,
 					});
 					//obteniendo el infowindow del objeto GMap
 					infoWindowCustom = mark.infoWindow;
 					//editando el css del infowindow
-					editCssInfoWindow();					
+					editCssInfoWindowPpal();					
 					//añadiendo la marca al mapa	
 					map.addMarker(mark);
 					// markers.push(mark);
@@ -486,11 +547,6 @@ function clearMarkers() {
 function generarRutaCar(lat, lng, opcionTransporte){
 	map.setCenter(lat, lng);	
 	map.setZoom(17);
-	// map.addMarker({
-	// 			title: 'Mi ubicación',
-	// 			lat: currentLat,
-	// 			lng: currentLng,
-	// 			});
 	map.drawRoute({
 				origin: [currentLat, currentLng],
 				destination: [lat, lng],
@@ -504,16 +560,11 @@ function generarRutaCar(lat, lng, opcionTransporte){
 function generarRutaWalk(lat, lng, opcionTransporte){
 	map.setCenter(lat, lng);	
 	map.setZoom(17);
-	// map.addMarker({
-	// 			title: 'Mi ubicación',
-	// 			lat: currentLat,
-	// 			lng: currentLng,
-	// 			});	
 	map.drawRoute({
 				origin: [currentLat, currentLng],
 				destination: [lat, lng],
 				travelMode: opcionTransporte,
-				strokeColor: '#FF0006',
+				strokeColor: '#FD3C41',
 				strokeOpacity: 0.6,
 				strokeWeight: 6
 			});
@@ -523,16 +574,11 @@ function generarRutaSucursal(lat, lng, opcionTransporte){
 	map.setCenter(lat, lng);	
 	mostrarSucursales();
 	map.setZoom(17);
-	// map.addMarker({
-	// 			title: 'Mi ubicación',
-	// 			lat: currentLat,
-	// 			lng: currentLng,
-	// 			});
 	map.drawRoute({
 				origin: [currentLat, currentLng],
 				destination: [lat, lng],
 				travelMode: opcionTransporte,
-				strokeColor: '#0005D1',
+				strokeColor: '#0060F1',
 				strokeOpacity: 0.6,
 				strokeWeight: 6
 			});
@@ -550,7 +596,7 @@ function findMe(){
 				destination: coordsMarker,
 				// destination: [7.908388743984923, -72.491574883461],
 				travelMode: 'driving',
-				strokeColor: '#0000FF',
+				strokeColor: '#0060F1',				
 				strokeOpacity: 0.6,
 				strokeWeight: 6
 			});
@@ -585,12 +631,17 @@ function editCssInfoWindowNormal(){
 		// Reference to the div that groups the close button elements.
 		var iwCloseBtn = iwOuter.next();
 		// Apply the desired effect to the close button
-		var consulta = window.matchMedia('(max-width:320px)');
+		var consulta = window.matchMedia('(max-width:320px)');		
 		if( consulta.matches){			
-			iwCloseBtn.css({opacity: '1', right: '18spx', top: '3px', border: '7px solid rgba(0, 10, 123, 1.0)', 'border-radius': '5px', 'box-shadow': '0 0 5px rgba(0, 10, 123, .9)'});		
+			iwCloseBtn.css({opacity: '1', right: '2px', top: '3px', border: '7px solid rgba(0, 10, 123, 1.0)', 'border-radius': '5px', 'box-shadow': '0 0 5px rgba(0, 10, 123, .9)'});		
 		}else{
 			iwCloseBtn.css({opacity: '1', right: '38px', top: '3px', border: '7px solid rgba(0, 10, 123, 1.0)', 'border-radius': '5px', 'box-shadow': '0 0 5px rgba(0, 10, 123, .9)'});
 		}		
+		consulta = window.matchMedia('(min-width:321px) and (max-width:550px)');		
+		if( consulta.matches){			
+			iwCloseBtn.css({opacity: '1', right: '10px', top: '3px', border: '7px solid rgba(0, 10, 123, 1.0)', 'border-radius': '5px', 'box-shadow': '0 0 5px rgba(0, 10, 123, .9)'});		
+		}
+
 		// If the content of infowindow not exceed the set maximum height, then the gradient is removed.
 		// if($('.iw-content').height() < 140){
 		// $('.iw-bottom-gradient').css({display: 'none'});
@@ -659,12 +710,15 @@ function editCssInfoWindow(){
 		// Reference to the div that groups the close button elements.
 		var iwCloseBtn = iwOuter.next();
 		// Apply the desired effect to the close button
-		var consulta = window.matchMedia('(max-width:320px)');
-		console.log(consulta.matches);
+		var consulta = window.matchMedia('(max-width:320px)');		
 		if( consulta.matches){			
-			iwCloseBtn.css({opacity: '1', right: '18spx', top: '3px', border: '7px solid rgba(0, 10, 123, 1.0)', 'border-radius': '5px', 'box-shadow': '0 0 5px rgba(0, 10, 123, .9)'});		
+			iwCloseBtn.css({opacity: '1', right: '2px', top: '3px', border: '7px solid rgba(0, 10, 123, 1.0)', 'border-radius': '5px', 'box-shadow': '0 0 5px rgba(0, 10, 123, .9)'});		
 		}else{
 			iwCloseBtn.css({opacity: '1', right: '38px', top: '3px', border: '7px solid rgba(0, 10, 123, 1.0)', 'border-radius': '5px', 'box-shadow': '0 0 5px rgba(0, 10, 123, .9)'});
+		}		
+		consulta = window.matchMedia('(min-width:321px) and (max-width:550px)');		
+		if( consulta.matches){			
+			iwCloseBtn.css({opacity: '1', right: '10px', top: '3px', border: '7px solid rgba(0, 10, 123, 1.0)', 'border-radius': '5px', 'box-shadow': '0 0 5px rgba(0, 10, 123, .9)'});		
 		}
 		// If the content of infowindow not exceed the set maximum height, then the gradient is removed.
 		// if($('.iw-content').height() < 140){
@@ -694,6 +748,50 @@ function editCssInfoWindow(){
 																 'driving')}, false);
   	});
 }// fin del metodo editCssInfoWindow
+
+
+//Edicion del CSS para el objeto InfoWindows
+function editCssInfoWindowPpal(){
+	//Desde aca se comienza la manipulacion del DOM del objeto Info Window
+	//nos apoyamos de jQuery
+	console.log('css ppal');
+	google.maps.event.addListener(infoWindowCustom, 'domready', function() {
+		// Reference to the DIV that wraps the bottom of infowindow
+		var iwOuter = $('.gm-style-iw');
+		// iwOuter.children(':nth-child(1)').css({'display' : 'block'});		
+		var iwBackground = iwOuter.prev();		
+		// Removes background shadow DIV
+		iwBackground.children(':nth-child(2)').css({'display' : 'none'});
+		// Removes white background DIV
+		iwBackground.children(':nth-child(4)').css({'display' : 'none'});
+		// Moves the infowindow 115px to the right.
+		iwOuter.parent().parent().css({left: '0px'});
+		// Changes the desired tail shadow color.
+		iwBackground.children(':nth-child(3)').find('div').children().css({'box-shadow': 'rgba(0, 10, 123, .5) 0px 1px 6px', 'z-index' : '1'});
+		// Reference to the div that groups the close button elements.
+		var iwCloseBtn = iwOuter.next();
+		// Apply the desired effect to the close button
+		var consulta = window.matchMedia('(max-width:320px)');		
+		if( consulta.matches){			
+			iwCloseBtn.css({opacity: '1', right: '2px', top: '3px', border: '7px solid rgba(0, 10, 123, 1.0)', 'border-radius': '5px', 'box-shadow': '0 0 5px rgba(0, 10, 123, .9)'});		
+		}else{
+			iwCloseBtn.css({opacity: '1', right: '38px', top: '3px', border: '7px solid rgba(0, 10, 123, 1.0)', 'border-radius': '5px', 'box-shadow': '0 0 5px rgba(0, 10, 123, .9)'});
+		}		
+		consulta = window.matchMedia('(min-width:321px) and (max-width:550px)');		
+		if( consulta.matches){			
+			iwCloseBtn.css({opacity: '1', right: '10px', top: '3px', border: '7px solid rgba(0, 10, 123, 1.0)', 'border-radius': '5px', 'box-shadow': '0 0 5px rgba(0, 10, 123, .9)'});		
+		}
+		// If the content of infowindow not exceed the set maximum height, then the gradient is removed.
+		// if($('.iw-content').height() < 140){
+		// $('.iw-bottom-gradient').css({display: 'none'});
+		// }
+	    // The API automatically applies 0.7 opacity to the button after the mouseout event. This function reverses this event to the desired value.
+	    iwCloseBtn.mouseout(function(){
+	      $(this).css({opacity: '1'});
+	    });		 
+  	});
+}// fin del metodo editCssInfoWindow
+
 
 //crea los div de las sucursales y los inserta en el contenedor
 function crearSucursal(lat, lng, suc,  dir, i, marker){
@@ -759,8 +857,14 @@ function crearSucursal(lat, lng, suc,  dir, i, marker){
 						if (status !== google.maps.DistanceMatrixStatus.OK) {
 							//implementar div
 						} else {		
-							var d = response.rows[0].elements[0].distance.text;
-							distanciaSucElement.appendChild( document.createTextNode( d ) );							
+							var d = response.rows[0].elements[0].distance.value;
+							var distancia;
+							if( d < 1000){
+								distancia = d + " mts";
+							}else{
+								distancia = (d/1000).toFixed(2) + " Km"
+							}
+							distanciaSucElement.appendChild( document.createTextNode( distancia ) );							
 						}
 					}
 				);
@@ -787,7 +891,7 @@ function crearSucursal(lat, lng, suc,  dir, i, marker){
 									//itera los marcadores para disparar el infowindow correspondiente
 									for( var i = 0 ; i < map.markers.length ; i++){
 										if( suc == map.markers[i].title)
-											map.markers[i].infoWindow.open(map, map.markers[i]);
+											map.markers[i].infoWindow.open(map, map.markers[i]);										
 										}//fin del if
 									},
 								  false);
@@ -818,7 +922,6 @@ function buscarMarcador( lat, lng ) {
         var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
         var d = R * c;
         distances[i] = d;
-        
         if ( (closest == -1 || d < distances[closest]) && (markerst[i].details.estado==='abierto')) {
             closest = i;
         }
@@ -827,28 +930,6 @@ function buscarMarcador( lat, lng ) {
     return [markerst[closest].position.lat(),  markerst[closest].position.lng()];    
 }
 
-//establece las coordenadas de la ubicacion actual a las variables globales de longitud y latitud
-function setCurrentCoords(){
-	GMaps.geolocate({
-		success: function(position) {
-			currentLat = position.coords.latitude;
-			currentLng = position.coords.longitude;				
-			map.addMarker({
-				title: 'Mi ubicación',
-				lat: currentLat,
-				lng: currentLng,
-				// draggable:true,
-				});			
-		},
-		error: function(error) {	
-		var errorGeo = document.getElementById("errorglocate");    	
-    	errorGeo.style.display = 'block';
-		console.log("error al establecer las coordenadas")		;
-		},
-		not_supported: function() {			
-		},		
-	});	
-}
 
 //Consuta la distancia entre la aubicacion actual y las coordenadas enviadas como parametros
 function getCurrentDistanceGoogleMaps(lat, lng){//----este metodo no se usa... :-(
