@@ -161,8 +161,8 @@ function crearMapa(){
 	var marCerca = document.getElementById('resetmapa');
 	marCerca.addEventListener('click', resetMapa, false);
 	
-	var marCerca = document.getElementById('resetButton');
-	marCerca.addEventListener('click', resetMapa, false);
+	// var marCerca = document.getElementById('resetButton');
+	// marCerca.addEventListener('click', resetMapa, false);
 
 	var marCerca = document.getElementById('cercabutton');
 	marCerca.addEventListener('click', function(){ mostrarSucursales(); findMe();}, false);
