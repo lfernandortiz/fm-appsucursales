@@ -986,6 +986,10 @@ border-top: 1px solid white;
 		height: 80vh;		
 	}
 
+	.contentestado:nth-child(2) {
+     	border-right: none;
+ 	}
+
 	/*Cuadro Sucursales*/
 	.encuentranos{
 		width: 92vw;
