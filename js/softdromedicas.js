@@ -12,7 +12,7 @@ var cucutalat=  7.8890971;
 var cucutalng= -72.49668959999997;
 //ubicacion del archivo de imagen del marcador
 var urlMarker ;
-//este campo es usado por el metodo buscarMarcador para asignar el marcador mas cercano
+//este campo usado por el metodo buscarMarcador para asignar el marcador mas cercano
 var markerNear;
 
 //coordenadas usadas para establecer la ubicacion actual
