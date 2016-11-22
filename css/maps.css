@@ -102,7 +102,9 @@
   content: '\f216';
 }
 
-
+*{
+	-webkit-font-smoothing: antialiased;
+}
 
 /**Algunos reset***/
 html,body {	
