@@ -40,7 +40,7 @@ var sucursales = [
 	['Farmanorte 10', 7.912830721471756, -72.48752474784851, 'Avenida Libertadores # 18N-181 Brr Santa Elena Bloques Del Zulima', '5776206','3155997099', 'CUCUTA','','7:30am', '22', '7:30am', '9pm', 11],
 	['Farmanorte 11', 7.8871853, -72.49622654, 'Cll 11 Con Av 2E Esquina Diagonal C.C. Ventura Plaza', '5711737','3173643955', 'CUCUTA','true', '', '', '', '', 12],
 	['Farmanorte 12', 7.88983925194856, -72.49102771282196, 'Av. 9E Con Cll 9 Esq Fte Col. Domingo Savio Brr La Riviera', '5751377','3185166993', 'CUCUTA','','7am', '22', '7am', '10pm', 13],
-	['Farmanorte 13', 7.89593978, -72.49713292, 'Av 3E # 1-108 Local 1 Frente Al Parque La Ceiba', '577770','3185166990', 'CUCUTA','','8am', '21', '8am', '9pm', 14],
+	['Farmanorte 13', 7.89593978, -72.49713292, 'Av 3E # 1-108 Local 1 Frente Al Parque La Ceiba', '5777770','3185166990', 'CUCUTA','','8am', '21', '8am', '9pm', 14],
 	['Farmanorte 14', 7.88912722, -72.51350731, 'Cll 6 # 13-61 Fte Ese Loma Bolivar', '5739782','3155120028', 'CUCUTA','true', '', '', '', '', 15],
 	['Farmanorte 15', 7.91121118, -72.51772667, 'Avenida 0 # 4-68 Esquina Barrio Comuneros', '5796173','3154372258', 'CUCUTA','true', '', '', '', '', 16],
 	['Farmanorte 16', 7.607999367664449, -72.59926557540894, 'Cll 3 # 3-34  Parq Prpal Chinacota', '5864324','3173660022', 'CHINACOTA','true', '', '', '', '', 17],
@@ -161,8 +161,8 @@ function crearMapa(){
 	var marCerca = document.getElementById('resetmapa');
 	marCerca.addEventListener('click', resetMapa, false);
 	
-	var marCerca = document.getElementById('resetButton');
-	marCerca.addEventListener('click', resetMapa, false);
+	// var marCerca = document.getElementById('resetButton');
+	// marCerca.addEventListener('click', resetMapa, false);
 
 	var marCerca = document.getElementById('cercabutton');
 	marCerca.addEventListener('click', function(){ mostrarSucursales(); findMe();}, false);

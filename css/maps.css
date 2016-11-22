@@ -632,20 +632,27 @@ border-top: 1px solid white;
 	cursor: pointer;
 	font-family: : Roboto,sans-serif;
 	font-size: .8rem;
-	height: 36px;
+	height: 20px;
 	margin: 0;
-	min-width: 36px;
+	min-width: 3.8rem;
 	outline: 0;
 	overflow: hidden;
 	padding: 6px;
 	text-align: center;
 	text-decoration: none;
+	border: 1px solid #979797;
+	border-radius: 5px;
 	/*text-overflow: ellipsis;*/
 	/*text-transform: uppercase;*/
 	transition: background-color .2s,box-shadow .2s;
 	vertical-align: middle;
 	white-space: nowrap;
 }
+
+.buttonreset:visited{
+	color: #FFFFFF!important;
+}
+
 
 /*==============================================
   Estilos que editan contenedor de sucursales
@@ -978,6 +985,10 @@ border-top: 1px solid white;
 		width: 100%;
 		height: 80vh;		
 	}
+
+	.contentestado:nth-child(2) {
+     	border-right: none;
+ 	}
 
 	/*Cuadro Sucursales*/
 	.encuentranos{
