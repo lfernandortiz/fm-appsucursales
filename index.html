@@ -3,62 +3,72 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Sucursales Farmanorte</title>
-	<script 
-	      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA3lhlUmXlLXYgbTTeGMp89zM6Ym49p5YU" async defer>
-	</script> 	
-
-	<!-- <script 
-	      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA3lhlUmXlLXYgbTTeGMp89zM6Ym49p5YU&callback=initMap" async defer>
-	</script> -->	
-	<link rel="stylesheet" href="css/maps.css">
+	<!-- api_key_googlemaps_dromedicas  AIzaSyA3lhlUmXlLXYgbTTeGMp89zM6Ym49p5YU-->
+	<script
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBTBpZ3RjwHjaEUvALkuvvYZhV4BVgFXus" async defer>
+	</script>
+	<script>
+    //Google Analytics
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-88757058-1', 'auto');
+      ga('send', 'pageview');
+  </script>
+	<link rel="stylesheet" href="../css/maps.css">
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=2.0, minimum-scale=1.0">
-	
+	<meta name="description" content="Aplicacion de mapas con todas nuestras sucursales. Encuentra la sucursal Drogueria Farmanorte mas cercana. ">	
+	<meta property="og:title" content="App Mapa Farmanorte" />
+	<meta property="og:url" content="https://www.farmanorte.com.co/seccion/mapsfarmanorte.html" />
+	<meta property="og:description" content="Encuentra la sucursal más cercana a tu ubicación.">
+	<meta property="og:image" content="../images/mapasfarmanorte192x192.png">
+	<meta property="og:type" content="Application" />
 	<meta name="HandheldFriendly" content="True">
-  	<meta name="MobileOptimized" content="320">
+  <meta name="MobileOptimized" content="320">
 	<!--Favicon touch-->	
-	<link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
-	<link rel="icon" type="images/png" href="images/favicon-32x32.png" sizes="32x32">
-	<link rel="icon" type="images/png" href="images/favicon-16x16.png" sizes="16x16">
-	<link rel="manifest" href="images/manifest.json">
-	<link rel="mask-icon" href="images/safari-pinned-tab.svg" color="#5bbad5">
-	<meta name="theme-color" content="#ffffff"> 
-			
+	<link rel="apple-touch-icon" sizes="180x180" href="../images/mapasfarmanorte-apple-touch-icon.png">
+	<link rel="icon" type="images/png" href="../images/mapasfarmanorte-favicon-32x32.png" sizes="32x32">
+	<link rel="icon" type="images/png" href="../images/mapasfarmanorte-favicon-16x16.png" sizes="16x16">
+	<link rel="manifest" href="../images/manifest2.json">
+	<link rel="mask-icon" href="../images/safari-pinned-tab.svg" color="#5bbad5">
+	<meta name="theme-color" content="#ffffff"> 			
 	<!-- For iOS web apps. Delete if not needed. https://github.com/h5bp/mobile-boilerplate/issues/94 -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-title" content="Sucursales Farmanorte">
     <meta name="format-detection" content="telephone=no">
-
-
 </head>
-<!-- api_key_googlemaps_dromedicas  AIzaSyA3lhlUmXlLXYgbTTeGMp89zM6Ym49p5YU-->
 <body>
 <header id="headerMain">
 	<div class="header">
-		<a href="https://www.farmanorte.com.co" title="Pagina Farmanorte" target="_blank"><img src="images/iconoFarmanorte.png" alt="icono Farmanorte"></a>
+		<a href="https://www.farmanorte.com.co/index.html" title="Pagina Farmanorte"><img src="../images/iconoFarmanorte.png" alt="icono Farmanorte"></a>
 		<div class="title">
 			<h1 id="resetmapa" title="Resetear Mapa">Sucursales Farmanorte</h1>
-		</div>
+		</div>			
 		<div class="buttonmenu" id="buttonmenu">			
-			<span class="zmdi zmdi-menu zmdi-hc-2x burgermenu" id="burgermenu"></span>			
-		</div>				
+			<span class="zmdi zmdi-menu zmdi-hc-2x burgermenu" id="burgermenu"></span>		
+		</div>	
 	</div>
 	<nav class="menu" id="menu"> <!-- menu -->
-      <ul>
-      	<li id="closemenu" class="closemenu" title="Listado de Sucursales">
-          <span class="zmdi zmdi-close" id="closemenubutton">
-        </li>
-        <li id="sucursales" title="Listado de Sucursales">
-          <i class="zmdi zmdi-pin"></i>Sucursales
-        </li>
-        <li id="mascercana" title="Ubica la sucursal mas cercana">
-         	<i class="zmdi zmdi-gps-dot"></i>Ubicar la mas cercana
-        </li>
-      </ul>
+		<div class="closemenu" id="closemenu">
+			<span class="zmdi zmdi-close" id="closemenubutton">
+		</div>
+		<ul>			
+			<li id="sucursales" title="Listado de Sucursales">
+				<i class="zmdi zmdi-pin"></i>Sucursales
+			</li>
+			<li id="mascercana" title="Ubica la sucursal mas cercana">
+				<i class="zmdi zmdi-gps-dot"></i>Ubicar la mas cercana
+			</li>
+		</ul>
 	</nav>
 </header>
 <section class="errorglocate" id="errorglocate">
 	<b><i class="zmdi zmdi-globe-lock"></i> Geolocalizaci&oacute;n Deshabilitada - </b>Active este servicio en su dispositivo.
+</section>
+<section class="errorglocate" id="errorCargaSuc">
+	<b><i class="zmdi zmdi-alert-triangle"></i> Error en la carga de los datos. - </b>Intentelo mas tarde.
 </section>
 <section id="mainc" >
 	<div class="encuentranos" id="encuentranos">
@@ -85,32 +95,32 @@
 		</div> <!-- fin del div contentsuc -->
 		<div class="divcerca">
 			<button class="cercabutton" id="cercabutton">
-				<img src="images/marker.png" alt="Cerca de mi">
+				<img src="../images/marker.png" alt="Cerca de mi">
 				Cerca de mi
 			</button>
 		</div>
 	</div>	
 	<div id="map"></div>		
-	<div class="reset"><a class="buttonreset" href="https://www.farmanorte.com.co" title="Regresar">Regresar</a></div>
+	<div class="reset"><a class="buttonreset" href="https://www.farmanorte.com.co/index.html" title="Regresar">Regresar</a></div>
 </section>	
 
-<!-- <footer class="footer">
-	<div class="social">
-		<a href="" id="facebook"><i class="zmdi zmdi-facebook"></i></a>
-		<a href="" id="twitter"><i class="zmdi zmdi-twitter"></i></a>
-		<a href="" id="instagram"><i class="zmdi zmdi-instagram"></i></a>
-	</div>
-</footer> -->
-
-
 </body>
-<script src="js/gmaps.js"></script>  
-<script src="js/jquery.js"></script>  
-<script src="js/jquery-ui.js"></script>  
-<script src="js/lucid.js"></script>  
-<script src="js/jquery.fancy-scroll.js"></script>  
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-88757058-1', 'auto');
+ga('send', 'pageview');
+</script>
+<script src="../js/gmaps.js"></script>  
+<script src="../js/jquery.js"></script>  
+<script src="../js/jquery-ui.js"></script>  
+<script src="../js/lucid.js"></script>  
+<script src="../js/jquery.fancy-scroll.js"></script>  
 <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.7/hammer.min.js"></script>    
-<script src="js/softdromedicas.js"></script>  
+<script src="../js/markerclusterer.js"></script>  
+<script src="../js/softdromedicas.js"></script>
 </html>
 
 
