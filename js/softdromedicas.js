@@ -32,6 +32,7 @@ function iniciar(){
   cargarInfoSucursales(function(response) {
     //Parse JSON string into object
     sucursales = JSON.parse(response);
+    console.log(sucursales.length);
     console.log('1----');
   });
   //se cargan las coordenadas actuales y dentro 
@@ -70,7 +71,7 @@ function setCurrentCoords(){
 function cargarInfoSucursales(callback) {
     var xobj = new XMLHttpRequest();
     xobj.overrideMimeType("application/json");
-    xobj.open('GET', '../js/sucursales.json', true); // Replace 'my_data' with the path to your file
+    xobj.open('GET', 'js/sucursales.json', true); // Replace 'my_data' with the path to your file
     xobj.onreadystatechange = function() {
         if (xobj.readyState == 4 && xobj.status == "200") {
             // Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
@@ -293,7 +294,7 @@ function addMarkerWithTimeout(position, timeout,
     var contents = 
       '<div id="iw-container">' +
                 '<div class="iw-title">'+
-          '<img src="../images/iconoFarmanorte.png" alt="logoFarmanorte">'+
+          '<img src="images/iconoFarmanorte.png" alt="logoFarmanorte">'+
           '<h3>Droguería '+ suc +'</h3>'+
         '</div>'+
         '<div class="iw-content">'+
@@ -335,8 +336,8 @@ function addMarkerWithTimeout(position, timeout,
           //registro del manejo de evento click para desplegar el objeto InfoWindow
       window.setTimeout(function(){
           //añadir un marker con GMap
-          var myIcon = new google.maps.MarkerImage("../images/markFarmaAbierto.png", null, null, null, new google.maps.Size(30,48));
-          urlMarker = "../images/markFarmaAbierto.png";
+          var myIcon = new google.maps.MarkerImage("images/markFarmaAbierto.png", null, null, null, new google.maps.Size(30,48));
+          urlMarker = "images/markFarmaAbierto.png";
           var mark = map.createMarker ({  
               position: position,
               icon: myIcon,
@@ -365,12 +366,12 @@ function addMarkerWithTimeout(position, timeout,
       if (diaDeLaSemana >= 1 && diaDeLaSemana <= 6) {
         var est;
         if( abierto(fechaActual, aLS, cLS) ){
-          myIcon2  = new google.maps.MarkerImage("../images/markFarmaAbierto.png", null, null, null, new google.maps.Size(30,48));
-          urlMarker2 = "../images/markFarmaAbierto.png";
+          myIcon2  = new google.maps.MarkerImage("images/markFarmaAbierto.png", null, null, null, new google.maps.Size(30,48));
+          urlMarker2 = "images/markFarmaAbierto.png";
           est = 'abierto';                
         }else{
-          myIcon2  = new google.maps.MarkerImage("../images/markFarmaCerrado.png", null, null, null, new google.maps.Size(30,48));
-          urlMarker2 = "../images/markFarmaCerrado.png";
+          myIcon2  = new google.maps.MarkerImage("images/markFarmaCerrado.png", null, null, null, new google.maps.Size(30,48));
+          urlMarker2 = "images/markFarmaCerrado.png";
           est = 'cerrado';                
         }//fin del else 
         var hOrdinario ='<div class="layoutcontentbutton" id="infoHoradetalle">'+
@@ -412,12 +413,12 @@ function addMarkerWithTimeout(position, timeout,
       if (diaDeLaSemana == 0 ) {
         var est;
         if( abierto(fechaActual, aDF, cDF) ){
-          myIcon2  = new google.maps.MarkerImage("../images/markFarmaAbierto.png", null, null, null, new google.maps.Size(30,48));
-          urlMarker2 = "../images/markFarmaAbierto.png";
+          myIcon2  = new google.maps.MarkerImage("images/markFarmaAbierto.png", null, null, null, new google.maps.Size(30,48));
+          urlMarker2 = "images/markFarmaAbierto.png";
           est = 'abierto';          
         }else{
-          myIcon2  = new google.maps.MarkerImage("../images/markFarmaCerrado.png", null, null, null, new google.maps.Size(30,48));
-          urlMarker2 = "../images/markFarmaCerrado.png";
+          myIcon2  = new google.maps.MarkerImage("images/markFarmaCerrado.png", null, null, null, new google.maps.Size(30,48));
+          urlMarker2 = "images/markFarmaCerrado.png";
           est = 'cerrado';
         }//fin del else 
         var hOrdinario ='<div class="layoutcontentbutton">'+
@@ -512,7 +513,7 @@ function addMarkerWithTimeoutPpal(position, timeout, suc, i, dir, telefono, celu
     var contentsp = 
       '<div id="iw-container">' +
                 '<div class="iw-titleppal">'+
-          '<img src="../images/iconoDromedicas.png" alt="logoDromedicas">'+
+          '<img src="images/iconoDromedicas.png" alt="logoDromedicas">'+
           '<h3>'+ suc +'</h3>'+
         '</div>'+
         '<div class="iw-contentppal">'+
@@ -525,7 +526,7 @@ function addMarkerWithTimeoutPpal(position, timeout, suc, i, dir, telefono, celu
           //añadir un marker con GMap
           var mark = map.createMarker ({  
               position: position,
-              icon: "../images/markDromedicas.png",
+              icon: "images/markDromedicas.png",
             title: 'Dromedicas del Oriente',
             infoWindow: {content:contentsp},
             animation: google.maps.Animation.DROP,
@@ -823,7 +824,7 @@ function crearSucursal(lat, lng, suc,  dir, i, marker){
         divmarkerElement.setAttribute("class", "divmarker");        
           //creo el elemento img con el marker
           var markerElement  = document.createElement("img")
-          markerElement.setAttribute("src", "../images/markFarmaAbierto.png");
+          markerElement.setAttribute("src", "images/markFarmaAbierto.png");
         //creo el div clase detallesuc
         var detallesucElement  = document.createElement("div");       
         detallesucElement.setAttribute("class", "detallesuc");
